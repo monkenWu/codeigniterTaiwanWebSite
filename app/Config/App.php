@@ -6,6 +6,8 @@ use CodeIgniter\Config\BaseConfig;
 
 class App extends BaseConfig
 {
+    public $gitHubExpires = 14400; // 4 hours
+
     /**
      * --------------------------------------------------------------------------
      * Base Site URL

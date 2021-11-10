@@ -1,0 +1,947 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>PHP 風格指南 &mdash; CodeIgniter 3.1.6 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/ci-icon.ico"/>
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="CodeIgniter 3.1.6 documentation" href="../index.html"/>
+        <link rel="up" title="一般主題" href="index.html"/>
+        <link rel="next" title="Libraries" href="../libraries/index.html"/>
+        <link rel="prev" title="安全性" href="security.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        
+          <a href="http://codeigniter.tw/" class="fa fa-home"> CodeIgniter</a>
+        
+        
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="搜尋使用手冊" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+          
+          
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="welcome.html">歡迎加入 CodeIgniter</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../installation/index.html">安裝指引</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../installation/downloads.html">下載 CodeIgniter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation/index.html">安裝指引</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation/upgrading.html">從先前的版本來更新</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation/troubleshooting.html">故障排除</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../overview/index.html">CodeIgniter 概觀</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../overview/getting_started.html">開始 CodeIgniter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/at_a_glance.html">CodeIgniter 一目了然</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/features.html">CodeIgniter 特色</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/appflow.html">應用程式溝通流程</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/mvc.html">Model-View-Controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/goals.html">設計以及架構目標</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/index.html">教學</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial/static_pages.html">靜態頁面</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial/news_section.html">新聞模組介紹</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial/create_news_items.html">動態新增新聞</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial/conclusion.html">結論</a></li>
+</ul>
+</li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">一般主題</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="urls.html">CodeIgniter URLs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="controllers.html">控制器 Controllers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reserved_names.html">保留名稱</a></li>
+<li class="toctree-l2"><a class="reference internal" href="views.html">視圖 Views</a></li>
+<li class="toctree-l2"><a class="reference internal" href="models.html">什麼是 Model？</a></li>
+<li class="toctree-l2"><a class="reference internal" href="models.html#id2">剖析 Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="models.html#id3">載入 Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="models.html#models">自動載入 Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="models.html#id4">連接資料庫</a></li>
+<li class="toctree-l2"><a class="reference internal" href="helpers.html">Helpers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libraries.html">使用 CodeIgniter 函式庫</a></li>
+<li class="toctree-l2"><a class="reference internal" href="creating_libraries.html">自建函式庫</a></li>
+<li class="toctree-l2"><a class="reference internal" href="drivers.html">使用 CodeIgniter 驅動器</a></li>
+<li class="toctree-l2"><a class="reference internal" href="creating_drivers.html">自建驅動器</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core_classes.html">新增系統核心類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ancillary_classes.html">新增配套類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hooks.html">Hooks－擴充核心</a></li>
+<li class="toctree-l2"><a class="reference internal" href="autoloader.html">自動載入資源</a></li>
+<li class="toctree-l2"><a class="reference internal" href="common_functions.html">通用函數</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compatibility_functions.html">相容性函數</a></li>
+<li class="toctree-l2"><a class="reference internal" href="routing.html">URI 路由</a></li>
+<li class="toctree-l2"><a class="reference internal" href="errors.html">錯誤處理</a></li>
+<li class="toctree-l2"><a class="reference internal" href="caching.html">Caching</a></li>
+<li class="toctree-l2"><a class="reference internal" href="profiling.html">應用程式效能分析</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cli.html">透過 CLI 執行 CodeIgniter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="managing_apps.html">管理你的應用程式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="environments.html">處理多環境變數</a></li>
+<li class="toctree-l2"><a class="reference internal" href="alternative_php.html">替代 View 檔案的 PHP 的語法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security.html">安全性</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">PHP Style Guide</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../libraries/index.html">Libraries</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/benchmark.html">效能測試類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/caching.html">快取驅動類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/calendar.html">日曆類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/cart.html">購物車類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/config.html">設定類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/email.html">電子郵件類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/encrypt.html">Encrypt Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/encryption.html">Encryption Library</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/file_uploading.html">檔案上傳類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/form_validation.html">Form Validation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/ftp.html">FTP Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/image_lib.html">Image Manipulation Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/input.html">Input Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/javascript.html">Javascript Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/language.html">Language Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/loader.html">Loader Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/migration.html">Migrations Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/output.html">Output Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/pagination.html">Pagination Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/parser.html">Template Parser Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/security.html">Security Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/sessions.html">Session Library</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/table.html">HTML Table 類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/trackback.html">Trackback 類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/typography.html">Typography 類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/unit_testing.html">單元測試類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/uri.html">URI 類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/user_agent.html">User Agent 類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/xmlrpc.html">XML-RPC 及 XML-RPC Server 類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/zip.html">Zip 類別</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../database/index.html">資料庫參考</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../database/examples.html">快速入門：範例程式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../database/configuration.html">資料庫設定</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../database/connecting.html">連接資料庫</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../database/queries.html">執行查詢</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../database/results.html">產生查詢結果</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../database/helpers.html">查詢補助函數</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../database/query_builder.html">查詢生成器類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../database/transactions.html">交易</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../database/metadata.html">取得資料表資訊</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../database/call_function.html">自訂函數</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../database/caching.html">查詢快取</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../database/forge.html">使用 Database Forge 管理資料庫</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../database/utilities.html">Database Utilities 類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../database/db_driver_reference.html">Database Driver 參考</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../helpers/index.html">輔助函式</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../helpers/array_helper.html">Array 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../helpers/captcha_helper.html">CAPTCHA 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../helpers/cookie_helper.html">Cookie 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../helpers/date_helper.html">Date 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../helpers/directory_helper.html">Directory 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../helpers/download_helper.html">Download 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../helpers/email_helper.html">Email 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../helpers/file_helper.html">File 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../helpers/form_helper.html">Form 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../helpers/html_helper.html">HTML 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../helpers/inflector_helper.html">Inflector 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../helpers/language_helper.html">Language 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../helpers/number_helper.html">Number 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../helpers/path_helper.html">Path 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../helpers/security_helper.html">Security 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../helpers/smiley_helper.html">Smiley 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../helpers/string_helper.html">String 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../helpers/text_helper.html">Text 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../helpers/typography_helper.html">Typography 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../helpers/url_helper.html">URL 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../helpers/xml_helper.html">XML 輔助函式</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">貢獻 CodeIgniter</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../documentation/index.html">Writing CodeIgniter Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../DCO.html">Developer’s Certificate of Origin 1.1</a></li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">CodeIgniter</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">使用手冊</a> &raquo;</li>
+      
+          <li><a href="index.html">一般主題</a> &raquo;</li>
+      
+    <li>PHP 風格指南</li>
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document">
+            
+  <div class="section" id="php">
+<h1><a class="toc-backref" href="#id25">PHP 風格指南</a><a class="headerlink" href="#php" title="Permalink to this headline">¶</a></h1>
+<p>本頁主要描述了開發 CodeIgniter 框架本身時所採取的編碼風格。
+建議你在自己的專案中也遵循這些規範，但這不是強迫性的。</p>
+<div class="contents topic" id="id1">
+<p class="topic-title">目錄</p>
+<ul class="simple">
+<li><a class="reference internal" href="#php" id="id25">PHP 風格指南</a><ul>
+<li><a class="reference internal" href="#id2" id="id26">檔案格式</a><ul>
+<li><a class="reference internal" href="#textmate" id="id27">TextMate</a></li>
+<li><a class="reference internal" href="#bbedit" id="id28">BBEdit</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id3" id="id29">PHP 結束標籤</a></li>
+<li><a class="reference internal" href="#id4" id="id30">檔案命名</a></li>
+<li><a class="reference internal" href="#id5" id="id31">類別與方法命名</a></li>
+<li><a class="reference internal" href="#id6" id="id32">變數名稱</a></li>
+<li><a class="reference internal" href="#id7" id="id33">註解</a></li>
+<li><a class="reference internal" href="#id8" id="id34">常數</a></li>
+<li><a class="reference internal" href="#true-false-null" id="id35">TRUE, FALSE, 以及 NULL</a></li>
+<li><a class="reference internal" href="#id9" id="id36">邏輯運算子</a></li>
+<li><a class="reference internal" href="#id10" id="id37">比對回傳值與型別轉換</a></li>
+<li><a class="reference internal" href="#id11" id="id38">除錯用程式</a></li>
+<li><a class="reference internal" href="#id12" id="id39">檔案中的空白字元</a></li>
+<li><a class="reference internal" href="#id13" id="id40">相容性</a></li>
+<li><a class="reference internal" href="#id14" id="id41">一個檔案一個類別</a></li>
+<li><a class="reference internal" href="#id15" id="id42">縮排的空白</a></li>
+<li><a class="reference internal" href="#id16" id="id43">換行</a></li>
+<li><a class="reference internal" href="#id17" id="id44">程式碼縮排</a></li>
+<li><a class="reference internal" href="#id18" id="id45">括號間距</a></li>
+<li><a class="reference internal" href="#id19" id="id46">多國語系</a></li>
+<li><a class="reference internal" href="#id20" id="id47">私有方法與變數</a></li>
+<li><a class="reference internal" href="#id21" id="id48">PHP 錯誤</a></li>
+<li><a class="reference internal" href="#short-open-tags" id="id49">Short Open Tags</a></li>
+<li><a class="reference internal" href="#id22" id="id50">一行一個陳述式</a></li>
+<li><a class="reference internal" href="#id23" id="id51">字串</a></li>
+<li><a class="reference internal" href="#sql" id="id52">SQL 查詢</a></li>
+<li><a class="reference internal" href="#id24" id="id53">預設參數</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="id2">
+<h2><a class="toc-backref" href="#id26">檔案格式</a><a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>檔案應該以 unicode (UTF-8) 編碼儲存。<em>不應該</em> 使用 BOM。
+UTF-8 並不像 UTF-16 及 UTF-32， UTF-8 編碼的檔案不需要標示位元組順序(Byte Order)，
+而且 BOM 在 PHP 送出結果時會造成一些不好的副作用，使程式無法設置標頭(headers)。
+應該使用 Unix 風格的換行字元(LF)。</p>
+<p>這邊會說明如何在一些常見的文字編輯器中套用這個設定。
+你所使用的編輯器可能有不同的設定方法，請參照編輯器的說明文件。</p>
+<div class="section" id="textmate">
+<h3><a class="toc-backref" href="#id27">TextMate</a><a class="headerlink" href="#textmate" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li>Open the Application Preferences</li>
+<li>Click Advanced, and then the “Saving” tab</li>
+<li>In “File Encoding”, select “UTF-8 (recommended)”</li>
+<li>In “Line Endings”, select “LF (recommended)”</li>
+<li><em>Optional:</em> Check “Use for existing files as well” if you wish to
+modify the line endings of files you open to your new preference.</li>
+</ol>
+</div>
+<div class="section" id="bbedit">
+<h3><a class="toc-backref" href="#id28">BBEdit</a><a class="headerlink" href="#bbedit" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li>Open the Application Preferences</li>
+<li>Select “Text Encodings” on the left.</li>
+<li>In “Default text encoding for new documents”, select “Unicode (UTF-8,
+no BOM)”</li>
+<li><em>Optional:</em> In “If file’s encoding can’t be guessed, use”, select
+“Unicode (UTF-8, no BOM)”</li>
+<li>Select “Text Files” on the left.</li>
+<li>In “Default line breaks”, select “Mac OS X and Unix (LF)”</li>
+</ol>
+</div>
+</div>
+<div class="section" id="id3">
+<h2><a class="toc-backref" href="#id29">PHP 結束標籤</a><a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<p>雖然 PHP 的結束標籤 <strong>?&gt;</strong> 是選擇性的。但如果用到結束標籤的話，
+任何在結束標籤之後的空白字元，不論是由開發者、使用者、或 FTP 軟體造成的，
+都可能造成非預期的輸出，產生 PHP 錯誤，或是當錯誤被忽略時造成空白頁面。
+因此，所有的 PHP 檔案應該要 <strong>省略</strong> 結束標籤，並改用一段註解來標示檔案的結尾，
+以及檔案相對於程式根目錄的位置。這樣做讓你依然能夠檢查檔案是否完整，確認內容是否被截斷。</p>
+<p><strong>錯誤的</strong>:</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
+
+<span class="k">echo</span> <span class="s2">&quot;Here&#39;s my code!&quot;</span><span class="p">;</span>
+
+<span class="cp">?&gt;</span>
+</pre></div>
+</div>
+<p><strong>正確的</strong>:</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span>
+
+<span class="k">echo</span> <span class="s2">&quot;Here&#39;s my code!&quot;</span><span class="p">;</span>
+
+<span class="cm">/* End of file Myfile.php */</span>
+<span class="cm">/* Location: ./system/modules/mymodule/myfile.php */</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">在檔案結尾的註解之後，應該沒有空行或是換行字元，
+若是你在送交 pull request 時看到這個情況，請檢查你的編輯器設定並修正它。</p>
+</div>
+</div>
+<div class="section" id="id4">
+<h2><a class="toc-backref" href="#id30">檔案命名</a><a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<p>類別檔案應該採用首字母大寫的格式，而其它種類的檔案（設定檔，views，一般程式等等）應該全小寫。</p>
+<p><strong>錯誤的</strong>:</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="nx">somelibrary</span><span class="o">.</span><span class="nx">php</span>
+<span class="nx">someLibrary</span><span class="o">.</span><span class="nx">php</span>
+<span class="nx">SOMELIBRARY</span><span class="o">.</span><span class="nx">php</span>
+<span class="nx">Some_Library</span><span class="o">.</span><span class="nx">php</span>
+
+<span class="nx">Application_config</span><span class="o">.</span><span class="nx">php</span>
+<span class="nx">Application_Config</span><span class="o">.</span><span class="nx">php</span>
+<span class="nx">applicationConfig</span><span class="o">.</span><span class="nx">php</span>
+</pre></div>
+</div>
+<p><strong>正確的</strong>:</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="nx">Somelibrary</span><span class="o">.</span><span class="nx">php</span>
+<span class="nx">Some_library</span><span class="o">.</span><span class="nx">php</span>
+
+<span class="nx">applicationconfig</span><span class="o">.</span><span class="nx">php</span>
+<span class="nx">application_config</span><span class="o">.</span><span class="nx">php</span>
+</pre></div>
+</div>
+<p>另外，類別檔案的名稱應該要對應到類別名稱。
+例如你有一個類別叫做 <cite>Myclass</cite>，則檔案名稱必須是 <strong>Myclass.php</strong>。</p>
+</div>
+<div class="section" id="id5">
+<h2><a class="toc-backref" href="#id31">類別與方法命名</a><a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
+<p>類別名稱應該總是以大寫字母開頭。
+字與字之間以底線分隔，而不是使用駝峰風格(CamelCase)。</p>
+<p><strong>錯誤的</strong>:</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">superclass</span>
+<span class="k">class</span> <span class="nc">SuperClass</span>
+</pre></div>
+</div>
+<p><strong>正確的</strong>:</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Super_class</span>
+</pre></div>
+</div>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Super_class</span> <span class="p">{</span>
+
+        <span class="k">public</span> <span class="k">function</span> <span class="fm">__construct</span><span class="p">()</span>
+        <span class="p">{</span>
+
+        <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>類別方法的命名應該完全使用小寫字母並且能夠表達其用途，最好包含動詞。
+盡量避免太長太囉唆的命名。字與字之間應該以底線分隔。</p>
+<p><strong>錯誤的</strong>:</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="k">function</span> <span class="nf">fileproperties</span><span class="p">()</span>               <span class="c1">// 描述不清，以及需要使用底線分隔</span>
+<span class="k">function</span> <span class="nf">fileProperties</span><span class="p">()</span>               <span class="c1">// 描述不清，不應使用駝峰風格</span>
+<span class="k">function</span> <span class="nf">getfileproperties</span><span class="p">()</span>            <span class="c1">// 好多了，但仍然漏了底線</span>
+<span class="k">function</span> <span class="nf">getFileProperties</span><span class="p">()</span>            <span class="c1">// 不應使用駝峰風格</span>
+<span class="k">function</span> <span class="nf">get_the_file_properties_from_the_file</span><span class="p">()</span>        <span class="c1">// 太囉唆</span>
+</pre></div>
+</div>
+<p><strong>正確的</strong>:</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="k">function</span> <span class="nf">get_file_properties</span><span class="p">()</span>  <span class="c1">// 描述清楚，底線分隔，並且全小寫字母</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id6">
+<h2><a class="toc-backref" href="#id32">變數名稱</a><a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
+<p>變數名稱的規則類似於類別方法。
+變數應該只用小寫字母，應使用底線分隔，並使用能表達其用途與內容的名稱。
+非常短或是非完整字的命名方式應該只使用在 for() 迴圈。</p>
+<p><strong>錯誤的</strong>:</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="nv">$j</span> <span class="o">=</span> <span class="s1">&#39;foo&#39;</span><span class="p">;</span>             <span class="c1">// 單個字母的變數應該只用在 for() 迴圈內</span>
+<span class="nv">$Str</span>                    <span class="c1">// 不應使用大寫字母</span>
+<span class="nv">$bufferedText</span>           <span class="c1">// 不應使用駝峰風格，而且可以縮短一些而不影響語意</span>
+<span class="nv">$groupid</span>                <span class="c1">// 字之間應該使用底線分隔</span>
+<span class="nv">$name_of_last_city_used</span> <span class="c1">// 太長了</span>
+</pre></div>
+</div>
+<p><strong>正確的</strong>:</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="p">(</span><span class="nv">$j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nv">$j</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">;</span> <span class="nv">$j</span><span class="o">++</span><span class="p">)</span>
+<span class="nv">$str</span>
+<span class="nv">$buffer</span>
+<span class="nv">$group_id</span>
+<span class="nv">$last_city</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id7">
+<h2><a class="toc-backref" href="#id33">註解</a><a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h2>
+<p>一般來說，程式碼應該要添加詳細的註解。
+這不僅可以為資淺的開發者描述流程與意圖，當你在修改數月前自己寫的程式時，也能幫你快速的進入狀況。
+這邊的註解風格並非強制性的，而是建議的風格。</p>
+<p><a class="reference external" href="http://manual.phpdoc.org/HTMLSmartyConverter/HandS/phpDocumentor/tutorial_phpDocumentor.howto.pkg.html#basics.docblock">DocBlock</a>
+風格的註解會放在類別，方法，與屬性的前面，讓編輯器可以取得資訊:</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="sd">/**</span>
+<span class="sd"> * Super Class</span>
+<span class="sd"> *</span>
+<span class="sd"> * @package     Package Name</span>
+<span class="sd"> * @subpackage  Subpackage</span>
+<span class="sd"> * @category    Category</span>
+<span class="sd"> * @author      Author Name</span>
+<span class="sd"> * @link        http://example.com</span>
+<span class="sd"> */</span>
+<span class="k">class</span> <span class="nc">Super_class</span> <span class="p">{</span>
+</pre></div>
+</div>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="sd">/**</span>
+<span class="sd"> * Encodes string for use in XML</span>
+<span class="sd"> *</span>
+<span class="sd"> * @param       string  $str    Input string</span>
+<span class="sd"> * @return      string</span>
+<span class="sd"> */</span>
+<span class="k">function</span> <span class="nf">xml_encode</span><span class="p">(</span><span class="nv">$str</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="sd">/**</span>
+<span class="sd"> * Data for class manipulation</span>
+<span class="sd"> *</span>
+<span class="sd"> * @var array</span>
+<span class="sd"> */</span>
+<span class="k">public</span> <span class="nv">$data</span> <span class="o">=</span> <span class="k">array</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>在程式中使用單行註解，在大塊的註解與程式中間留下一個空行。</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="c1">// break up the string by newlines</span>
+<span class="nv">$parts</span> <span class="o">=</span> <span class="nb">explode</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="nv">$str</span><span class="p">);</span>
+
+<span class="c1">// A longer comment that needs to give greater detail on what is</span>
+<span class="c1">// occurring and why can use multiple single-line comments.  Try to</span>
+<span class="c1">// keep the width reasonable, around 70 characters is the easiest to</span>
+<span class="c1">// read.  Don&#39;t hesitate to link to permanent external resources</span>
+<span class="c1">// that may provide greater detail:</span>
+<span class="c1">//</span>
+<span class="c1">// http://example.com/information_about_something/in_particular/</span>
+
+<span class="nv">$parts</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">foo</span><span class="p">(</span><span class="nv">$parts</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id8">
+<h2><a class="toc-backref" href="#id34">常數</a><a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h2>
+<p>常數遵循與變數相同的規則，但常數應該永遠使用全大寫字母。
+<em>在適當的時候永遠使用 CodeIgniter 常數，例如 SLASH, LD, RD, PATH_CACHE 等等</em></p>
+<p><strong>錯誤的</strong>:</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="nx">myConstant</span>      <span class="c1">// 缺少底線分隔，以及沒有全部大寫</span>
+<span class="nx">N</span>               <span class="c1">// 不應使用單個字母的常數</span>
+<span class="nx">S_C_VER</span>         <span class="c1">// 不具有描述能力的名稱</span>
+<span class="nv">$str</span> <span class="o">=</span> <span class="nb">str_replace</span><span class="p">(</span><span class="s1">&#39;{foo}&#39;</span><span class="p">,</span> <span class="s1">&#39;bar&#39;</span><span class="p">,</span> <span class="nv">$str</span><span class="p">);</span>       <span class="c1">// 應該使用 LD 與 RD 常數</span>
+</pre></div>
+</div>
+<p><strong>正確的</strong>:</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="nx">MY_CONSTANT</span>
+<span class="nx">NEWLINE</span>
+<span class="nx">SUPER_CLASS_VERSION</span>
+<span class="nv">$str</span> <span class="o">=</span> <span class="nb">str_replace</span><span class="p">(</span><span class="nx">LD</span><span class="o">.</span><span class="s1">&#39;foo&#39;</span><span class="o">.</span><span class="nx">RD</span><span class="p">,</span> <span class="s1">&#39;bar&#39;</span><span class="p">,</span> <span class="nv">$str</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="true-false-null">
+<h2><a class="toc-backref" href="#id35">TRUE, FALSE, 以及 NULL</a><a class="headerlink" href="#true-false-null" title="Permalink to this headline">¶</a></h2>
+<p><strong>TRUE</strong>, <strong>FALSE</strong>, 以及 <strong>NULL</strong> 關鍵字應該永遠使用大寫字母。</p>
+<p><strong>錯誤的</strong>:</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="p">(</span><span class="nv">$foo</span> <span class="o">==</span> <span class="k">true</span><span class="p">)</span>
+<span class="nv">$bar</span> <span class="o">=</span> <span class="k">false</span><span class="p">;</span>
+<span class="k">function</span> <span class="nf">foo</span><span class="p">(</span><span class="nv">$bar</span> <span class="o">=</span> <span class="k">null</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>正確的</strong>:</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="p">(</span><span class="nv">$foo</span> <span class="o">==</span> <span class="k">TRUE</span><span class="p">)</span>
+<span class="nv">$bar</span> <span class="o">=</span> <span class="k">FALSE</span><span class="p">;</span>
+<span class="k">function</span> <span class="nf">foo</span><span class="p">(</span><span class="nv">$bar</span> <span class="o">=</span> <span class="k">NULL</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id9">
+<h2><a class="toc-backref" href="#id36">邏輯運算子</a><a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h2>
+<p>不建議使用 <code class="docutils literal notranslate"><span class="pre">||</span></code> 運算子，因在某些裝置上辨識度低（例如看起來像數字 11）。
+<code class="docutils literal notranslate"><span class="pre">&amp;&amp;</span></code> 比 <code class="docutils literal notranslate"><span class="pre">AND</span></code> 為佳，但兩者皆可接受。
+<code class="docutils literal notranslate"><span class="pre">!</span></code> 前後都應該加上空白字元。</p>
+<p><strong>錯誤的</strong>:</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="p">(</span><span class="nv">$foo</span> <span class="o">||</span> <span class="nv">$bar</span><span class="p">)</span>
+<span class="k">if</span> <span class="p">(</span><span class="nv">$foo</span> <span class="k">AND</span> <span class="nv">$bar</span><span class="p">)</span>  <span class="c1">// OK 但是不建議用在一般語法高亮編輯器</span>
+<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$foo</span><span class="p">)</span>
+<span class="k">if</span> <span class="p">(</span><span class="o">!</span> <span class="nb">is_array</span><span class="p">(</span><span class="nv">$foo</span><span class="p">))</span>
+</pre></div>
+</div>
+<p><strong>正確的</strong>:</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="p">(</span><span class="nv">$foo</span> <span class="k">OR</span> <span class="nv">$bar</span><span class="p">)</span>
+<span class="k">if</span> <span class="p">(</span><span class="nv">$foo</span> <span class="o">&amp;&amp;</span> <span class="nv">$bar</span><span class="p">)</span> <span class="c1">// 推薦作法</span>
+<span class="k">if</span> <span class="p">(</span> <span class="o">!</span> <span class="nv">$foo</span><span class="p">)</span>
+<span class="k">if</span> <span class="p">(</span> <span class="o">!</span> <span class="nb">is_array</span><span class="p">(</span><span class="nv">$foo</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id10">
+<h2><a class="toc-backref" href="#id37">比對回傳值與型別轉換</a><a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h2>
+<p>一些 PHP 函式在失敗時回傳 FALSE，但也可能在成功時回傳 “” 或 0，這些值在鬆散比對時也會被當成 FALSE。
+當回傳值使用在條件判斷時應該明確的比對變數型別，以確定回傳值確實是所預期的，
+而不是在鬆散比對時被型別轉換成相同的值。</p>
+<p>在檢查回傳值與使用變數時都嚴格的檢查。
+必要時使用 <strong>===</strong> 與 <strong>!==</strong>。</p>
+<p><strong>錯誤的</strong>:</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="c1">// 如果 &#39;foo&#39; 位於字串的開頭， strpos 將會回傳 0，</span>
+<span class="c1">// 將會造成此條件判斷式被判斷為 TRUE</span>
+<span class="k">if</span> <span class="p">(</span><span class="nb">strpos</span><span class="p">(</span><span class="nv">$str</span><span class="p">,</span> <span class="s1">&#39;foo&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="k">FALSE</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>正確的</strong>:</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="p">(</span><span class="nb">strpos</span><span class="p">(</span><span class="nv">$str</span><span class="p">,</span> <span class="s1">&#39;foo&#39;</span><span class="p">)</span> <span class="o">===</span> <span class="k">FALSE</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>錯誤的</strong>:</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="k">function</span> <span class="nf">build_string</span><span class="p">(</span><span class="nv">$str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+<span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$str</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="c1">// 如果參數傳入的是 FALSE 或是 0 會怎樣？</span>
+        <span class="p">{</span>
+
+        <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>正確的</strong>:</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="k">function</span> <span class="nf">build_string</span><span class="p">(</span><span class="nv">$str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+<span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$str</span> <span class="o">===</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="p">{</span>
+
+        <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>可以參考 <a class="reference external" href="http://php.net/manual/en/language.types.type-juggling.php#language.types.typecasting">typecasting</a>，
+來獲得更多資訊。
+型別轉換有許多用途，例如當轉換一個變數為字串時，NULL 以及布林 FALSE 會變成空字串，0（以及其它數字）會變成數字字串，
+還有布林 TRUE 會變成 “1”:</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="nv">$str</span> <span class="o">=</span> <span class="p">(</span><span class="nx">string</span><span class="p">)</span> <span class="nv">$str</span><span class="p">;</span> <span class="c1">// 將 $str 轉型為字串</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id11">
+<h2><a class="toc-backref" href="#id38">除錯用程式</a><a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h2>
+<p>不要在送交程式碼時留下除錯用程式，即使是註解掉的。
+一些像是 <code class="docutils literal notranslate"><span class="pre">var_dump()</span></code>, <code class="docutils literal notranslate"><span class="pre">print_r()</span></code>, <code class="docutils literal notranslate"><span class="pre">die()</span></code>/<code class="docutils literal notranslate"><span class="pre">exit()</span></code> 之類的不應該包含在你的程式碼內，除非有除錯以外的用途。</p>
+</div>
+<div class="section" id="id12">
+<h2><a class="toc-backref" href="#id39">檔案中的空白字元</a><a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h2>
+<p>在 PHP 開始標籤前面，以及結束標籤後面都不應該有空白字元。
+由於輸出是被暫存的，在 CodeIgniter 真正開始輸出內容前，空白字元會讓輸出提早開始，
+這會造成錯誤，並且使 CodeIgniter 無法送出正確的標頭(headers)。</p>
+</div>
+<div class="section" id="id13">
+<h2><a class="toc-backref" href="#id40">相容性</a><a class="headerlink" href="#id13" title="Permalink to this headline">¶</a></h2>
+<p>CodeIgniter 建議 PHP 5.6 或是更新的版本，最低需求是 PHP 5.3.7。你的程式碼也必須相容這個最低需求，提供合適的備案，
+或是做成選擇性啟用的功能。</p>
+<p>另外，不要使用會用到非預設函式庫的 PHP 函式，除非你的程式碼在函式庫不存在時能提供替代方法。</p>
+</div>
+<div class="section" id="id14">
+<h2><a class="toc-backref" href="#id41">一個檔案一個類別</a><a class="headerlink" href="#id14" title="Permalink to this headline">¶</a></h2>
+<p>將每個類別放在各自的檔案中，除非這些類別是 <em>極度相關的</em> 。
+CodeIgniter 裡一個檔案含有多個類別的例子是 Xmlrpc 函式庫檔案。</p>
+</div>
+<div class="section" id="id15">
+<h2><a class="toc-backref" href="#id42">縮排的空白</a><a class="headerlink" href="#id15" title="Permalink to this headline">¶</a></h2>
+<p>在你的程式碼中使用 tab 作為縮排空白，而不是空白字元。
+這看起來是個小事，但使用 tab 來取代空白字元允許其它開發者使用他們喜好的縮排等級來閱讀你的程式碼，
+並且可以在他們使用的軟體中調整。
+另外還有一個好處，使用一個 tab 至少能取代四個空白字元，因此原始碼檔案會更小。</p>
+</div>
+<div class="section" id="id16">
+<h2><a class="toc-backref" href="#id43">換行</a><a class="headerlink" href="#id16" title="Permalink to this headline">¶</a></h2>
+<p>檔案必須儲存為 Unix 換行字元。
+這規則比較偏向於 Windows 使用者，總之確認你的編輯器用的是 Unix 換行字元。</p>
+</div>
+<div class="section" id="id17">
+<h2><a class="toc-backref" href="#id44">程式碼縮排</a><a class="headerlink" href="#id17" title="Permalink to this headline">¶</a></h2>
+<p>除了類別宣告以外，使用 Allman style 的縮排。
+大括號永遠自己放在一行，並且與其所屬的控制陳述式有相同的縮排。</p>
+<p><strong>錯誤的</strong>:</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="k">function</span> <span class="nf">foo</span><span class="p">(</span><span class="nv">$bar</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// ...</span>
+<span class="p">}</span>
+
+<span class="k">foreach</span> <span class="p">(</span><span class="nv">$arr</span> <span class="k">as</span> <span class="nv">$key</span> <span class="o">=&gt;</span> <span class="nv">$val</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// ...</span>
+<span class="p">}</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="nv">$foo</span> <span class="o">==</span> <span class="nv">$bar</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// ...</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="c1">// ...</span>
+<span class="p">}</span>
+
+<span class="k">for</span> <span class="p">(</span><span class="nv">$i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nv">$i</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">;</span> <span class="nv">$i</span><span class="o">++</span><span class="p">)</span>
+        <span class="p">{</span>
+        <span class="k">for</span> <span class="p">(</span><span class="nv">$j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nv">$j</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">;</span> <span class="nv">$j</span><span class="o">++</span><span class="p">)</span>
+                <span class="p">{</span>
+                <span class="c1">// ...</span>
+                <span class="p">}</span>
+        <span class="p">}</span>
+
+<span class="k">try</span> <span class="p">{</span>
+        <span class="c1">// ...</span>
+<span class="p">}</span>
+<span class="k">catch</span><span class="p">()</span> <span class="p">{</span>
+        <span class="c1">// ...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>正確的</strong>:</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="k">function</span> <span class="nf">foo</span><span class="p">(</span><span class="nv">$bar</span><span class="p">)</span>
+<span class="p">{</span>
+        <span class="c1">// ...</span>
+<span class="p">}</span>
+
+<span class="k">foreach</span> <span class="p">(</span><span class="nv">$arr</span> <span class="k">as</span> <span class="nv">$key</span> <span class="o">=&gt;</span> <span class="nv">$val</span><span class="p">)</span>
+<span class="p">{</span>
+        <span class="c1">// ...</span>
+<span class="p">}</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="nv">$foo</span> <span class="o">==</span> <span class="nv">$bar</span><span class="p">)</span>
+<span class="p">{</span>
+        <span class="c1">// ...</span>
+<span class="p">}</span>
+<span class="k">else</span>
+<span class="p">{</span>
+        <span class="c1">// ...</span>
+<span class="p">}</span>
+
+<span class="k">for</span> <span class="p">(</span><span class="nv">$i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nv">$i</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">;</span> <span class="nv">$i</span><span class="o">++</span><span class="p">)</span>
+<span class="p">{</span>
+        <span class="k">for</span> <span class="p">(</span><span class="nv">$j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nv">$j</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">;</span> <span class="nv">$j</span><span class="o">++</span><span class="p">)</span>
+        <span class="p">{</span>
+                <span class="c1">// ...</span>
+        <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">try</span>
+<span class="p">{</span>
+        <span class="c1">// ...</span>
+<span class="p">}</span>
+<span class="k">catch</span><span class="p">()</span>
+<span class="p">{</span>
+        <span class="c1">// ...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id18">
+<h2><a class="toc-backref" href="#id45">括號間距</a><a class="headerlink" href="#id18" title="Permalink to this headline">¶</a></h2>
+<p>一般來說，括號不應該有額外的空白。
+但是在一些需要括號來接受參數的控制結構（declare, do-while,
+elseif, for, foreach, if, switch, while）後面應該永遠加上空白，以便與函式區隔，並增加可讀性。</p>
+<p><strong>錯誤的</strong>:</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="nv">$arr</span><span class="p">[</span> <span class="nv">$foo</span> <span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;foo&#39;</span><span class="p">;</span>
+</pre></div>
+</div>
+<p><strong>正確的</strong>:</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="nv">$arr</span><span class="p">[</span><span class="nv">$foo</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;foo&#39;</span><span class="p">;</span> <span class="c1">// 陣列鍵值兩旁不用空白</span>
+</pre></div>
+</div>
+<p><strong>錯誤的</strong>:</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="k">function</span> <span class="nf">foo</span> <span class="p">(</span> <span class="nv">$bar</span> <span class="p">)</span>
+<span class="p">{</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>正確的</strong>:</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="k">function</span> <span class="nf">foo</span><span class="p">(</span><span class="nv">$bar</span><span class="p">)</span> <span class="c1">// 宣告函式時括號周圍不用空白</span>
+<span class="p">{</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>錯誤的</strong>:</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="k">foreach</span><span class="p">(</span> <span class="nv">$query</span><span class="o">-&gt;</span><span class="na">result</span><span class="p">()</span> <span class="k">as</span> <span class="nv">$row</span> <span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>正確的</strong>:</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="k">foreach</span> <span class="p">(</span><span class="nv">$query</span><span class="o">-&gt;</span><span class="na">result</span><span class="p">()</span> <span class="k">as</span> <span class="nv">$row</span><span class="p">)</span> <span class="c1">// 控制結構後面加上一個空白，但不用加在括號內側</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id19">
+<h2><a class="toc-backref" href="#id46">多國語系</a><a class="headerlink" href="#id19" title="Permalink to this headline">¶</a></h2>
+<p>CodeIgniter 函式庫應該盡可能的利用對應的語系檔案。</p>
+<p><strong>錯誤的</strong>:</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="k">return</span> <span class="s2">&quot;Invalid Selection&quot;</span><span class="p">;</span>
+</pre></div>
+</div>
+<p><strong>正確的</strong>:</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">lang</span><span class="o">-&gt;</span><span class="na">line</span><span class="p">(</span><span class="s1">&#39;invalid_selection&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id20">
+<h2><a class="toc-backref" href="#id47">私有方法與變數</a><a class="headerlink" href="#id20" title="Permalink to this headline">¶</a></h2>
+<p>只有在內部使用的方法與變數，例如你的 public 方法用到的工具及幫助函式，應該以底線開頭。</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">function</span> <span class="nf">convert_text</span><span class="p">()</span>
+<span class="k">private</span> <span class="k">function</span> <span class="nf">_convert_text</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id21">
+<h2><a class="toc-backref" href="#id48">PHP 錯誤</a><a class="headerlink" href="#id21" title="Permalink to this headline">¶</a></h2>
+<p>程式碼不應該丟出任何錯誤，並且不能藉由隱藏警告與提醒來達成這個目標。
+用到不是自己所建立的變數時（例如 <code class="docutils literal notranslate"><span class="pre">$_POST</span></code> 的鍵值），永遠先用 <code class="docutils literal notranslate"><span class="pre">isset()</span></code> 檢查後才使用。</p>
+<p>確保你的開發環境中為每個使用者都啟用了錯誤回報，以及 display_errors 在 PHP 環境中有啟用。
+你可以這樣子檢查:</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="p">(</span><span class="nb">ini_get</span><span class="p">(</span><span class="s1">&#39;display_errors&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
+<span class="p">{</span>
+        <span class="k">exit</span> <span class="s2">&quot;Enabled&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>在某些伺服器 <em>display_errors</em> 被停用了，而你沒有辦法修改 php.ini，那麼你通常可以這樣啟用:</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="nb">ini_set</span><span class="p">(</span><span class="s1">&#39;display_errors&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">在執行時期使用 <code class="docutils literal notranslate"><span class="pre">ini_set()</span></code> 設置 <a class="reference external" href="http://php.net/manual/en/errorfunc.configuration.php#ini.display-errors">display_errors</a>
+並不等同於在 PHP 環境中啟用。也就是說若程式發生重大錯誤，將不會有任何作用。</p>
+</div>
+</div>
+<div class="section" id="short-open-tags">
+<h2><a class="toc-backref" href="#id49">Short Open Tags</a><a class="headerlink" href="#short-open-tags" title="Permalink to this headline">¶</a></h2>
+<p>永遠使用完整的 PHP 起始標籤，以免伺服器並沒有啟用 <em>short_open_tag</em>。</p>
+<p><strong>錯誤的</strong>:</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;?</span> <span class="k">echo</span> <span class="nv">$foo</span><span class="p">;</span> <span class="cp">?&gt;</span>
+
+<span class="cp">&lt;?</span><span class="o">=</span><span class="nv">$foo</span><span class="cp">?&gt;</span>
+</pre></div>
+</div>
+<p><strong>正確的</strong>:</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;?</span><span class="nx">php</span> <span class="k">echo</span> <span class="nv">$foo</span><span class="p">;</span> <span class="cp">?&gt;</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">自 PHP 5.4 起，永遠可以使用 <strong>&lt;?=</strong> 標籤</p>
+</div>
+</div>
+<div class="section" id="id22">
+<h2><a class="toc-backref" href="#id50">一行一個陳述式</a><a class="headerlink" href="#id22" title="Permalink to this headline">¶</a></h2>
+<p>永遠不要將多行陳述式合併為一行。</p>
+<p><strong>錯誤的</strong>:</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="nv">$foo</span> <span class="o">=</span> <span class="s1">&#39;this&#39;</span><span class="p">;</span> <span class="nv">$bar</span> <span class="o">=</span> <span class="s1">&#39;that&#39;</span><span class="p">;</span> <span class="nv">$bat</span> <span class="o">=</span> <span class="nb">str_replace</span><span class="p">(</span><span class="nv">$foo</span><span class="p">,</span> <span class="nv">$bar</span><span class="p">,</span> <span class="nv">$bag</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><strong>正確的</strong>:</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="nv">$foo</span> <span class="o">=</span> <span class="s1">&#39;this&#39;</span><span class="p">;</span>
+<span class="nv">$bar</span> <span class="o">=</span> <span class="s1">&#39;that&#39;</span><span class="p">;</span>
+<span class="nv">$bat</span> <span class="o">=</span> <span class="nb">str_replace</span><span class="p">(</span><span class="nv">$foo</span><span class="p">,</span> <span class="nv">$bar</span><span class="p">,</span> <span class="nv">$bag</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id23">
+<h2><a class="toc-backref" href="#id51">字串</a><a class="headerlink" href="#id23" title="Permalink to this headline">¶</a></h2>
+<p>永遠使用單引號字串，除非你需要解析變數。
+當你需要解析變數時，永遠使用大括號來避免變數名稱解析錯誤。
+若是字串中包含了單引號，你也可以使用雙引號來避免使用跳脫字元。</p>
+<p><strong>錯誤的</strong>:</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;My String&quot;</span>                                     <span class="c1">// 沒用到變數解析，使用雙引號沒有特別用處</span>
+<span class="s2">&quot;My string </span><span class="si">$foo</span><span class="s2">&quot;</span>                                <span class="c1">// 需要加上大括號</span>
+<span class="s1">&#39;SELECT foo FROM bar WHERE baz = \&#39;bag\&#39;&#39;</span>       <span class="c1">// 醜死了</span>
+</pre></div>
+</div>
+<p><strong>正確的</strong>:</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="s1">&#39;My String&#39;</span>
+<span class="s2">&quot;My string </span><span class="si">{</span><span class="nv">$foo</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="s2">&quot;SELECT foo FROM bar WHERE baz = &#39;bag&#39;&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="sql">
+<h2><a class="toc-backref" href="#id52">SQL 查詢</a><a class="headerlink" href="#sql" title="Permalink to this headline">¶</a></h2>
+<p>SQL 關鍵字永遠使用大寫字母: SELECT, INSERT, UPDATE, WHERE,
+AS, JOIN, ON, IN, 等等。</p>
+<p>將較長的查詢拆解成多行來增進可讀性，最好每個子句各放在一行。</p>
+<p><strong>錯誤的</strong>:</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="c1">// 關鍵字是小寫以及查詢太長(... 表示一行的連續)</span>
+<span class="nv">$query</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">query</span><span class="p">(</span><span class="s2">&quot;select foo, bar, baz, foofoo, foobar as raboof, foobaz from exp_pre_email_addresses</span>
+<span class="s2">...where foo != &#39;oof&#39; and baz != &#39;zab&#39; order by foobaz limit 5, 100&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><strong>正確的</strong>:</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="nv">$query</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">query</span><span class="p">(</span><span class="s2">&quot;SELECT foo, bar, baz, foofoo, foobar AS raboof, foobaz</span>
+<span class="s2">                                FROM exp_pre_email_addresses</span>
+<span class="s2">                                WHERE foo != &#39;oof&#39;</span>
+<span class="s2">                                AND baz != &#39;zab&#39;</span>
+<span class="s2">                                ORDER BY foobaz</span>
+<span class="s2">                                LIMIT 5, 100&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id24">
+<h2><a class="toc-backref" href="#id53">預設參數</a><a class="headerlink" href="#id24" title="Permalink to this headline">¶</a></h2>
+<p>在適當的時候提供預設參數，可以避免失誤的呼叫造成 PHP 錯誤，並減少一些程式碼。例如:</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="k">function</span> <span class="nf">foo</span><span class="p">(</span><span class="nv">$bar</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="nv">$baz</span> <span class="o">=</span> <span class="k">FALSE</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../libraries/index.html" class="btn btn-neutral float-right" title="Libraries">下一頁 <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="security.html" class="btn btn-neutral" title="安全性"><span class="fa fa-arrow-circle-left"></span> 上一頁</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2014 - 2017, British Columbia Institute of Technology.
+      最後編輯時間 Nov 19, 2020.
+    </p>
+  </div>
+
+  
+    <p>由 <a href="https://readthedocs.org">Read the Docs</a> 提供 <a href="http://sphinx-doc.org/">Sphinx</a> 並使用 <a href="https://github.com/snide/sphinx_rtd_theme">sphinx_rtd_theme</a> 主題</p>
+    <p><a href="https://github.com/CodeIgniter-TW/CodeIgniter-UserGuide" target="_blank">Github 繁體中文翻譯</a></p>
+  
+
+</footer>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-5766319-11', 'auto');
+  ga('send', 'pageview');
+
+</script>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'3.1.6',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  false
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="../_static/language_data.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

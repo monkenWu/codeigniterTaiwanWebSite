@@ -1,0 +1,465 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>錯誤處理 &mdash; CodeIgniter 3.1.6 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/ci-icon.ico"/>
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="CodeIgniter 3.1.6 documentation" href="../index.html"/>
+        <link rel="up" title="一般主題" href="index.html"/>
+        <link rel="next" title="網頁快取" href="caching.html"/>
+        <link rel="prev" title="URI 路由" href="routing.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        
+          <a href="http://codeigniter.tw/" class="fa fa-home"> CodeIgniter</a>
+        
+        
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="搜尋使用手冊" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+          
+          
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="welcome.html">歡迎加入 CodeIgniter</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../installation/index.html">安裝指引</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../installation/downloads.html">下載 CodeIgniter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation/index.html">安裝指引</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation/upgrading.html">從先前的版本來更新</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation/troubleshooting.html">故障排除</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../overview/index.html">CodeIgniter 概觀</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../overview/getting_started.html">開始 CodeIgniter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/at_a_glance.html">CodeIgniter 一目了然</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/features.html">CodeIgniter 特色</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/appflow.html">應用程式溝通流程</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/mvc.html">Model-View-Controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/goals.html">設計以及架構目標</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/index.html">教學</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial/static_pages.html">靜態頁面</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial/news_section.html">新聞模組介紹</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial/create_news_items.html">動態新增新聞</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial/conclusion.html">結論</a></li>
+</ul>
+</li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">一般主題</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="urls.html">CodeIgniter URLs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="controllers.html">控制器 Controllers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reserved_names.html">保留名稱</a></li>
+<li class="toctree-l2"><a class="reference internal" href="views.html">視圖 Views</a></li>
+<li class="toctree-l2"><a class="reference internal" href="models.html">什麼是 Model？</a></li>
+<li class="toctree-l2"><a class="reference internal" href="models.html#id2">剖析 Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="models.html#id3">載入 Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="models.html#models">自動載入 Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="models.html#id4">連接資料庫</a></li>
+<li class="toctree-l2"><a class="reference internal" href="helpers.html">Helpers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libraries.html">使用 CodeIgniter 函式庫</a></li>
+<li class="toctree-l2"><a class="reference internal" href="creating_libraries.html">自建函式庫</a></li>
+<li class="toctree-l2"><a class="reference internal" href="drivers.html">使用 CodeIgniter 驅動器</a></li>
+<li class="toctree-l2"><a class="reference internal" href="creating_drivers.html">自建驅動器</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core_classes.html">新增系統核心類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ancillary_classes.html">新增配套類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hooks.html">Hooks－擴充核心</a></li>
+<li class="toctree-l2"><a class="reference internal" href="autoloader.html">自動載入資源</a></li>
+<li class="toctree-l2"><a class="reference internal" href="common_functions.html">通用函數</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compatibility_functions.html">相容性函數</a></li>
+<li class="toctree-l2"><a class="reference internal" href="routing.html">URI 路由</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">錯誤處理</a></li>
+<li class="toctree-l2"><a class="reference internal" href="caching.html">Caching</a></li>
+<li class="toctree-l2"><a class="reference internal" href="profiling.html">應用程式效能分析</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cli.html">透過 CLI 執行 CodeIgniter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="managing_apps.html">管理你的應用程式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="environments.html">處理多環境變數</a></li>
+<li class="toctree-l2"><a class="reference internal" href="alternative_php.html">替代 View 檔案的 PHP 的語法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security.html">安全性</a></li>
+<li class="toctree-l2"><a class="reference internal" href="styleguide.html">PHP Style Guide</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../libraries/index.html">Libraries</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/benchmark.html">效能測試類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/caching.html">快取驅動類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/calendar.html">日曆類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/cart.html">購物車類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/config.html">設定類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/email.html">電子郵件類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/encrypt.html">Encrypt Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/encryption.html">Encryption Library</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/file_uploading.html">檔案上傳類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/form_validation.html">Form Validation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/ftp.html">FTP Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/image_lib.html">Image Manipulation Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/input.html">Input Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/javascript.html">Javascript Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/language.html">Language Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/loader.html">Loader Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/migration.html">Migrations Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/output.html">Output Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/pagination.html">Pagination Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/parser.html">Template Parser Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/security.html">Security Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/sessions.html">Session Library</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/table.html">HTML Table 類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/trackback.html">Trackback 類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/typography.html">Typography 類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/unit_testing.html">單元測試類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/uri.html">URI 類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/user_agent.html">User Agent 類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/xmlrpc.html">XML-RPC 及 XML-RPC Server 類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/zip.html">Zip 類別</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../database/index.html">資料庫參考</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../database/examples.html">快速入門：範例程式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../database/configuration.html">資料庫設定</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../database/connecting.html">連接資料庫</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../database/queries.html">執行查詢</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../database/results.html">產生查詢結果</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../database/helpers.html">查詢補助函數</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../database/query_builder.html">查詢生成器類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../database/transactions.html">交易</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../database/metadata.html">取得資料表資訊</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../database/call_function.html">自訂函數</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../database/caching.html">查詢快取</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../database/forge.html">使用 Database Forge 管理資料庫</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../database/utilities.html">Database Utilities 類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../database/db_driver_reference.html">Database Driver 參考</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../helpers/index.html">輔助函式</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../helpers/array_helper.html">Array 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../helpers/captcha_helper.html">CAPTCHA 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../helpers/cookie_helper.html">Cookie 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../helpers/date_helper.html">Date 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../helpers/directory_helper.html">Directory 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../helpers/download_helper.html">Download 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../helpers/email_helper.html">Email 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../helpers/file_helper.html">File 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../helpers/form_helper.html">Form 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../helpers/html_helper.html">HTML 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../helpers/inflector_helper.html">Inflector 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../helpers/language_helper.html">Language 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../helpers/number_helper.html">Number 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../helpers/path_helper.html">Path 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../helpers/security_helper.html">Security 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../helpers/smiley_helper.html">Smiley 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../helpers/string_helper.html">String 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../helpers/text_helper.html">Text 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../helpers/typography_helper.html">Typography 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../helpers/url_helper.html">URL 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../helpers/xml_helper.html">XML 輔助函式</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">貢獻 CodeIgniter</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../documentation/index.html">Writing CodeIgniter Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../DCO.html">Developer’s Certificate of Origin 1.1</a></li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">CodeIgniter</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">使用手冊</a> &raquo;</li>
+      
+          <li><a href="index.html">一般主題</a> &raquo;</li>
+      
+    <li>錯誤處理</li>
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document">
+            
+  <div class="section" id="id1">
+<h1>錯誤處理<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<p>CodeIgniter 讓你使用下列的函數來在你的應用程式中建立錯誤報告。
+此外，它還有一個 logging 類別來讓錯誤以及除錯訊息可以存成文字檔。</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">CodeIgniter 預設會顯示所有PHP錯誤訊息。</p>
+</div>
+<p>你可能會希望在開發過程完畢後改變這個行為。
+你可以在主要的 index.php 檔案的開頭找到 error_reporting() 這個函數。
+即使取消錯誤報告，錯誤仍然會寫入 log 檔。</p>
+<p>不像大部分 CodeIgniter 的系統，錯誤處理函數只是在整個系統中都可以直接呼叫的程序式函數介面。
+這個方式讓你觸發錯誤訊息時不必擔心 class/function 的有效範圍。</p>
+<p>CodeIgniter 也會回傳狀態碼無論系統核心何時呼叫 <code class="docutils literal notranslate"><span class="pre">exit()</span></code> 函數。
+這個結束狀態碼是分隔 HTTP 狀態碼，並作為一個給其它程序的通知服務，
+這個服務監視其他程序是否代碼成功地執行完成，或者導致代碼執行終止的問題。
+這個變數定義於 <em>application/config/constants.php</em> 。While 結束狀態碼在 CLI 設定是最有用的，
+回傳適當的狀態碼幫助伺服器軟體保持追蹤你的腳本以及應用程式的健康。</p>
+<p>這個函數讓你用下列的錯誤訊息模板來顯示給予的錯誤訊息：</p>
+<dl class="function">
+<dt id="show_error">
+<code class="descname">show_error</code><span class="sig-paren">(</span><em>$message</em>, <em>$status_code</em>, <em>$heading = 'An Error Was Encountered'</em><span class="sig-paren">)</span><a class="headerlink" href="#show_error" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>$message</strong> (<em>mixed</em>) – 錯誤訊息</li>
+<li><strong>$status_code</strong> (<em>int</em>) – HTTP 回應狀態碼</li>
+<li><strong>$heading</strong> (<em>string</em>) – 錯誤頁面標頭</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">void</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<p>這個函數將顯示錯誤訊息使用以下模板提供給你：</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="nx">application</span><span class="o">/</span><span class="nx">views</span><span class="o">/</span><span class="nx">errors</span><span class="o">/</span><span class="nx">error_general</span><span class="o">.</span><span class="nx">php</span>
+</pre></div>
+</div>
+<p>在錯誤訊息中這個可選的參數 <code class="docutils literal notranslate"><span class="pre">$status_code</span></code> 決定什麼 HTTP 狀態碼應該被傳送。
+如果 <code class="docutils literal notranslate"><span class="pre">$status_code</span></code> 小於 100，HTTP 狀態碼將會被設定為 500，然後結束狀態碼將會被設定成</p>
+<blockquote>
+<div><code class="docutils literal notranslate"><span class="pre">$status_code</span> <span class="pre">+</span> <span class="pre">EXIT__AUTO_MIN</span></code> 。如果這個值大於</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">EXIT__AUTO_MAX</span></code> ，或者如果 <code class="docutils literal notranslate"><span class="pre">$status_code</span></code> 是 100 或者更高，結束狀態碼將會被設定為 <code class="docutils literal notranslate"><span class="pre">EXIT_ERROR</span></code> 。
+你可以檢查 <em>application/config/constants.php</em> 以獲得更多細節。</p>
+<dl class="function">
+<dt id="show_404">
+<code class="descname">show_404</code><span class="sig-paren">(</span><em>$page = ''</em>, <em>$log_error = TRUE</em><span class="sig-paren">)</span><a class="headerlink" href="#show_404" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>$page</strong> (<em>string</em>) – URI 字串</li>
+<li><strong>$log_error</strong> (<em>bool</em>) – 是否紀錄錯誤</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">void</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<p>這個函數將會顯示 404 錯誤訊息，提供以下錯誤訊息模板：</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="nx">application</span><span class="o">/</span><span class="nx">views</span><span class="o">/</span><span class="nx">errors</span><span class="o">/</span><span class="nx">error_404</span><span class="o">.</span><span class="nx">php</span>
+</pre></div>
+</div>
+<p>傳遞給該函數需要的字符串是未找到頁面的文件路徑。
+結束狀態碼將被設定在 <code class="docutils literal notranslate"><span class="pre">EXIT_UNKNOWN_FILE</span></code> 。
+注意如果控制器（Controller）未找到，CodeIgniter 自動地顯示 404 訊息。</p>
+<p>CodeIgniter 自動地記錄所有 <code class="docutils literal notranslate"><span class="pre">show_404()</span></code> 呼叫。設定第二個參數選項 FALSE 將不會做記錄。</p>
+<p>… php:function:: log_message($level, $message)</p>
+<blockquote>
+<div><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">param  string  $level:</th></tr>
+<tr class="field-odd field"><td>&#160;</td><td class="field-body">記錄層級： ‘error’，’debug’ 或者 ‘info’</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">param  string  $message:</th></tr>
+<tr class="field-even field"><td>&#160;</td><td class="field-body">記錄的訊息</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">rtype:</th><td class="field-body">void</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<p>這個函數讓你寫錯誤訊息到你的記錄檔案內。
+你一定三選一中要提供一個 “levels” 到第一個參數內，指定這個錯誤是屬於哪種形態（debug、error、info），
+到第二個參數。</p>
+<p>例子：</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="p">(</span><span class="nv">$some_var</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+<span class="p">{</span>
+        <span class="nx">log_message</span><span class="p">(</span><span class="s1">&#39;error&#39;</span><span class="p">,</span> <span class="s1">&#39;Some variable did not contain a value.&#39;</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="k">else</span>
+<span class="p">{</span>
+        <span class="nx">log_message</span><span class="p">(</span><span class="s1">&#39;debug&#39;</span><span class="p">,</span> <span class="s1">&#39;Some variable was correctly set&#39;</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="nx">log_message</span><span class="p">(</span><span class="s1">&#39;info&#39;</span><span class="p">,</span> <span class="s1">&#39;The purpose of some variable is to provide some value.&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>這裡有三種錯誤訊息型態：</p>
+<ol class="arabic simple">
+<li>Error 訊息。這裡是實際上的錯誤，像是 PHP 錯誤或者使用者錯誤。</li>
+<li>Debug 訊息。這裡的訊息是除錯用的。例如，如果一個類別被初始化，你可以記錄它當作除錯訊息。</li>
+<li>Informational 訊息。這裡是最低優先權的訊息，簡單地給對於一些過程信息。CodeIgniter 本身不產生
+info 訊息，如果你要做是可以做的。</li>
+</ol>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">為了實際被寫入記錄文件， <em>logs</em> 目錄必須設為可以寫入。
+除此之外，你一定要設定“threshold”來做記錄在這邊設定 <em>application/config/config.php</em> 。你可能，例如，只需要 error 訊息被記錄，以及不需要其他兩個型態的記錄。如果你設定他為 0 ，記錄將會被關閉。</p>
+</div>
+</div>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="caching.html" class="btn btn-neutral float-right" title="網頁快取">下一頁 <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="routing.html" class="btn btn-neutral" title="URI 路由"><span class="fa fa-arrow-circle-left"></span> 上一頁</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2014 - 2017, British Columbia Institute of Technology.
+      最後編輯時間 Nov 19, 2020.
+    </p>
+  </div>
+
+  
+    <p>由 <a href="https://readthedocs.org">Read the Docs</a> 提供 <a href="http://sphinx-doc.org/">Sphinx</a> 並使用 <a href="https://github.com/snide/sphinx_rtd_theme">sphinx_rtd_theme</a> 主題</p>
+    <p><a href="https://github.com/CodeIgniter-TW/CodeIgniter-UserGuide" target="_blank">Github 繁體中文翻譯</a></p>
+  
+
+</footer>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-5766319-11', 'auto');
+  ga('send', 'pageview');
+
+</script>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'3.1.6',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  false
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="../_static/language_data.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

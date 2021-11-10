@@ -21,7 +21,7 @@
 				</p>
 
 				<div class="cv-boxes-buttons-area">
-					<a href="<?= $v4link ?>" class="buttons-reverse download-buttons" target="_blank">下載</a>
+					<a href="<?= $v4link ?>" class="buttons-reverse download-buttons" target="_blank">下載框架</a>
 					<a href="https://forum.codeigniter.com/forum-28.html" class="buttons-reverse download-buttons" target="_blank">討論版</a>
 					<a href="https://github.com/codeigniter4/CodeIgniter4" class="buttons-reverse download-buttons" target="_blank">原始碼</a>
 					<a href="https://github.com/codeigniter4/translations" class="buttons-reverse download-buttons" target="_blank">系統語系</a>
@@ -42,7 +42,9 @@
 
 				<div class="clr"></div>
 				<div class="cv-boxes-buttons-area">
-					<a href="<?= $v3link ?>" class="buttons-reverse download-buttons" target="_blank">下載</a>
+					<a href="<?= $v3link ?>" class="buttons-reverse download-buttons" target="_blank">下載框架</a>
+					<a href="/userguide3/index.html" class="buttons-reverse download-buttons" target="_blank">線上使用手冊</a>
+					<a href="/userguide3.zip" class="buttons-reverse download-buttons" target="_blank">離線使用手冊</a>
 					<a href="https://github.com/bcit-ci/CodeIgniter" class="buttons-reverse download-buttons" target="_blank">原始碼</a>
 					<a href="https://github.com/bcit-ci/codeigniter3-translations" class="buttons-reverse download-buttons" target="_blank">系統語系</a>
 				</div><!--cv-boxes-buttons-area end-->

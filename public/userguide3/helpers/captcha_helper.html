@@ -1,0 +1,502 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>CAPTCHA 輔助函式 &mdash; CodeIgniter 3.1.6 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/ci-icon.ico"/>
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="CodeIgniter 3.1.6 documentation" href="../index.html"/>
+        <link rel="up" title="輔助函式" href="index.html"/>
+        <link rel="next" title="Cookie 輔助函式" href="cookie_helper.html"/>
+        <link rel="prev" title="Array 輔助函式" href="array_helper.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        
+          <a href="http://codeigniter.tw/" class="fa fa-home"> CodeIgniter</a>
+        
+        
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="搜尋使用手冊" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+          
+          
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../general/welcome.html">歡迎加入 CodeIgniter</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../installation/index.html">安裝指引</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../installation/downloads.html">下載 CodeIgniter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation/index.html">安裝指引</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation/upgrading.html">從先前的版本來更新</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation/troubleshooting.html">故障排除</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../overview/index.html">CodeIgniter 概觀</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../overview/getting_started.html">開始 CodeIgniter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/at_a_glance.html">CodeIgniter 一目了然</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/features.html">CodeIgniter 特色</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/appflow.html">應用程式溝通流程</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/mvc.html">Model-View-Controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/goals.html">設計以及架構目標</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/index.html">教學</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial/static_pages.html">靜態頁面</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial/news_section.html">新聞模組介紹</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial/create_news_items.html">動態新增新聞</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial/conclusion.html">結論</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../general/index.html">一般主題</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../general/urls.html">CodeIgniter URLs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/controllers.html">控制器 Controllers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/reserved_names.html">保留名稱</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/views.html">視圖 Views</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/models.html">什麼是 Model？</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/models.html#id2">剖析 Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/models.html#id3">載入 Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/models.html#models">自動載入 Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/models.html#id4">連接資料庫</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/helpers.html">Helpers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/libraries.html">使用 CodeIgniter 函式庫</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/creating_libraries.html">自建函式庫</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/drivers.html">使用 CodeIgniter 驅動器</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/creating_drivers.html">自建驅動器</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/core_classes.html">新增系統核心類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/ancillary_classes.html">新增配套類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/hooks.html">Hooks－擴充核心</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/autoloader.html">自動載入資源</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/common_functions.html">通用函數</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/compatibility_functions.html">相容性函數</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/routing.html">URI 路由</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/errors.html">錯誤處理</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/caching.html">Caching</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/profiling.html">應用程式效能分析</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/cli.html">透過 CLI 執行 CodeIgniter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/managing_apps.html">管理你的應用程式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/environments.html">處理多環境變數</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/alternative_php.html">替代 View 檔案的 PHP 的語法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/security.html">安全性</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/styleguide.html">PHP Style Guide</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../libraries/index.html">Libraries</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/benchmark.html">效能測試類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/caching.html">快取驅動類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/calendar.html">日曆類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/cart.html">購物車類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/config.html">設定類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/email.html">電子郵件類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/encrypt.html">Encrypt Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/encryption.html">Encryption Library</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/file_uploading.html">檔案上傳類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/form_validation.html">Form Validation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/ftp.html">FTP Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/image_lib.html">Image Manipulation Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/input.html">Input Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/javascript.html">Javascript Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/language.html">Language Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/loader.html">Loader Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/migration.html">Migrations Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/output.html">Output Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/pagination.html">Pagination Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/parser.html">Template Parser Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/security.html">Security Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/sessions.html">Session Library</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/table.html">HTML Table 類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/trackback.html">Trackback 類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/typography.html">Typography 類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/unit_testing.html">單元測試類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/uri.html">URI 類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/user_agent.html">User Agent 類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/xmlrpc.html">XML-RPC 及 XML-RPC Server 類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/zip.html">Zip 類別</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../database/index.html">資料庫參考</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../database/examples.html">快速入門：範例程式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../database/configuration.html">資料庫設定</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../database/connecting.html">連接資料庫</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../database/queries.html">執行查詢</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../database/results.html">產生查詢結果</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../database/helpers.html">查詢補助函數</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../database/query_builder.html">查詢生成器類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../database/transactions.html">交易</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../database/metadata.html">取得資料表資訊</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../database/call_function.html">自訂函數</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../database/caching.html">查詢快取</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../database/forge.html">使用 Database Forge 管理資料庫</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../database/utilities.html">Database Utilities 類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../database/db_driver_reference.html">Database Driver 參考</a></li>
+</ul>
+</li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">輔助函式</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="array_helper.html">Array 輔助函式</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">CAPTCHA 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cookie_helper.html">Cookie 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="date_helper.html">Date 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="directory_helper.html">Directory 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="download_helper.html">Download 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="email_helper.html">Email 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_helper.html">File 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="form_helper.html">Form 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="html_helper.html">HTML 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="inflector_helper.html">Inflector 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="language_helper.html">Language 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="number_helper.html">Number 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="path_helper.html">Path 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security_helper.html">Security 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="smiley_helper.html">Smiley 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="string_helper.html">String 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="text_helper.html">Text 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="typography_helper.html">Typography 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="url_helper.html">URL 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="xml_helper.html">XML 輔助函式</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">貢獻 CodeIgniter</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../documentation/index.html">Writing CodeIgniter Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../DCO.html">Developer’s Certificate of Origin 1.1</a></li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">CodeIgniter</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">使用手冊</a> &raquo;</li>
+      
+          <li><a href="index.html">輔助函式</a> &raquo;</li>
+      
+    <li>CAPTCHA 輔助函式</li>
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document">
+            
+  <div class="section" id="captcha">
+<h1>CAPTCHA 輔助函式<a class="headerlink" href="#captcha" title="Permalink to this headline">¶</a></h1>
+<p>CAPTCHA 輔助函式包含了各種輔助產生驗證圖片的相關函式。</p>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#id1" id="id5">導入輔助函式</a></li>
+<li><a class="reference internal" href="#id2" id="id6">使用 CAPTCHA 輔助函式</a><ul>
+<li><a class="reference internal" href="#id3" id="id7">建立驗證碼資料庫</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id4" id="id8">可用函式格式</a></li>
+</ul>
+</div>
+<div class="custom-index container"></div><div class="section" id="id1">
+<h2><a class="toc-backref" href="#id5">導入輔助函式</a><a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>CAPTCHA 輔助函式的載入語法如下：</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">load</span><span class="o">-&gt;</span><span class="na">helper</span><span class="p">(</span><span class="s1">&#39;captcha&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id2">
+<h2><a class="toc-backref" href="#id6">使用 CAPTCHA 輔助函式</a><a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>準備好如下所示的語法後，就可以產生驗證碼：</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="nv">$vals</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;word&#39;</span>          <span class="o">=&gt;</span> <span class="s1">&#39;Random word&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;img_path&#39;</span>      <span class="o">=&gt;</span> <span class="s1">&#39;./captcha/&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;img_url&#39;</span>       <span class="o">=&gt;</span> <span class="s1">&#39;http://example.com/captcha/&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;font_path&#39;</span>     <span class="o">=&gt;</span> <span class="s1">&#39;./path/to/fonts/texb.ttf&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;img_width&#39;</span>     <span class="o">=&gt;</span> <span class="s1">&#39;150&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;img_height&#39;</span>    <span class="o">=&gt;</span> <span class="mi">30</span><span class="p">,</span>
+        <span class="s1">&#39;expiration&#39;</span>    <span class="o">=&gt;</span> <span class="mi">7200</span><span class="p">,</span>
+        <span class="s1">&#39;word_length&#39;</span>   <span class="o">=&gt;</span> <span class="mi">8</span><span class="p">,</span>
+        <span class="s1">&#39;font_size&#39;</span>     <span class="o">=&gt;</span> <span class="mi">16</span><span class="p">,</span>
+        <span class="s1">&#39;img_id&#39;</span>        <span class="o">=&gt;</span> <span class="s1">&#39;Imageid&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;pool&#39;</span>          <span class="o">=&gt;</span> <span class="s1">&#39;0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ&#39;</span><span class="p">,</span>
+
+        <span class="c1">// White background and border, black text and red grid</span>
+        <span class="s1">&#39;colors&#39;</span>        <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+                <span class="s1">&#39;background&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">),</span>
+                <span class="s1">&#39;border&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">),</span>
+                <span class="s1">&#39;text&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+                <span class="s1">&#39;grid&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">40</span><span class="p">)</span>
+        <span class="p">)</span>
+<span class="p">);</span>
+
+<span class="nv">$cap</span> <span class="o">=</span> <span class="nx">create_captcha</span><span class="p">(</span><span class="nv">$vals</span><span class="p">);</span>
+<span class="k">echo</span> <span class="nv">$cap</span><span class="p">[</span><span class="s1">&#39;image&#39;</span><span class="p">];</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>驗證碼函式需要 GD 圖像函式庫。</li>
+<li>只有 <strong>img_path</strong> 與 <strong>img_url</strong> 是必填的。</li>
+<li>假設沒有填 <strong>word</strong>，函式會自動生成一個隨機的 ASCII 字串，當然你也可以從你自己準備的文字庫當中隨機挑選。</li>
+<li>如果你沒有標明字型檔的路徑，將會使用醜醜的預設字型。</li>
+<li>“captcha” 資料夾必須是可以寫入的。</li>
+<li><strong>expiration</strong> (以秒數計) 標明出驗證碼圖示過多久之後會被刪除，預設是兩小時。</li>
+<li><strong>word_length</strong> 預設為 8，<strong>pool</strong> 預設為 ‘0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ’。</li>
+<li><strong>font_size</strong> 預設為 16，GD 字型有大小限制。如果要使用更大的字體請選用其他字型。</li>
+<li><strong>img_id</strong> 將是驗證碼圖示的 id。</li>
+<li>如果任一 <strong>colors</strong> 內的值不見了，將會以預設值代替。</li>
+</ul>
+<div class="section" id="id3">
+<h3><a class="toc-backref" href="#id7">建立驗證碼資料庫</a><a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<p>為了避免驗證碼被有心人士利用，你可以將 <code class="docutils literal notranslate"><span class="pre">create_captcha()</span></code> 所回傳的資訊加入到資料庫中。如此一來，當資料從使用者端送來的時候只需要驗證此筆資料是否存在且未過期即可。</p>
+<p>資料表建置範例</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="nx">CREATE</span> <span class="nx">TABLE</span> <span class="nx">captcha</span> <span class="p">(</span>
+        <span class="nx">captcha_id</span> <span class="nx">bigint</span><span class="p">(</span><span class="mi">13</span><span class="p">)</span> <span class="nx">unsigned</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="nx">auto_increment</span><span class="p">,</span>
+        <span class="nx">captcha_time</span> <span class="nx">int</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="nx">unsigned</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+        <span class="nx">ip_address</span> <span class="nx">varchar</span><span class="p">(</span><span class="mi">45</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+        <span class="nx">word</span> <span class="nx">varchar</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span> <span class="k">NOT</span> <span class="k">NULL</span><span class="p">,</span>
+        <span class="nx">PRIMARY</span> <span class="nx">KEY</span> <span class="sb">`captcha_id`</span> <span class="p">(</span><span class="sb">`captcha_id`</span><span class="p">),</span>
+        <span class="nx">KEY</span> <span class="sb">`word`</span> <span class="p">(</span><span class="sb">`word`</span><span class="p">)</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p>這是搭配資料庫使用的範例語法。在頁面中驗證碼顯示的地方，你可以填入如下的語法：</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">load</span><span class="o">-&gt;</span><span class="na">helper</span><span class="p">(</span><span class="s1">&#39;captcha&#39;</span><span class="p">);</span>
+<span class="nv">$vals</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;img_path&#39;</span>      <span class="o">=&gt;</span> <span class="s1">&#39;./captcha/&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;img_url&#39;</span>       <span class="o">=&gt;</span> <span class="s1">&#39;http://example.com/captcha/&#39;</span>
+<span class="p">);</span>
+
+<span class="nv">$cap</span> <span class="o">=</span> <span class="nx">create_captcha</span><span class="p">(</span><span class="nv">$vals</span><span class="p">);</span>
+<span class="nv">$data</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;captcha_time&#39;</span>  <span class="o">=&gt;</span> <span class="nv">$cap</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">],</span>
+        <span class="s1">&#39;ip_address&#39;</span>    <span class="o">=&gt;</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">input</span><span class="o">-&gt;</span><span class="na">ip_address</span><span class="p">(),</span>
+        <span class="s1">&#39;word&#39;</span>          <span class="o">=&gt;</span> <span class="nv">$cap</span><span class="p">[</span><span class="s1">&#39;word&#39;</span><span class="p">]</span>
+<span class="p">);</span>
+
+<span class="nv">$query</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">insert_string</span><span class="p">(</span><span class="s1">&#39;captcha&#39;</span><span class="p">,</span> <span class="nv">$data</span><span class="p">);</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">query</span><span class="p">(</span><span class="nv">$query</span><span class="p">);</span>
+
+<span class="k">echo</span> <span class="s1">&#39;Submit the word you see below:&#39;</span><span class="p">;</span>
+<span class="k">echo</span> <span class="nv">$cap</span><span class="p">[</span><span class="s1">&#39;image&#39;</span><span class="p">];</span>
+<span class="k">echo</span> <span class="s1">&#39;&lt;input type=&quot;text&quot; name=&quot;captcha&quot; value=&quot;&quot; /&gt;&#39;</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>然後，資料接收端頁面則填入如下語法：</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="c1">// 首先，刪除舊的驗證碼</span>
+<span class="nv">$expiration</span> <span class="o">=</span> <span class="nb">time</span><span class="p">()</span> <span class="o">-</span> <span class="mi">7200</span><span class="p">;</span> <span class="c1">// Two hour limit</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">where</span><span class="p">(</span><span class="s1">&#39;captcha_time &lt; &#39;</span><span class="p">,</span> <span class="nv">$expiration</span><span class="p">)</span>
+        <span class="o">-&gt;</span><span class="na">delete</span><span class="p">(</span><span class="s1">&#39;captcha&#39;</span><span class="p">);</span>
+
+<span class="c1">// 確認驗證碼是否存在</span>
+<span class="nv">$sql</span> <span class="o">=</span> <span class="s1">&#39;SELECT COUNT(*) AS count FROM captcha WHERE word = ? AND ip_address = ? AND captcha_time &gt; ?&#39;</span><span class="p">;</span>
+<span class="nv">$binds</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="nv">$_POST</span><span class="p">[</span><span class="s1">&#39;captcha&#39;</span><span class="p">],</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">input</span><span class="o">-&gt;</span><span class="na">ip_address</span><span class="p">(),</span> <span class="nv">$expiration</span><span class="p">);</span>
+<span class="nv">$query</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">query</span><span class="p">(</span><span class="nv">$sql</span><span class="p">,</span> <span class="nv">$binds</span><span class="p">);</span>
+<span class="nv">$row</span> <span class="o">=</span> <span class="nv">$query</span><span class="o">-&gt;</span><span class="na">row</span><span class="p">();</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="nv">$row</span><span class="o">-&gt;</span><span class="na">count</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+<span class="p">{</span>
+        <span class="k">echo</span> <span class="s1">&#39;You must submit the word that appears in the image.&#39;</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="id4">
+<h2><a class="toc-backref" href="#id8">可用函式格式</a><a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<p>允許使用的函式格式如下：</p>
+<dl class="function">
+<dt id="create_captcha">
+<code class="descname">create_captcha</code><span class="sig-paren">(</span><span class="optional">[</span><em>$data = ''</em><span class="optional">[</span>, <em>$img_path = ''</em><span class="optional">[</span>, <em>$img_url = ''</em><span class="optional">[</span>, <em>$font_path = ''</em><span class="optional">]</span><span class="optional">]</span><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#create_captcha" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>$data</strong> (<em>array</em>) – 存有驗證碼資訊的陣列</li>
+<li><strong>$img_path</strong> (<em>string</em>) – 建立驗證碼圖示的路徑</li>
+<li><strong>$img_url</strong> (<em>string</em>) – 驗證碼圖示資料夾的 URL</li>
+<li><strong>$font_path</strong> (<em>string</em>) – 字型檔的伺服器路徑</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">array(‘word’ =&gt; $word, ‘time’ =&gt; $now, ‘image’ =&gt; $img)</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">陣列</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>取得輸入在陣列中的資訊生成驗證碼，且根據你的需求產生驗證碼圖示，並將圖示的相關資訊回傳。</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;image&#39;</span> <span class="o">=&gt;</span> <span class="nx">IMAGE</span> <span class="nx">TAG</span>
+        <span class="s1">&#39;time&#39;</span>  <span class="o">=&gt;</span> <span class="nx">TIMESTAMP</span> <span class="p">(</span><span class="nx">in</span> <span class="nb">microtime</span><span class="p">)</span>
+        <span class="s1">&#39;word&#39;</span>  <span class="o">=&gt;</span> <span class="nx">CAPTCHA</span> <span class="nx">WORD</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>回傳的 <strong>image</strong> 是 HTML 圖示標籤：</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="nx">img</span> <span class="nx">src</span><span class="o">=</span><span class="s2">&quot;http://example.com/captcha/12345.jpg&quot;</span> <span class="nx">width</span><span class="o">=</span><span class="s2">&quot;140&quot;</span> <span class="nx">height</span><span class="o">=</span><span class="s2">&quot;50&quot;</span> <span class="o">/&gt;</span>
+</pre></div>
+</div>
+<p>回傳的 <strong>time</strong> 是被用來當作圖片檔名（沒有副檔名）的時間戳記，就像是這樣的數字：1139612155.3422</p>
+<p>回傳的 <strong>word</strong> 是出現在驗證碼圖示中的文字，如果沒有指定特定字串給函式的話將會隨機挑選一個字串。</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="cookie_helper.html" class="btn btn-neutral float-right" title="Cookie 輔助函式">下一頁 <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="array_helper.html" class="btn btn-neutral" title="Array 輔助函式"><span class="fa fa-arrow-circle-left"></span> 上一頁</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2014 - 2017, British Columbia Institute of Technology.
+      最後編輯時間 Nov 19, 2020.
+    </p>
+  </div>
+
+  
+    <p>由 <a href="https://readthedocs.org">Read the Docs</a> 提供 <a href="http://sphinx-doc.org/">Sphinx</a> 並使用 <a href="https://github.com/snide/sphinx_rtd_theme">sphinx_rtd_theme</a> 主題</p>
+    <p><a href="https://github.com/CodeIgniter-TW/CodeIgniter-UserGuide" target="_blank">Github 繁體中文翻譯</a></p>
+  
+
+</footer>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-5766319-11', 'auto');
+  ga('send', 'pageview');
+
+</script>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'3.1.6',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  false
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="../_static/language_data.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

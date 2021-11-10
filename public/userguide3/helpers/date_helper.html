@@ -1,0 +1,852 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Date 輔助函式 &mdash; CodeIgniter 3.1.6 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/ci-icon.ico"/>
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="CodeIgniter 3.1.6 documentation" href="../index.html"/>
+        <link rel="up" title="輔助函式" href="index.html"/>
+        <link rel="next" title="Directory 輔助函式" href="directory_helper.html"/>
+        <link rel="prev" title="Cookie 輔助函式" href="cookie_helper.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        
+          <a href="http://codeigniter.tw/" class="fa fa-home"> CodeIgniter</a>
+        
+        
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="搜尋使用手冊" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+          
+          
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../general/welcome.html">歡迎加入 CodeIgniter</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../installation/index.html">安裝指引</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../installation/downloads.html">下載 CodeIgniter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation/index.html">安裝指引</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation/upgrading.html">從先前的版本來更新</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation/troubleshooting.html">故障排除</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../overview/index.html">CodeIgniter 概觀</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../overview/getting_started.html">開始 CodeIgniter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/at_a_glance.html">CodeIgniter 一目了然</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/features.html">CodeIgniter 特色</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/appflow.html">應用程式溝通流程</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/mvc.html">Model-View-Controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/goals.html">設計以及架構目標</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/index.html">教學</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial/static_pages.html">靜態頁面</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial/news_section.html">新聞模組介紹</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial/create_news_items.html">動態新增新聞</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial/conclusion.html">結論</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../general/index.html">一般主題</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../general/urls.html">CodeIgniter URLs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/controllers.html">控制器 Controllers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/reserved_names.html">保留名稱</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/views.html">視圖 Views</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/models.html">什麼是 Model？</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/models.html#id2">剖析 Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/models.html#id3">載入 Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/models.html#models">自動載入 Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/models.html#id4">連接資料庫</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/helpers.html">Helpers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/libraries.html">使用 CodeIgniter 函式庫</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/creating_libraries.html">自建函式庫</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/drivers.html">使用 CodeIgniter 驅動器</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/creating_drivers.html">自建驅動器</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/core_classes.html">新增系統核心類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/ancillary_classes.html">新增配套類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/hooks.html">Hooks－擴充核心</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/autoloader.html">自動載入資源</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/common_functions.html">通用函數</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/compatibility_functions.html">相容性函數</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/routing.html">URI 路由</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/errors.html">錯誤處理</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/caching.html">Caching</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/profiling.html">應用程式效能分析</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/cli.html">透過 CLI 執行 CodeIgniter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/managing_apps.html">管理你的應用程式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/environments.html">處理多環境變數</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/alternative_php.html">替代 View 檔案的 PHP 的語法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/security.html">安全性</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/styleguide.html">PHP Style Guide</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../libraries/index.html">Libraries</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/benchmark.html">效能測試類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/caching.html">快取驅動類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/calendar.html">日曆類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/cart.html">購物車類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/config.html">設定類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/email.html">電子郵件類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/encrypt.html">Encrypt Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/encryption.html">Encryption Library</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/file_uploading.html">檔案上傳類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/form_validation.html">Form Validation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/ftp.html">FTP Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/image_lib.html">Image Manipulation Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/input.html">Input Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/javascript.html">Javascript Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/language.html">Language Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/loader.html">Loader Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/migration.html">Migrations Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/output.html">Output Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/pagination.html">Pagination Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/parser.html">Template Parser Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/security.html">Security Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/sessions.html">Session Library</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/table.html">HTML Table 類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/trackback.html">Trackback 類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/typography.html">Typography 類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/unit_testing.html">單元測試類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/uri.html">URI 類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/user_agent.html">User Agent 類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/xmlrpc.html">XML-RPC 及 XML-RPC Server 類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/zip.html">Zip 類別</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../database/index.html">資料庫參考</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../database/examples.html">快速入門：範例程式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../database/configuration.html">資料庫設定</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../database/connecting.html">連接資料庫</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../database/queries.html">執行查詢</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../database/results.html">產生查詢結果</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../database/helpers.html">查詢補助函數</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../database/query_builder.html">查詢生成器類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../database/transactions.html">交易</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../database/metadata.html">取得資料表資訊</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../database/call_function.html">自訂函數</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../database/caching.html">查詢快取</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../database/forge.html">使用 Database Forge 管理資料庫</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../database/utilities.html">Database Utilities 類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../database/db_driver_reference.html">Database Driver 參考</a></li>
+</ul>
+</li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">輔助函式</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="array_helper.html">Array 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="captcha_helper.html">CAPTCHA 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cookie_helper.html">Cookie 輔助函式</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Date 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="directory_helper.html">Directory 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="download_helper.html">Download 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="email_helper.html">Email 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_helper.html">File 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="form_helper.html">Form 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="html_helper.html">HTML 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="inflector_helper.html">Inflector 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="language_helper.html">Language 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="number_helper.html">Number 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="path_helper.html">Path 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security_helper.html">Security 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="smiley_helper.html">Smiley 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="string_helper.html">String 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="text_helper.html">Text 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="typography_helper.html">Typography 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="url_helper.html">URL 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="xml_helper.html">XML 輔助函式</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">貢獻 CodeIgniter</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../documentation/index.html">Writing CodeIgniter Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../DCO.html">Developer’s Certificate of Origin 1.1</a></li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">CodeIgniter</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">使用手冊</a> &raquo;</li>
+      
+          <li><a href="index.html">輔助函式</a> &raquo;</li>
+      
+    <li>Date 輔助函式</li>
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document">
+            
+  <div class="section" id="date">
+<h1>Date 輔助函式<a class="headerlink" href="#date" title="Permalink to this headline">¶</a></h1>
+<p>Date 輔助函式包含了各種處理日期的相關函式。</p>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#id1" id="id4">導入輔助函式</a></li>
+<li><a class="reference internal" href="#id2" id="id5">可用函式格式</a></li>
+<li><a class="reference internal" href="#timezone" id="id6">Timezone 參考列表</a></li>
+</ul>
+</div>
+<div class="custom-index container"></div><div class="section" id="id1">
+<h2><a class="toc-backref" href="#id4">導入輔助函式</a><a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>Date 輔助函式的載入語法如下</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">load</span><span class="o">-&gt;</span><span class="na">helper</span><span class="p">(</span><span class="s1">&#39;date&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id2">
+<h2><a class="toc-backref" href="#id5">可用函式格式</a><a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>允許使用的函式格式如下：</p>
+<dl class="function">
+<dt id="now">
+<code class="descname">now</code><span class="sig-paren">(</span><span class="optional">[</span><em>$timezone = NULL</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#now" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>$timezone</strong> (<em>string</em>) – 時區</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">UNIX 時間戳記</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">整數</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>根據你在 config 檔案中 “time reference“ 的設定，同時參考你伺服器的本地時間或任一 PHP 所支援的時區，並以 UNIX 時間戳記的格式回傳現在的時間，如果你沒有試圖將設定改為 PHP 所支援的任一時區（不過當你在經營一個網站且讓各個使用者可以各別設置時區的話你通常就會做），就沒有必要使用此函式來取代原本 PHP 的 <code class="docutils literal notranslate"><span class="pre">time</span> <span class="pre">()</span></code> 了。</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="k">echo</span> <span class="nx">now</span><span class="p">(</span><span class="s1">&#39;Australia/Victoria&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>如果沒有提供時區，將會回傳基於 <strong>time_reference</strong> 設定的 <code class="docutils literal notranslate"><span class="pre">time</span> <span class="pre">()</span></code>。</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="mdate">
+<code class="descname">mdate</code><span class="sig-paren">(</span><span class="optional">[</span><em>$datestr = ''</em><span class="optional">[</span>, <em>$time = ''</em><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#mdate" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>$datestr</strong> (<em>string</em>) – 日期字串</li>
+<li><strong>$time</strong> (<em>int</em>) – UNIX 時間戳記</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">MySQL 格式的日期</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">字串</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>此函式除了可以讓你使用 MySQL 的日期格式（字串中每個字母前方要加上百分比符號，如：<cite>%Y %m %d</cite>）之外，其實跟 PHP 的 <a class="reference external" href="http://php.net/manual/en/function.date.php">date()</a> 相當雷同。</p>
+<p>使用此函式的好處是你沒必要去過濾任何非日期的字符，其他動作就像你平常使用 <code class="docutils literal notranslate"><span class="pre">date()</span></code> 函式一樣。</p>
+<p>範例</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="nv">$datestring</span> <span class="o">=</span> <span class="s1">&#39;Year: %Y Month: %m Day: %d - %h:%i %a&#39;</span><span class="p">;</span>
+<span class="nv">$time</span> <span class="o">=</span> <span class="nb">time</span><span class="p">();</span>
+<span class="k">echo</span> <span class="nx">mdate</span><span class="p">(</span><span class="nv">$datestring</span><span class="p">,</span> <span class="nv">$time</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>如果第二個參數沒有指定時間戳記，將會使用現在的時間。</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="standard_date">
+<code class="descname">standard_date</code><span class="sig-paren">(</span><span class="optional">[</span><em>$fmt = 'DATE_RFC822'</em><span class="optional">[</span>, <em>$time = NULL</em><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#standard_date" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>$fmt</strong> (<em>string</em>) – 日期格式</li>
+<li><strong>$time</strong> (<em>int</em>) – UNIX 時間戳記</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">已格式化的日期或當格式錯誤時回傳 FALSE</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">字串</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>回傳你所指定的日期標準格式所產生的日期字串。</p>
+<p>範例</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="nv">$format</span> <span class="o">=</span> <span class="s1">&#39;DATE_RFC822&#39;</span><span class="p">;</span>
+<span class="nv">$time</span> <span class="o">=</span> <span class="nb">time</span><span class="p">();</span>
+<span class="k">echo</span> <span class="nx">standard_date</span><span class="p">(</span><span class="nv">$format</span><span class="p">,</span> <span class="nv">$time</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><strong>支援格式：</strong></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="local_to_gmt">
+<code class="descname">local_to_gmt</code><span class="sig-paren">(</span><span class="optional">[</span><em>$time = ''</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#local_to_gmt" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>$time</strong> (<em>int</em>) – UNIX 時間戳記</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">UNIX 時間戳記</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">int</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>輸入 UNIX 時間戳記後將回傳以 GMT 表示的時間。</p>
+<p>範例</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="nv">$gmt</span> <span class="o">=</span> <span class="nx">local_to_gmt</span><span class="p">(</span><span class="nb">time</span><span class="p">());</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="gmt_to_local">
+<code class="descname">gmt_to_local</code><span class="sig-paren">(</span><span class="optional">[</span><em>$time = ''</em><span class="optional">[</span>, <em>$timezone = 'UTC'</em><span class="optional">[</span>, <em>$dst = FALSE</em><span class="optional">]</span><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#gmt_to_local" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>$time</strong> (<em>int</em>) – UNIX 時間戳記</li>
+<li><strong>$timezone</strong> (<em>string</em>) – 時區</li>
+<li><strong>$dst</strong> (<em>bool</em>) – 是否有啟用 DST</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">UNIX 時間戳記</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">整數</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>輸入 UNIX 時間戳記（參考自 GMT）後將其轉化為符合當地時區的時間戳記，並且可選擇計入日光節約時間。</p>
+<p>範例</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="nv">$timestamp</span> <span class="o">=</span> <span class="mi">1140153693</span><span class="p">;</span>
+<span class="nv">$timezone</span>  <span class="o">=</span> <span class="s1">&#39;UM8&#39;</span><span class="p">;</span>
+<span class="nv">$daylight_saving</span> <span class="o">=</span> <span class="k">TRUE</span><span class="p">;</span>
+<span class="k">echo</span> <span class="nx">gmt_to_local</span><span class="p">(</span><span class="nv">$timestamp</span><span class="p">,</span> <span class="nv">$timezone</span><span class="p">,</span> <span class="nv">$daylight_saving</span><span class="p">);</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="mysql_to_unix">
+<code class="descname">mysql_to_unix</code><span class="sig-paren">(</span><span class="optional">[</span><em>$time = ''</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#mysql_to_unix" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>$time</strong> (<em>string</em>) – MySQL 時間戳記</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">UNIX 時間戳記</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">int</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>輸入 MySQL 時間戳記後將回傳 UNIX 時間戳記。</p>
+<p>範例</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="nv">$unix</span> <span class="o">=</span> <span class="nx">mysql_to_unix</span><span class="p">(</span><span class="s1">&#39;20061124092345&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="unix_to_human">
+<code class="descname">unix_to_human</code><span class="sig-paren">(</span><span class="optional">[</span><em>$time = ''</em><span class="optional">[</span>, <em>$seconds = FALSE</em><span class="optional">[</span>, <em>$fmt = 'us'</em><span class="optional">]</span><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#unix_to_human" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>$time</strong> (<em>int</em>) – UNIX 時間戳記</li>
+<li><strong>$seconds</strong> (<em>bool</em>) – 是否顯示秒數</li>
+<li><strong>$fmt</strong> (<em>string</em>) – 格式（美規或歐規）</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">已格式化的日期</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">字串</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>輸入 UNIX 時間戳記後將回傳可清楚識別的時間字串，格式如下：</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="nx">YYYY</span><span class="o">-</span><span class="nx">MM</span><span class="o">-</span><span class="nx">DD</span> <span class="nx">HH</span><span class="o">:</span><span class="nx">MM</span><span class="o">:</span><span class="nx">SS</span> <span class="nx">AM</span><span class="o">/</span><span class="nx">PM</span>
+</pre></div>
+</div>
+<p>如果你需要在表單欄位中顯示日期的話，這個函式將會相當有用。</p>
+<p>你可以選擇顯示或隱藏秒數，同時可以被設定成歐規或美規，如果只送出時間戳記，預設將會回傳秒數隱藏而且是美規的時間。</p>
+<p>範例</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="nv">$now</span> <span class="o">=</span> <span class="nb">time</span><span class="p">();</span>
+<span class="k">echo</span> <span class="nx">unix_to_human</span><span class="p">(</span><span class="nv">$now</span><span class="p">);</span> <span class="c1">// 美規時間秒數隱藏</span>
+<span class="k">echo</span> <span class="nx">unix_to_human</span><span class="p">(</span><span class="nv">$now</span><span class="p">,</span> <span class="k">TRUE</span><span class="p">,</span> <span class="s1">&#39;us&#39;</span><span class="p">);</span> <span class="c1">// 美規時間秒數顯示</span>
+<span class="k">echo</span> <span class="nx">unix_to_human</span><span class="p">(</span><span class="nv">$now</span><span class="p">,</span> <span class="k">TRUE</span><span class="p">,</span> <span class="s1">&#39;eu&#39;</span><span class="p">);</span> <span class="c1">// 歐規時間秒數顯示</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="human_to_unix">
+<code class="descname">human_to_unix</code><span class="sig-paren">(</span><span class="optional">[</span><em>$datestr = ''</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#human_to_unix" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>$datestr</strong> (<em>int</em>) – 日期字串</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">UNIX 時間戳記或失敗時回傳 FALSE</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">整數</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>跟 <code class="xref php php-func docutils literal notranslate"><span class="pre">unix_to_time()</span></code> 完全相反的函式，輸入人類可識別的時間格式後將回傳 UNIX 時間戳記，假設你需要透過表單讓使用者填寫日期的話，這個函式將會相當有用。 如果使用者輸入的日期格式並非如上一函式所述的話，將會回傳 FALSE。</p>
+<p>範例</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="nv">$now</span> <span class="o">=</span> <span class="nb">time</span><span class="p">();</span>
+<span class="nv">$human</span> <span class="o">=</span> <span class="nx">unix_to_human</span><span class="p">(</span><span class="nv">$now</span><span class="p">);</span>
+<span class="nv">$unix</span> <span class="o">=</span> <span class="nx">human_to_unix</span><span class="p">(</span><span class="nv">$human</span><span class="p">);</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="nice_date">
+<code class="descname">nice_date</code><span class="sig-paren">(</span><span class="optional">[</span><em>$bad_date = ''</em><span class="optional">[</span>, <em>$format = FALSE</em><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#nice_date" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>$bad_date</strong> (<em>int</em>) – 格式紊亂的類日期字串</li>
+<li><strong>$format</strong> (<em>string</em>) – 回傳的日期格式（就像使用 <code class="docutils literal notranslate"><span class="pre">date()</span></code> 函式一樣）</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">已格式化的日期</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">字串</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>此函式可將一格式紊亂的日期字串轉成至少可以用的格式，當然它也還是接受符合標準格式的啦。</p>
+<p>此函式預設將會回傳 UNIX 時間戳記，並且你可以選擇性地丟出時間格式（就像使用 <code class="docutils literal notranslate"><span class="pre">date()</span></code> 函式一樣）當作第二個參數。</p>
+<p>範例</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="nv">$bad_date</span> <span class="o">=</span> <span class="s1">&#39;199605&#39;</span><span class="p">;</span>
+<span class="c1">// Should Produce: 1996-05-01</span>
+<span class="nv">$better_date</span> <span class="o">=</span> <span class="nx">nice_date</span><span class="p">(</span><span class="nv">$bad_date</span><span class="p">,</span> <span class="s1">&#39;Y-m-d&#39;</span><span class="p">);</span>
+
+<span class="nv">$bad_date</span> <span class="o">=</span> <span class="s1">&#39;9-11-2001&#39;</span><span class="p">;</span>
+<span class="c1">// Should Produce: 2001-09-11</span>
+<span class="nv">$better_date</span> <span class="o">=</span> <span class="nx">nice_date</span><span class="p">(</span><span class="nv">$bad_date</span><span class="p">,</span> <span class="s1">&#39;Y-m-d&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="timespan">
+<code class="descname">timespan</code><span class="sig-paren">(</span><span class="optional">[</span><em>$seconds = 1</em><span class="optional">[</span>, <em>$time = ''</em><span class="optional">[</span>, <em>$units = ''</em><span class="optional">]</span><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#timespan" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>$seconds</strong> (<em>int</em>) – 秒數</li>
+<li><strong>$time</strong> (<em>string</em>) – UNIX 時間戳記</li>
+<li><strong>$units</strong> (<em>int</em>) – 顯示的時間單位數量</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">已格式化的不同時間</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">字串</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>將 UNIX 時間戳記格式化後回傳的值如下</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="mi">1</span> <span class="nx">Year</span><span class="p">,</span> <span class="mi">10</span> <span class="nx">Months</span><span class="p">,</span> <span class="mi">2</span> <span class="nx">Weeks</span><span class="p">,</span> <span class="mi">5</span> <span class="nx">Days</span><span class="p">,</span> <span class="mi">10</span> <span class="nx">Hours</span><span class="p">,</span> <span class="mi">16</span> <span class="nx">Minutes</span>
+</pre></div>
+</div>
+<p>第一個參數必須包含 UNIX 時間戳記，第二個參數包含的時間戳記必須比第一個參數大，第三個參數選填且可以限制顯示的時間單位數量。</p>
+<p>如果第二個參數是空的，將會顯示現在時間。</p>
+<p>最常被用來顯示從過去某個時間點到現在總共經過多久時間。</p>
+<p>範例</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="nv">$post_date</span> <span class="o">=</span> <span class="s1">&#39;1079621429&#39;</span><span class="p">;</span>
+<span class="nv">$now</span> <span class="o">=</span> <span class="nb">time</span><span class="p">();</span>
+<span class="nv">$units</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+<span class="k">echo</span> <span class="nx">timespan</span><span class="p">(</span><span class="nv">$post_date</span><span class="p">,</span> <span class="nv">$now</span><span class="p">,</span> <span class="nv">$units</span><span class="p">);</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="days_in_month">
+<code class="descname">days_in_month</code><span class="sig-paren">(</span><span class="optional">[</span><em>$month = 0</em><span class="optional">[</span>, <em>$year = ''</em><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#days_in_month" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>$month</strong> (<em>int</em>) – 數字化的月份</li>
+<li><strong>$year</strong> (<em>int</em>) – 數字化的年份</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">在特定月份中的天數</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">整數</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>輸入年月後回傳該月有幾天，含閏年計算。</p>
+<p>範例</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="k">echo</span> <span class="nx">days_in_month</span><span class="p">(</span><span class="mo">06</span><span class="p">,</span> <span class="mi">2005</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>如果第二個參數為空，則預設使用今年。</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="date_range">
+<code class="descname">date_range</code><span class="sig-paren">(</span><span class="optional">[</span><em>$unix_start = ''</em><span class="optional">[</span>, <em>$mixed = ''</em><span class="optional">[</span>, <em>$is_unix = TRUE</em><span class="optional">[</span>, <em>$format = 'Y-m-d'</em><span class="optional">]</span><span class="optional">]</span><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#date_range" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>$unix_start</strong> (<em>int</em>) – 範圍內起始的 UNIX 時間戳記</li>
+<li><strong>$mixed</strong> (<em>int</em>) – 範圍內結束 UNIX 時間戳記或日期間隔</li>
+<li><strong>$is_unix</strong> (<em>bool</em>) – 如果 $mixed 不是時間戳記就設為 FALSE</li>
+<li><strong>$format</strong> (<em>string</em>) – 日期格式就如同在 <code class="docutils literal notranslate"><span class="pre">date()</span></code> 用的那樣</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">日期陣列</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">陣列</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>回傳在自訂時間內的日期陣列。</p>
+<p>範例</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="nv">$range</span> <span class="o">=</span> <span class="nx">date_range</span><span class="p">(</span><span class="s1">&#39;2012-01-01&#39;</span><span class="p">,</span> <span class="s1">&#39;2012-01-15&#39;</span><span class="p">);</span>
+<span class="k">echo</span> <span class="s2">&quot;First 15 days of 2012:&quot;</span><span class="p">;</span>
+<span class="k">foreach</span> <span class="p">(</span><span class="nv">$range</span> <span class="k">as</span> <span class="nv">$date</span><span class="p">)</span>
+<span class="p">{</span>
+        <span class="k">echo</span> <span class="nv">$date</span><span class="o">.</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="timezones">
+<code class="descname">timezones</code><span class="sig-paren">(</span><span class="optional">[</span><em>$tz = ''</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#timezones" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>$tz</strong> (<em>string</em>) – 時區代號</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">與 UTC 差距多少小時</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">整數</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>輸入時區代號（參考最下方列表）後將回傳與 UTC 差距多少小時。</p>
+<p>範例</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="k">echo</span> <span class="nx">timezones</span><span class="p">(</span><span class="s1">&#39;UM5&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>很適用於會用到 <a class="reference internal" href="#timezone_menu" title="timezone_menu"><code class="xref php php-func docutils literal notranslate"><span class="pre">timezone_menu()</span></code></a> 的時機。</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="timezone_menu">
+<code class="descname">timezone_menu</code><span class="sig-paren">(</span><span class="optional">[</span><em>$default = 'UTC'</em><span class="optional">[</span>, <em>$class = ''</em><span class="optional">[</span>, <em>$name = 'timezones'</em><span class="optional">[</span>, <em>$attributes = ''</em><span class="optional">]</span><span class="optional">]</span><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#timezone_menu" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>$default</strong> (<em>string</em>) – 時區</li>
+<li><strong>$class</strong> (<em>string</em>) – 下拉選單的 CSS Class name</li>
+<li><strong>$name</strong> (<em>string</em>) – 下拉選單的 Name</li>
+<li><strong>$attributes</strong> (<em>mixed</em>) – HTML 屬性</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">包含時區訊息的 HTML 下拉選單</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">字串</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>產生一個可以選時區的下拉選單，結果如下：</p>
+<form action="#">
+        <select name="timezones">
+                <option value='UM12'>(UTC -12:00) Baker/Howland Island</option>
+                <option value='UM11'>(UTC -11:00) Samoa Time Zone, Niue</option>
+                <option value='UM10'>(UTC -10:00) Hawaii-Aleutian Standard Time, Cook Islands, Tahiti</option>
+                <option value='UM95'>(UTC -9:30) Marquesas Islands</option>
+                <option value='UM9'>(UTC -9:00) Alaska Standard Time, Gambier Islands</option>
+                <option value='UM8'>(UTC -8:00) Pacific Standard Time, Clipperton Island</option>
+                <option value='UM7'>(UTC -7:00) Mountain Standard Time</option>
+                <option value='UM6'>(UTC -6:00) Central Standard Time</option>
+                <option value='UM5'>(UTC -5:00) Eastern Standard Time, Western Caribbean Standard Time</option>
+                <option value='UM45'>(UTC -4:30) Venezuelan Standard Time</option>
+                <option value='UM4'>(UTC -4:00) Atlantic Standard Time, Eastern Caribbean Standard Time</option>
+                <option value='UM35'>(UTC -3:30) Newfoundland Standard Time</option>
+                <option value='UM3'>(UTC -3:00) Argentina, Brazil, French Guiana, Uruguay</option>
+                <option value='UM2'>(UTC -2:00) South Georgia/South Sandwich Islands</option>
+                <option value='UM1'>(UTC -1:00) Azores, Cape Verde Islands</option>
+                <option value='UTC' selected='selected'>(UTC) Greenwich Mean Time, Western European Time</option>
+                <option value='UP1'>(UTC +1:00) Central European Time, West Africa Time</option>
+                <option value='UP2'>(UTC +2:00) Central Africa Time, Eastern European Time, Kaliningrad Time</option>
+                <option value='UP3'>(UTC +3:00) Moscow Time, East Africa Time</option>
+                <option value='UP35'>(UTC +3:30) Iran Standard Time</option>
+                <option value='UP4'>(UTC +4:00) Azerbaijan Standard Time, Samara Time</option>
+                <option value='UP45'>(UTC +4:30) Afghanistan</option>
+                <option value='UP5'>(UTC +5:00) Pakistan Standard Time, Yekaterinburg Time</option>
+                <option value='UP55'>(UTC +5:30) Indian Standard Time, Sri Lanka Time</option>
+                <option value='UP575'>(UTC +5:45) Nepal Time</option>
+                <option value='UP6'>(UTC +6:00) Bangladesh Standard Time, Bhutan Time, Omsk Time</option>
+                <option value='UP65'>(UTC +6:30) Cocos Islands, Myanmar</option>
+                <option value='UP7'>(UTC +7:00) Krasnoyarsk Time, Cambodia, Laos, Thailand, Vietnam</option>
+                <option value='UP8'>(UTC +8:00) Australian Western Standard Time, Beijing Time, Irkutsk Time</option>
+                <option value='UP875'>(UTC +8:45) Australian Central Western Standard Time</option>
+                <option value='UP9'>(UTC +9:00) Japan Standard Time, Korea Standard Time, Yakutsk Time</option>
+                <option value='UP95'>(UTC +9:30) Australian Central Standard Time</option>
+                <option value='UP10'>(UTC +10:00) Australian Eastern Standard Time, Vladivostok Time</option>
+                <option value='UP105'>(UTC +10:30) Lord Howe Island</option>
+                <option value='UP11'>(UTC +11:00) Srednekolymsk Time, Solomon Islands, Vanuatu</option>
+                <option value='UP115'>(UTC +11:30) Norfolk Island</option>
+                <option value='UP12'>(UTC +12:00) Fiji, Gilbert Islands, Kamchatka Time, New Zealand Standard Time</option>
+                <option value='UP1275'>(UTC +12:45) Chatham Islands Standard Time</option>
+                <option value='UP13'>(UTC +13:00) Phoenix Islands Time, Tonga</option>
+                <option value='UP14'>(UTC +14:00) Line Islands</option>
+        </select>
+</form><p>如果你有個具備會員系統的網站，且允許使用者設置各自的時區，這個下拉選單將會非常好用。</p>
+<p>第一個參數讓你設定預設時區，舉例來說你要設定太平洋時間為預設值的話可以這麼寫：</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="k">echo</span> <span class="nx">timezone_menu</span><span class="p">(</span><span class="s1">&#39;UM8&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>當然也請參考下方的時區列表。</p>
+<p>第二個參數讓你設定選單的 CSS Class name。</p>
+<p>第四個參數讓你可以在下拉選單的標籤中額外添加屬性。</p>
+</dd></dl>
+
+</div>
+<div class="section" id="timezone">
+<h2><a class="toc-backref" href="#id6">Timezone 參考列表</a><a class="headerlink" href="#timezone" title="Permalink to this headline">¶</a></h2>
+<p>下方的表格包含所有時區以及其相關地點。</p>
+<p>提醒一下，列表有些地點為了格式化有稍作修減。</p>
+</div>
+</div>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="directory_helper.html" class="btn btn-neutral float-right" title="Directory 輔助函式">下一頁 <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="cookie_helper.html" class="btn btn-neutral" title="Cookie 輔助函式"><span class="fa fa-arrow-circle-left"></span> 上一頁</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2014 - 2017, British Columbia Institute of Technology.
+      最後編輯時間 Nov 19, 2020.
+    </p>
+  </div>
+
+  
+    <p>由 <a href="https://readthedocs.org">Read the Docs</a> 提供 <a href="http://sphinx-doc.org/">Sphinx</a> 並使用 <a href="https://github.com/snide/sphinx_rtd_theme">sphinx_rtd_theme</a> 主題</p>
+    <p><a href="https://github.com/CodeIgniter-TW/CodeIgniter-UserGuide" target="_blank">Github 繁體中文翻譯</a></p>
+  
+
+</footer>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-5766319-11', 'auto');
+  ga('send', 'pageview');
+
+</script>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'3.1.6',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  false
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="../_static/language_data.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

@@ -9,6 +9,8 @@ use CodeIgniter\HTTP\IncomingRequest;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use Psr\Log\LoggerInterface;
+use App\Libraries\GitHubHelper;
+
 
 /**
  * Class BaseController
@@ -44,6 +46,11 @@ class BaseController extends Controller
     protected $github;
 
     /**
+     * @var GitHubHelper
+     */
+	protected $gitter;
+
+    /**
      * Constructor.
      */
     public function initController(RequestInterface $request, ResponseInterface $response, LoggerInterface $logger)
@@ -52,6 +59,7 @@ class BaseController extends Controller
         parent::initController($request, $response, $logger);
 
         $this->github = service('github');
+        $this->gitter = new GitHubHelper();
     }
 
     /**

@@ -1,0 +1,481 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>安全性 &mdash; CodeIgniter 3.1.6 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/ci-icon.ico"/>
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="CodeIgniter 3.1.6 documentation" href="../index.html"/>
+        <link rel="up" title="一般主題" href="index.html"/>
+        <link rel="next" title="PHP 風格指南" href="styleguide.html"/>
+        <link rel="prev" title="替代 View 檔案的 PHP 的語法" href="alternative_php.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        
+          <a href="http://codeigniter.tw/" class="fa fa-home"> CodeIgniter</a>
+        
+        
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="搜尋使用手冊" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+          
+          
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="welcome.html">歡迎加入 CodeIgniter</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../installation/index.html">安裝指引</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../installation/downloads.html">下載 CodeIgniter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation/index.html">安裝指引</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation/upgrading.html">從先前的版本來更新</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation/troubleshooting.html">故障排除</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../overview/index.html">CodeIgniter 概觀</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../overview/getting_started.html">開始 CodeIgniter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/at_a_glance.html">CodeIgniter 一目了然</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/features.html">CodeIgniter 特色</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/appflow.html">應用程式溝通流程</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/mvc.html">Model-View-Controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/goals.html">設計以及架構目標</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/index.html">教學</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial/static_pages.html">靜態頁面</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial/news_section.html">新聞模組介紹</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial/create_news_items.html">動態新增新聞</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial/conclusion.html">結論</a></li>
+</ul>
+</li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">一般主題</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="urls.html">CodeIgniter URLs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="controllers.html">控制器 Controllers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reserved_names.html">保留名稱</a></li>
+<li class="toctree-l2"><a class="reference internal" href="views.html">視圖 Views</a></li>
+<li class="toctree-l2"><a class="reference internal" href="models.html">什麼是 Model？</a></li>
+<li class="toctree-l2"><a class="reference internal" href="models.html#id2">剖析 Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="models.html#id3">載入 Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="models.html#models">自動載入 Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="models.html#id4">連接資料庫</a></li>
+<li class="toctree-l2"><a class="reference internal" href="helpers.html">Helpers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libraries.html">使用 CodeIgniter 函式庫</a></li>
+<li class="toctree-l2"><a class="reference internal" href="creating_libraries.html">自建函式庫</a></li>
+<li class="toctree-l2"><a class="reference internal" href="drivers.html">使用 CodeIgniter 驅動器</a></li>
+<li class="toctree-l2"><a class="reference internal" href="creating_drivers.html">自建驅動器</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core_classes.html">新增系統核心類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ancillary_classes.html">新增配套類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hooks.html">Hooks－擴充核心</a></li>
+<li class="toctree-l2"><a class="reference internal" href="autoloader.html">自動載入資源</a></li>
+<li class="toctree-l2"><a class="reference internal" href="common_functions.html">通用函數</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compatibility_functions.html">相容性函數</a></li>
+<li class="toctree-l2"><a class="reference internal" href="routing.html">URI 路由</a></li>
+<li class="toctree-l2"><a class="reference internal" href="errors.html">錯誤處理</a></li>
+<li class="toctree-l2"><a class="reference internal" href="caching.html">Caching</a></li>
+<li class="toctree-l2"><a class="reference internal" href="profiling.html">應用程式效能分析</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cli.html">透過 CLI 執行 CodeIgniter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="managing_apps.html">管理你的應用程式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="environments.html">處理多環境變數</a></li>
+<li class="toctree-l2"><a class="reference internal" href="alternative_php.html">替代 View 檔案的 PHP 的語法</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">安全性</a></li>
+<li class="toctree-l2"><a class="reference internal" href="styleguide.html">PHP Style Guide</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../libraries/index.html">Libraries</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/benchmark.html">效能測試類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/caching.html">快取驅動類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/calendar.html">日曆類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/cart.html">購物車類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/config.html">設定類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/email.html">電子郵件類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/encrypt.html">Encrypt Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/encryption.html">Encryption Library</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/file_uploading.html">檔案上傳類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/form_validation.html">Form Validation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/ftp.html">FTP Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/image_lib.html">Image Manipulation Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/input.html">Input Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/javascript.html">Javascript Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/language.html">Language Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/loader.html">Loader Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/migration.html">Migrations Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/output.html">Output Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/pagination.html">Pagination Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/parser.html">Template Parser Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/security.html">Security Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/sessions.html">Session Library</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/table.html">HTML Table 類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/trackback.html">Trackback 類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/typography.html">Typography 類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/unit_testing.html">單元測試類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/uri.html">URI 類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/user_agent.html">User Agent 類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/xmlrpc.html">XML-RPC 及 XML-RPC Server 類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/zip.html">Zip 類別</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../database/index.html">資料庫參考</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../database/examples.html">快速入門：範例程式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../database/configuration.html">資料庫設定</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../database/connecting.html">連接資料庫</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../database/queries.html">執行查詢</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../database/results.html">產生查詢結果</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../database/helpers.html">查詢補助函數</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../database/query_builder.html">查詢生成器類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../database/transactions.html">交易</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../database/metadata.html">取得資料表資訊</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../database/call_function.html">自訂函數</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../database/caching.html">查詢快取</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../database/forge.html">使用 Database Forge 管理資料庫</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../database/utilities.html">Database Utilities 類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../database/db_driver_reference.html">Database Driver 參考</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../helpers/index.html">輔助函式</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../helpers/array_helper.html">Array 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../helpers/captcha_helper.html">CAPTCHA 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../helpers/cookie_helper.html">Cookie 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../helpers/date_helper.html">Date 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../helpers/directory_helper.html">Directory 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../helpers/download_helper.html">Download 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../helpers/email_helper.html">Email 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../helpers/file_helper.html">File 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../helpers/form_helper.html">Form 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../helpers/html_helper.html">HTML 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../helpers/inflector_helper.html">Inflector 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../helpers/language_helper.html">Language 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../helpers/number_helper.html">Number 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../helpers/path_helper.html">Path 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../helpers/security_helper.html">Security 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../helpers/smiley_helper.html">Smiley 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../helpers/string_helper.html">String 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../helpers/text_helper.html">Text 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../helpers/typography_helper.html">Typography 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../helpers/url_helper.html">URL 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../helpers/xml_helper.html">XML 輔助函式</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">貢獻 CodeIgniter</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../documentation/index.html">Writing CodeIgniter Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../DCO.html">Developer’s Certificate of Origin 1.1</a></li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">CodeIgniter</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">使用手冊</a> &raquo;</li>
+      
+          <li><a href="index.html">一般主題</a> &raquo;</li>
+      
+    <li>安全性</li>
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document">
+            
+  <div class="section" id="id1">
+<h1>安全性<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<p>本頁描述一些有關網站安全的”最佳實踐“，同時包含了 CodeIgniter 的內部安全機制細節。</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">如果你來這邊尋找安全性的聯絡方式，請參考 <cite>Contribution Guide &lt;../contributing/index&gt;</cite>.</p>
+</div>
+<div class="section" id="uri">
+<h2>URI 安全性<a class="headerlink" href="#uri" title="Permalink to this headline">¶</a></h2>
+<p>CodeIgniter 對於哪些字元允許當作 URI 字串有相當嚴格的考量，以盡量減少惡意資料進入應用程式的可能性。URIs 只能包含下列字元：</p>
+<ul class="simple">
+<li>英文大小寫字母與數字（只有拉丁語）</li>
+<li>波浪號: ~</li>
+<li>百分比號: %</li>
+<li>點: .</li>
+<li>冒號: :</li>
+<li>底線: _</li>
+<li>減號: -</li>
+<li>空白</li>
+</ul>
+</div>
+<div class="section" id="register-globals">
+<h2>Register_globals<a class="headerlink" href="#register-globals" title="Permalink to this headline">¶</a></h2>
+<p>除了在 <code class="docutils literal notranslate"><span class="pre">$_GET</span></code> ， <code class="docutils literal notranslate"><span class="pre">$_POST</span></code> ， 以及 <code class="docutils literal notranslate"><span class="pre">$_COOKIE</span></code> 陣列中找到的變數，在系統初始化時，所有的整體變數都會 unset</p>
+<p>這個 unsetting 常式效用等同於 <em>register_globals = off</em> 選項設定。</p>
+</div>
+<div class="section" id="display-errors">
+<h2>display_errors<a class="headerlink" href="#display-errors" title="Permalink to this headline">¶</a></h2>
+<p>在上線產品網站環境中，只要將 <em>display_errors</em> 設定為 0 就可以停止所有錯誤輸出。關閉錯誤輸出將會隱藏掉淺在的錯誤資訊。</p>
+<p>在 index.php 檔案 設定 CodeIgniter 的 <strong>ENVIRONMENT</strong> 變數值為 <strong>‘production’</strong> ，系統環境將會關閉錯誤輸出。如果在開發環境之下，建議將 ENVIRONMENT 設定為 ‘development’，如果想要瞭解更多不同的環境變數值，請參考 <a class="reference internal" href="environments.html"><span class="doc">Handling Environments</span></a> 線上文件。</p>
+</div>
+<div class="section" id="magic-quotes-runtime">
+<h2>magic_quotes_runtime<a class="headerlink" href="#magic-quotes-runtime" title="Permalink to this headline">¶</a></h2>
+<p><em>magic_quotes_runtime</em> 設定指引會在系統初始化時關閉，所以當你從資料庫取得資料時不必移除反斜線。</p>
+<div class="section" id="id2">
+<h3>最佳實踐<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<p>在接受任何資料進入應用程式前，無論是表單提交來的 POST資料、COOKIE資料、URI資料、XML-RPC資料甚至是從SERVER陣列來的資料，我們都鼓勵你盡量實踐以下三步驟的進程：</p>
+<ol class="arabic simple">
+<li>把資料當作已被污染來過濾。</li>
+<li>做好資料驗證以保證它符合正確的型別、長度、大小等。（有時這個步驟可以取代步驟一）</li>
+<li>在把資料送進你的資料庫前跳脫（Escape）資料。</li>
+</ol>
+<p>CodeIgniter 提供下列的函數來協助你進行這個過程：</p>
+</div>
+</div>
+<div class="section" id="xss">
+<h2>跨站腳本（XSS）過濾<a class="headerlink" href="#xss" title="Permalink to this headline">¶</a></h2>
+<p>CodeIgniter 隨附了一個跨站腳本過濾器。這個過濾器會檢視一些在你資料中嵌入惡意 Javascript 的常見技術，還有企圖盜取 Cookie 或是進行其他惡意行為的各種程式碼。跨站腳本（XSS）過濾器在 <a class="reference internal" href="../libraries/security.html"><span class="doc">這裡</span></a> 有一些說明。</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">XSS filtering should <em>only be performed on output</em>. Filtering
+input data may modify the data in undesirable ways, including
+stripping special characters from passwords, which reduces
+security instead of improving it.</p>
+</div>
+</div>
+<div class="section" id="id3">
+<h2>資料驗證<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<p>CSRF stands for Cross-Site Request Forgery, which is the process of an
+attacker tricking their victim into unknowingly submitting a request.</p>
+<p>CodeIgniter provides CSRF protection out of the box, which will get
+automatically triggered for every non-GET HTTP request, but also needs
+you to create your submit forms in a certain way. This is explained in
+the <a class="reference internal" href="../libraries/security.html"><span class="doc">Security Library</span></a> documentation.</p>
+</div>
+<div class="section" id="password-handling">
+<h2>Password handling<a class="headerlink" href="#password-handling" title="Permalink to this headline">¶</a></h2>
+<p>It is <em>critical</em> that you handle passwords in your application properly.</p>
+<p>Unfortunately, many developers don’t know how to do that, and the web is
+full of outdated or otherwise wrongful advices, which doesn’t help.</p>
+<p>We would like to give you a list of combined do’s and don’ts to help you
+with that. Please read below.</p>
+<ul>
+<li><p class="first">DO NOT store passwords in plain-text format.</p>
+<p>Always <strong>hash</strong> your passwords.</p>
+</li>
+<li><p class="first">DO NOT use Base64 or similar encoding for storing passwords.</p>
+<p>This is as good as storing them in plain-text. Really. Do <strong>hashing</strong>,
+not <em>encoding</em>.</p>
+<p>Encoding, and encryption too, are two-way processes. Passwords are
+secrets that must only be known to their owner, and thus must work
+only in one direction. Hashing does that - there’s <em>no</em> un-hashing or
+de-hashing, but there is decoding and decryption.</p>
+</li>
+<li><p class="first">DO NOT use weak or broken hashing algorithms like MD5 or SHA1.</p>
+<p>These algorithms are old, proven to be flawed, and not designed for
+password hashing in the first place.</p>
+<p>Also, DON’T invent your own algorithms.</p>
+<p>Only use strong password hashing algorithms like BCrypt, which is used
+in PHP’s own <a class="reference external" href="http://php.net/password">Password Hashing</a> functions.</p>
+<p>Please use them, even if you’re not running PHP 5.5+, CodeIgniter
+provides them for you.</p>
+</li>
+<li><p class="first">DO NOT ever display or send a password in plain-text format!</p>
+<p>Even to the password’s owner, if you need a “Forgotten password”
+feature, just randomly generate a new, one-time (this is also important)
+password and send that instead.</p>
+</li>
+<li><p class="first">DO NOT put unnecessary limits on your users’ passwords.</p>
+<p>If you’re using a hashing algorithm other than BCrypt (which has a limit
+of 72 characters), you should set a relatively high limit on password
+lengths in order to mitigate DoS attacks - say, 1024 characters.</p>
+<p>Other than that however, there’s no point in forcing a rule that a
+password can only be up to a number of characters, or that it can’t
+contain a certain set of special characters.</p>
+<p>Not only does this <strong>reduce</strong> security instead of improving it, but
+there’s literally no reason to do it. No technical limitations and
+no (practical) storage constraints apply once you’ve hashed them, none!</p>
+</li>
+</ul>
+</div>
+<div class="section" id="validate-input-data">
+<h2>Validate input data<a class="headerlink" href="#validate-input-data" title="Permalink to this headline">¶</a></h2>
+<p>CodeIgniter has a <a class="reference internal" href="../libraries/form_validation.html"><span class="doc">Form Validation Library</span></a> that assists you in
+validating, filtering, and prepping your data.</p>
+<p>Even if that doesn’t work for your use case however, be sure to always
+validate and sanitize all input data. For example, if you expect a numeric
+string for an input variable, you can check for that with <code class="docutils literal notranslate"><span class="pre">is_numeric()</span></code>
+or <code class="docutils literal notranslate"><span class="pre">ctype_digit()</span></code>. Always try to narrow down your checks to a certain
+pattern.</p>
+<p>Have it in mind that this includes not only <code class="docutils literal notranslate"><span class="pre">$_POST</span></code> and <code class="docutils literal notranslate"><span class="pre">$_GET</span></code>
+variables, but also cookies, the user-agent string and basically
+<em>all data that is not created directly by your own code</em>.</p>
+</div>
+<div class="section" id="escape">
+<h2>在資料存入資料庫前跳脫（Escape）所有資料<a class="headerlink" href="#escape" title="Permalink to this headline">¶</a></h2>
+<p>千萬不要不跳脫(escape)任何資訊就把它存入資料庫。請看一下討論 <a class="reference internal" href="../database/queries.html"><span class="doc">database queries</span></a> 的章節來獲得更詳細的資訊。</p>
+</div>
+<div class="section" id="id4">
+<h2>隱藏你的檔案<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<p>其它更好的安全實踐只讓你的 <em>index.php</em>
+以及”assets“（像是 .js，css 以及圖片檔案）放在你的伺服器底下
+<em>webroot</em> 網站根目錄（大部份一般叫做 “htdocs/”）。
+這裡只有想要讓使用者存取的檔案放在這，其餘都不要直接放在網站根目錄底下。</p>
+<p>避免你的使用者去看到任何潛在允許他們存取敏感檔案，甚至執行代碼，等等。</p>
+<p>如果你不想要這樣做，請試著使用 .htaccess 去限制存取這些資源。</p>
+<p>CodeIgniter 在所有的資料夾裡面有一個 index.html 檔案去隱藏一些資料，但有它記住，這是不夠的，以防止嚴重的
+攻擊者。</p>
+</div>
+</div>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="styleguide.html" class="btn btn-neutral float-right" title="PHP 風格指南">下一頁 <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="alternative_php.html" class="btn btn-neutral" title="替代 View 檔案的 PHP 的語法"><span class="fa fa-arrow-circle-left"></span> 上一頁</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2014 - 2017, British Columbia Institute of Technology.
+      最後編輯時間 Nov 19, 2020.
+    </p>
+  </div>
+
+  
+    <p>由 <a href="https://readthedocs.org">Read the Docs</a> 提供 <a href="http://sphinx-doc.org/">Sphinx</a> 並使用 <a href="https://github.com/snide/sphinx_rtd_theme">sphinx_rtd_theme</a> 主題</p>
+    <p><a href="https://github.com/CodeIgniter-TW/CodeIgniter-UserGuide" target="_blank">Github 繁體中文翻譯</a></p>
+  
+
+</footer>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-5766319-11', 'auto');
+  ga('send', 'pageview');
+
+</script>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'3.1.6',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  false
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="../_static/language_data.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

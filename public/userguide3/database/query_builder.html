@@ -1,0 +1,2428 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>查詢生成器類別 &mdash; CodeIgniter 3.1.6 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/ci-icon.ico"/>
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="CodeIgniter 3.1.6 documentation" href="../index.html"/>
+        <link rel="up" title="資料庫參考" href="index.html"/>
+        <link rel="next" title="Transactions" href="transactions.html"/>
+        <link rel="prev" title="查詢補助函式" href="helpers.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        
+          <a href="http://codeigniter.tw/" class="fa fa-home"> CodeIgniter</a>
+        
+        
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="搜尋使用手冊" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+          
+          
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../general/welcome.html">歡迎加入 CodeIgniter</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../installation/index.html">安裝指引</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../installation/downloads.html">下載 CodeIgniter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation/index.html">安裝指引</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation/upgrading.html">從先前的版本來更新</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation/troubleshooting.html">故障排除</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../overview/index.html">CodeIgniter 概觀</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../overview/getting_started.html">開始 CodeIgniter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/at_a_glance.html">CodeIgniter 一目了然</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/features.html">CodeIgniter 特色</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/appflow.html">應用程式溝通流程</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/mvc.html">Model-View-Controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/goals.html">設計以及架構目標</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/index.html">教學</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial/static_pages.html">靜態頁面</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial/news_section.html">新聞模組介紹</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial/create_news_items.html">動態新增新聞</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial/conclusion.html">結論</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../general/index.html">一般主題</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../general/urls.html">CodeIgniter URLs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/controllers.html">控制器 Controllers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/reserved_names.html">保留名稱</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/views.html">視圖 Views</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/models.html">什麼是 Model？</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/models.html#id2">剖析 Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/models.html#id3">載入 Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/models.html#models">自動載入 Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/models.html#id4">連接資料庫</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/helpers.html">Helpers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/libraries.html">使用 CodeIgniter 函式庫</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/creating_libraries.html">自建函式庫</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/drivers.html">使用 CodeIgniter 驅動器</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/creating_drivers.html">自建驅動器</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/core_classes.html">新增系統核心類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/ancillary_classes.html">新增配套類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/hooks.html">Hooks－擴充核心</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/autoloader.html">自動載入資源</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/common_functions.html">通用函數</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/compatibility_functions.html">相容性函數</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/routing.html">URI 路由</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/errors.html">錯誤處理</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/caching.html">Caching</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/profiling.html">應用程式效能分析</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/cli.html">透過 CLI 執行 CodeIgniter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/managing_apps.html">管理你的應用程式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/environments.html">處理多環境變數</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/alternative_php.html">替代 View 檔案的 PHP 的語法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/security.html">安全性</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/styleguide.html">PHP Style Guide</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../libraries/index.html">Libraries</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/benchmark.html">效能測試類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/caching.html">快取驅動類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/calendar.html">日曆類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/cart.html">購物車類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/config.html">設定類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/email.html">電子郵件類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/encrypt.html">Encrypt Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/encryption.html">Encryption Library</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/file_uploading.html">檔案上傳類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/form_validation.html">Form Validation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/ftp.html">FTP Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/image_lib.html">Image Manipulation Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/input.html">Input Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/javascript.html">Javascript Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/language.html">Language Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/loader.html">Loader Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/migration.html">Migrations Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/output.html">Output Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/pagination.html">Pagination Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/parser.html">Template Parser Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/security.html">Security Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/sessions.html">Session Library</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/table.html">HTML Table 類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/trackback.html">Trackback 類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/typography.html">Typography 類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/unit_testing.html">單元測試類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/uri.html">URI 類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/user_agent.html">User Agent 類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/xmlrpc.html">XML-RPC 及 XML-RPC Server 類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/zip.html">Zip 類別</a></li>
+</ul>
+</li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">資料庫參考</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="examples.html">快速入門：範例程式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration.html">資料庫設定</a></li>
+<li class="toctree-l2"><a class="reference internal" href="connecting.html">連接資料庫</a></li>
+<li class="toctree-l2"><a class="reference internal" href="queries.html">執行查詢</a></li>
+<li class="toctree-l2"><a class="reference internal" href="results.html">產生查詢結果</a></li>
+<li class="toctree-l2"><a class="reference internal" href="helpers.html">查詢補助函數</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">查詢生成器類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="transactions.html">交易</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metadata.html">取得資料表資訊</a></li>
+<li class="toctree-l2"><a class="reference internal" href="call_function.html">自訂函數</a></li>
+<li class="toctree-l2"><a class="reference internal" href="caching.html">查詢快取</a></li>
+<li class="toctree-l2"><a class="reference internal" href="forge.html">使用 Database Forge 管理資料庫</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utilities.html">Database Utilities 類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="db_driver_reference.html">Database Driver 參考</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../helpers/index.html">輔助函式</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../helpers/array_helper.html">Array 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../helpers/captcha_helper.html">CAPTCHA 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../helpers/cookie_helper.html">Cookie 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../helpers/date_helper.html">Date 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../helpers/directory_helper.html">Directory 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../helpers/download_helper.html">Download 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../helpers/email_helper.html">Email 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../helpers/file_helper.html">File 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../helpers/form_helper.html">Form 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../helpers/html_helper.html">HTML 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../helpers/inflector_helper.html">Inflector 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../helpers/language_helper.html">Language 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../helpers/number_helper.html">Number 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../helpers/path_helper.html">Path 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../helpers/security_helper.html">Security 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../helpers/smiley_helper.html">Smiley 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../helpers/string_helper.html">String 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../helpers/text_helper.html">Text 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../helpers/typography_helper.html">Typography 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../helpers/url_helper.html">URL 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../helpers/xml_helper.html">XML 輔助函式</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">貢獻 CodeIgniter</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../documentation/index.html">Writing CodeIgniter Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../DCO.html">Developer’s Certificate of Origin 1.1</a></li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">CodeIgniter</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">使用手冊</a> &raquo;</li>
+      
+          <li><a href="index.html">資料庫參考</a> &raquo;</li>
+      
+    <li>查詢生成器類別</li>
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document">
+            
+  <div class="section" id="id1">
+<h1>查詢生成器類別<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<p>你可以在 CodeIgniter 中使用查詢生成器類別。這個模式可以讓你使用最少的程式從資料庫中取出、插入及更新資訊。在一些案例中，只需要一兩行程式就可以進行資料庫操作。 CodeIgniter 不需要每個資料表都是它自己的一個類別檔。取而代之，它提供了一個更簡單的介面。</p>
+<p>除了簡單，使用查詢生成器功能的主要好處在於，它讓你可以產生獨立於資料庫的應用程式，因為實際上的查詢語法是使用不同資料庫的轉接器來產生的。這也讓你的查詢更安全，因為值會由系統自動跳脫。</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">如果你傾向自己撰寫查詢，你可以在資料庫設定檔中設定不啟用這個類別，來讓核心資料庫函式庫及轉接器使用較少的資源。</p>
+</div>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#id2" id="id16">選取資料</a></li>
+<li><a class="reference internal" href="#id3" id="id17">尋找特定的資料</a></li>
+<li><a class="reference internal" href="#id4" id="id18">尋找相似的資料</a></li>
+<li><a class="reference internal" href="#id5" id="id19">排序查詢結果</a></li>
+<li><a class="reference internal" href="#id6" id="id20">結果的限制或計數</a></li>
+<li><a class="reference internal" href="#id7" id="id21">查詢分組</a></li>
+<li><a class="reference internal" href="#id8" id="id22">插入資料</a></li>
+<li><a class="reference internal" href="#id9" id="id23">更新資料</a></li>
+<li><a class="reference internal" href="#id10" id="id24">刪除資料</a></li>
+<li><a class="reference internal" href="#id11" id="id25">方法串接</a></li>
+<li><a class="reference internal" href="#ar-caching" id="id26">查詢生成器快取</a></li>
+<li><a class="reference internal" href="#id14" id="id27">重置查詢生成器</a></li>
+<li><a class="reference internal" href="#id15" id="id28">類別參考</a></li>
+</ul>
+</div>
+<div class="section" id="id2">
+<h2><a class="toc-backref" href="#id16">選取資料</a><a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>以下函式可以讓你建構 SQL <strong>SELECT</strong> 語句。</p>
+<p><strong>$this-&gt;db-&gt;get()</strong></p>
+<p>執行選取查詢並回傳結果。它同時可以用來取得資料表中所有記錄：</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="nv">$query</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;mytable&#39;</span><span class="p">);</span>  <span class="c1">// 產生： SELECT * FROM mytable</span>
+</pre></div>
+</div>
+<p>第二及第三個參數，可以讓你設定查詢的限制及偏移：</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="nv">$query</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;mytable&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">);</span>
+
+<span class="c1">// 執行： SELECT * FROM mytable LIMIT 20, 10</span>
+<span class="c1">// （使用 MySQL 時。其他資料庫的語法稍有不同）</span>
+</pre></div>
+</div>
+<p>你會注意到，上面的函式被指派給一個叫做 $query 的變數，它可以用來顯示結果：</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="nv">$query</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;mytable&#39;</span><span class="p">);</span>
+
+<span class="k">foreach</span> <span class="p">(</span><span class="nv">$query</span><span class="o">-&gt;</span><span class="na">result</span><span class="p">()</span> <span class="k">as</span> <span class="nv">$row</span><span class="p">)</span>
+<span class="p">{</span>
+        <span class="k">echo</span> <span class="nv">$row</span><span class="o">-&gt;</span><span class="na">title</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>請參閱 <a class="reference internal" href="results.html"><span class="doc">result functions</span></a> 頁面有關於生成出 result 的完整討論。</p>
+<p><strong>$this-&gt;db-&gt;get_compiled_select()</strong></p>
+<p>用來編譯 select 查詢，就像 <strong>$this-&gt;db-&gt;get()</strong> 但是沒有 <em>執行</em> 查詢。這個方法只將 SQL 查詢當做字串回傳。</p>
+<p>例如：</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="nv">$sql</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">get_compiled_select</span><span class="p">(</span><span class="s1">&#39;mytable&#39;</span><span class="p">);</span>
+<span class="k">echo</span> <span class="nv">$sql</span><span class="p">;</span>
+
+<span class="c1">// 印出字串： SELECT * FROM mytable</span>
+</pre></div>
+</div>
+<p>第二個參數讓你能設定，是否要讓查詢產生器的查詢在編譯之後重設。（預設是會重設，就像使用 <cite>$this-&gt;db-&gt;get()</cite> 一樣）：</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">limit</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">20</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">get_compiled_select</span><span class="p">(</span><span class="s1">&#39;mytable&#39;</span><span class="p">,</span> <span class="k">FALSE</span><span class="p">);</span>
+
+<span class="c1">// 印出字串： SELECT * FROM mytable LIMIT 20, 10</span>
+<span class="c1">// （使用 MySQL 時。其他資料庫的語法稍有不同）</span>
+
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">select</span><span class="p">(</span><span class="s1">&#39;title, content, date&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">get_compiled_select</span><span class="p">();</span>
+
+<span class="c1">// 印出字串： SELECT title, content, date FROM mytable LIMIT 20, 10</span>
+</pre></div>
+</div>
+<p>要注意的關鍵是在上面的範例中，第二個查詢並未使用 <strong>$this-&gt;db-&gt;from()</strong> ，也沒有傳送資料表名稱作為第一個參數。會出現這個結果，是因為查詢並未執行 <strong>$this-&gt;db-&gt;get()</strong> 使得值被重設，或是使用 <strong>$this-&gt;db-&gt;reset_query()</strong> 直接將值重設。</p>
+<p><strong>$this-&gt;db-&gt;get_where()</strong></p>
+<p>與上面的函式相同，只是它讓你可以加入 “where” 子句作為第二個參數，而非使用 db-&gt;where() 函式：</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="nv">$query</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">get_where</span><span class="p">(</span><span class="s1">&#39;mytable&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="nv">$id</span><span class="p">),</span> <span class="nv">$limit</span><span class="p">,</span> <span class="nv">$offset</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>更詳細的資訊，請參閱下面關於 where 函式的說明。</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">舊的 getwhere() 方法已經被移除而被 get_where() 方法取代</p>
+</div>
+<p><strong>$this-&gt;db-&gt;select()</strong></p>
+<p>讓你可以撰寫查詢中 SELECT 的部份：</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">select</span><span class="p">(</span><span class="s1">&#39;title, content, date&#39;</span><span class="p">);</span>
+<span class="nv">$query</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;mytable&#39;</span><span class="p">);</span>
+
+<span class="c1">// 執行： SELECT title, content, date FROM mytable</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">如果要從資料表中選取所有欄位 (*) ，你不需要使用這個函式。當你忽略， CodeIgniter 會假設你希望選取所有欄位而自動加上 ‘SELECT *’ 。</p>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">$this-&gt;db-&gt;select()</span></code> 可接受額外的第二個參數。如果你設成 FALSE ， CodeIgniter 將不會試著保護欄位及資料表名稱。如果你需要自行組合 select 語句，而自動跳脫欄位名稱可能會破壞它時，這個參數會很有用。</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">select</span><span class="p">(</span><span class="s1">&#39;(SELECT SUM(payments.amount) FROM payments WHERE payments.invoice_id=4) AS amount_paid&#39;</span><span class="p">,</span> <span class="k">FALSE</span><span class="p">);</span>
+<span class="nv">$query</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;mytable&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><strong>$this-&gt;db-&gt;select_max()</strong></p>
+<p>用來撰寫查詢中 <code class="docutils literal notranslate"><span class="pre">SELECT</span> <span class="pre">MAX(field)</span></code> 的部份。你可以額外包含第二個參數，來重新命名查詢結果中的欄位。</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">select_max</span><span class="p">(</span><span class="s1">&#39;age&#39;</span><span class="p">);</span>
+<span class="nv">$query</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;members&#39;</span><span class="p">);</span>  <span class="c1">// 產生： SELECT MAX(age) as age FROM members</span>
+
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">select_max</span><span class="p">(</span><span class="s1">&#39;age&#39;</span><span class="p">,</span> <span class="s1">&#39;member_age&#39;</span><span class="p">);</span>
+<span class="nv">$query</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;members&#39;</span><span class="p">);</span> <span class="c1">// 產生： SELECT MAX(age) as member_age FROM members</span>
+</pre></div>
+</div>
+<p><strong>$this-&gt;db-&gt;select_min()</strong></p>
+<p>用來撰寫查詢中 “SELECT MIN(field)” 的部份。跟 select_max() 一樣，可以額外用第二個參數來重新命名查詢結果中的欄位。</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">select_min</span><span class="p">(</span><span class="s1">&#39;age&#39;</span><span class="p">);</span>
+<span class="nv">$query</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;members&#39;</span><span class="p">);</span> <span class="c1">// 產生： SELECT MIN(age) as age FROM members</span>
+</pre></div>
+</div>
+<p><strong>$this-&gt;db-&gt;select_avg()</strong></p>
+<p>用來撰寫查詢中 “SELECT AVG(field)” 的部份。跟 select_max() 一樣，可以額外用第二個參數來重新命名查詢結果中的欄位。</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">select_avg</span><span class="p">(</span><span class="s1">&#39;age&#39;</span><span class="p">);</span>
+<span class="nv">$query</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;members&#39;</span><span class="p">);</span> <span class="c1">// 產生： SELECT AVG(age) as age FROM members</span>
+</pre></div>
+</div>
+<p><strong>$this-&gt;db-&gt;select_sum()</strong></p>
+<p>用來撰寫查詢中 “SELECT SUM(field)” 的部份。跟 select_max() 一樣，可以額外用第二個參數來重新命名查詢結果中的欄位。</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">select_sum</span><span class="p">(</span><span class="s1">&#39;age&#39;</span><span class="p">);</span>
+<span class="nv">$query</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;members&#39;</span><span class="p">);</span> <span class="c1">// 產生： SELECT SUM(age) as age FROM members</span>
+</pre></div>
+</div>
+<p><strong>$this-&gt;db-&gt;from()</strong></p>
+<p>讓你撰寫查詢中 FROM 的部份：</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">select</span><span class="p">(</span><span class="s1">&#39;title, content, date&#39;</span><span class="p">);</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">from</span><span class="p">(</span><span class="s1">&#39;mytable&#39;</span><span class="p">);</span>
+<span class="nv">$query</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">();</span>  <span class="c1">// 產生： SELECT title, content, date FROM mytable</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">如同之前的說明，查詢中 FROM 的部份可以在 $this-&gt;db-&gt;get() 函式中指定，就看你偏好使用哪個方法。</p>
+</div>
+<p><strong>$this-&gt;db-&gt;join()</strong></p>
+<p>讓你撰寫查詢中的 JOIN 部分：</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">select</span><span class="p">(</span><span class="s1">&#39;*&#39;</span><span class="p">);</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">from</span><span class="p">(</span><span class="s1">&#39;blogs&#39;</span><span class="p">);</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">join</span><span class="p">(</span><span class="s1">&#39;comments&#39;</span><span class="p">,</span> <span class="s1">&#39;comments.id = blogs.id&#39;</span><span class="p">);</span>
+<span class="nv">$query</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">();</span>
+
+<span class="c1">// 產生：</span>
+<span class="c1">// SELECT * FROM blogs JOIN comments ON comments.id = blogs.id</span>
+</pre></div>
+</div>
+<p>如果需要在一個查詢中使用多個 join ，可以多次呼叫這個函式。</p>
+<p>如果你需要在查詢中指定 JOIN 的方式，可以透過這個函式的第三個參數來做。可指定的方式有： left, right, outer, inner, left outer, 以及 right outer 。</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">join</span><span class="p">(</span><span class="s1">&#39;comments&#39;</span><span class="p">,</span> <span class="s1">&#39;comments.id = blogs.id&#39;</span><span class="p">,</span> <span class="s1">&#39;left&#39;</span><span class="p">);</span>
+<span class="c1">// 產生： LEFT JOIN comments ON comments.id = blogs.id</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id3">
+<h2><a class="toc-backref" href="#id17">尋找特定的資料</a><a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<p><strong>$this-&gt;db-&gt;where()</strong></p>
+<p>這個函式讓你能用四個方法之一來設定 <strong>WHERE</strong> 子句：</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">所有傳送給這個函式的值會被自動跳脫，以產生較安全的查詢。</p>
+</div>
+<ol class="arabic">
+<li><p class="first"><strong>簡單的 key/value 方法：</strong></p>
+<blockquote>
+<div><div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">where</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="nv">$name</span><span class="p">);</span> <span class="c1">// 產生： WHERE name = &#39;Joe&#39;</span>
+</pre></div>
+</div>
+<p>注意，它會幫你加上等號。</p>
+<p>If you use multiple function calls they will be chained together with
+AND between them:</p>
+<p>如果你多次呼叫這個函式，它會將他們用 AND 串在一起：</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">where</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="nv">$name</span><span class="p">);</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">where</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="nv">$title</span><span class="p">);</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">where</span><span class="p">(</span><span class="s1">&#39;status&#39;</span><span class="p">,</span> <span class="nv">$status</span><span class="p">);</span>
+<span class="c1">// WHERE name = &#39;Joe&#39; AND title = &#39;boss&#39; AND status = &#39;active&#39;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first"><strong>客製的 key/value 方法：</strong></p>
+<blockquote>
+<div><p>You can include an operator in the first parameter in order to
+control the comparison:</p>
+<p>你可以在第一個參數加上運算子，來控制它比較的方式：</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">where</span><span class="p">(</span><span class="s1">&#39;name !=&#39;</span><span class="p">,</span> <span class="nv">$name</span><span class="p">);</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">where</span><span class="p">(</span><span class="s1">&#39;id &lt;&#39;</span><span class="p">,</span> <span class="nv">$id</span><span class="p">);</span> <span class="c1">// 產生： WHERE name != &#39;Joe&#39; AND id &lt; 45</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first"><strong>關連陣列方法：</strong></p>
+<blockquote>
+<div><div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="nv">$array</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="nv">$name</span><span class="p">,</span> <span class="s1">&#39;title&#39;</span> <span class="o">=&gt;</span> <span class="nv">$title</span><span class="p">,</span> <span class="s1">&#39;status&#39;</span> <span class="o">=&gt;</span> <span class="nv">$status</span><span class="p">);</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">where</span><span class="p">(</span><span class="nv">$array</span><span class="p">);</span>
+<span class="c1">// 產生： WHERE name = &#39;Joe&#39; AND title = &#39;boss&#39; AND status = &#39;active&#39;</span>
+</pre></div>
+</div>
+<p>You can include your own operators using this method as well:</p>
+<p>你同樣可以在這個方法中使用你要的運算子：</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="nv">$array</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;name !=&#39;</span> <span class="o">=&gt;</span> <span class="nv">$name</span><span class="p">,</span> <span class="s1">&#39;id &lt;&#39;</span> <span class="o">=&gt;</span> <span class="nv">$id</span><span class="p">,</span> <span class="s1">&#39;date &gt;&#39;</span> <span class="o">=&gt;</span> <span class="nv">$date</span><span class="p">);</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">where</span><span class="p">(</span><span class="nv">$array</span><span class="p">);</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first"><strong>自定字串：</strong></p>
+<blockquote>
+<div><p>你可以手動撰寫自己要的子句：</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="nv">$where</span> <span class="o">=</span> <span class="s2">&quot;name=&#39;Joe&#39; AND status=&#39;boss&#39; OR status=&#39;active&#39;&quot;</span><span class="p">;</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">where</span><span class="p">(</span><span class="nv">$where</span><span class="p">);</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ol>
+<p><code class="docutils literal notranslate"><span class="pre">$this-&gt;db-&gt;where()</span></code> 可以接受額外的第三個參數。如果你將它設為 FALSE ， CodeIgniter 將嘗試不去保護欄位及資料表名稱。</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">where</span><span class="p">(</span><span class="s1">&#39;MATCH (field) AGAINST (&quot;value&quot;)&#39;</span><span class="p">,</span> <span class="k">NULL</span><span class="p">,</span> <span class="k">FALSE</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><strong>$this-&gt;db-&gt;or_where()</strong></p>
+<p>這個函式與前面的相同，只是會將多個實例用 OR 串接起來：</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">where</span><span class="p">(</span><span class="s1">&#39;name !=&#39;</span><span class="p">,</span> <span class="nv">$name</span><span class="p">);</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">or_where</span><span class="p">(</span><span class="s1">&#39;id &gt;&#39;</span><span class="p">,</span> <span class="nv">$id</span><span class="p">);</span>  <span class="c1">// 產生： WHERE name != &#39;Joe&#39; OR id &gt; 50</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">舊的 orwhere() 方法已經被移除而被 or_where() 方法取代</p>
+</div>
+<p><strong>$this-&gt;db-&gt;where_in()</strong></p>
+<p>產生 WHERE field IN (‘item’, ‘item’) SQL 查詢，如果合適的話就用 AND 來串接</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="nv">$names</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Frank&#39;</span><span class="p">,</span> <span class="s1">&#39;Todd&#39;</span><span class="p">,</span> <span class="s1">&#39;James&#39;</span><span class="p">);</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">where_in</span><span class="p">(</span><span class="s1">&#39;username&#39;</span><span class="p">,</span> <span class="nv">$names</span><span class="p">);</span>
+<span class="c1">// 產生： WHERE username IN (&#39;Frank&#39;, &#39;Todd&#39;, &#39;James&#39;)</span>
+</pre></div>
+</div>
+<p><strong>$this-&gt;db-&gt;or_where_in()</strong></p>
+<p>產生 WHERE field IN (‘item’, ‘item’) SQL 查詢，如果合適的話就用 OR 來串接</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="nv">$names</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Frank&#39;</span><span class="p">,</span> <span class="s1">&#39;Todd&#39;</span><span class="p">,</span> <span class="s1">&#39;James&#39;</span><span class="p">);</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">or_where_in</span><span class="p">(</span><span class="s1">&#39;username&#39;</span><span class="p">,</span> <span class="nv">$names</span><span class="p">);</span>
+<span class="c1">// 產生： OR username IN (&#39;Frank&#39;, &#39;Todd&#39;, &#39;James&#39;)</span>
+</pre></div>
+</div>
+<p><strong>$this-&gt;db-&gt;where_not_in()</strong></p>
+<p>產生 WHERE field NOT IN (‘item’, ‘item’) SQL 查詢，如果合適的話就用 AND 來串接</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="nv">$names</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Frank&#39;</span><span class="p">,</span> <span class="s1">&#39;Todd&#39;</span><span class="p">,</span> <span class="s1">&#39;James&#39;</span><span class="p">);</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">where_not_in</span><span class="p">(</span><span class="s1">&#39;username&#39;</span><span class="p">,</span> <span class="nv">$names</span><span class="p">);</span>
+<span class="c1">// 產生： WHERE username NOT IN (&#39;Frank&#39;, &#39;Todd&#39;, &#39;James&#39;)</span>
+</pre></div>
+</div>
+<p><strong>$this-&gt;db-&gt;or_where_not_in()</strong></p>
+<p>產生 WHERE field NOT IN (‘item’, ‘item’) SQL 查詢，如果合適的話就用 OR 來串接</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="nv">$names</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Frank&#39;</span><span class="p">,</span> <span class="s1">&#39;Todd&#39;</span><span class="p">,</span> <span class="s1">&#39;James&#39;</span><span class="p">);</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">or_where_not_in</span><span class="p">(</span><span class="s1">&#39;username&#39;</span><span class="p">,</span> <span class="nv">$names</span><span class="p">);</span>
+<span class="c1">// 產生： OR username NOT IN (&#39;Frank&#39;, &#39;Todd&#39;, &#39;James&#39;)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id4">
+<h2><a class="toc-backref" href="#id18">尋找相似的資料</a><a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<p><strong>$this-&gt;db-&gt;like()</strong></p>
+<p>這個方法可以讓你產生 <strong>LIKE</strong> 子句，在做搜尋時很有用。</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">所有傳進這個方法的值會被自動跳脫。</p>
+</div>
+<ol class="arabic">
+<li><p class="first"><strong>簡單的 key/value 方法：</strong></p>
+<blockquote>
+<div><div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">like</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="s1">&#39;match&#39;</span><span class="p">);</span>
+<span class="c1">// 產生： WHERE `title` LIKE &#39;%match%&#39; ESCAPE &#39;!&#39;</span>
+</pre></div>
+</div>
+<p>如果你多次呼叫這個方法，它們會使用 AND 來串接：</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">like</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="s1">&#39;match&#39;</span><span class="p">);</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">like</span><span class="p">(</span><span class="s1">&#39;body&#39;</span><span class="p">,</span> <span class="s1">&#39;match&#39;</span><span class="p">);</span>
+<span class="c1">// WHERE `title` LIKE &#39;%match%&#39; ESCAPE &#39;!&#39; AND  `body` LIKE &#39;%match% ESCAPE &#39;!&#39;</span>
+</pre></div>
+</div>
+<p>如果要控制在哪個位置放置萬用字元，你可以使用額外的第三個參數。可使用的參數為 ‘before’, ‘after’ 以及 ‘both’ （預設值）</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">like</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="s1">&#39;match&#39;</span><span class="p">,</span> <span class="s1">&#39;before&#39;</span><span class="p">);</span>    <span class="c1">// 產生： WHERE `title` LIKE &#39;%match&#39; ESCAPE &#39;!&#39;</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">like</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="s1">&#39;match&#39;</span><span class="p">,</span> <span class="s1">&#39;after&#39;</span><span class="p">);</span>     <span class="c1">// 產生： WHERE `title` LIKE &#39;match%&#39; ESCAPE &#39;!&#39;</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">like</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="s1">&#39;match&#39;</span><span class="p">,</span> <span class="s1">&#39;both&#39;</span><span class="p">);</span>      <span class="c1">// 產生： WHERE `title` LIKE &#39;%match%&#39; ESCAPE &#39;!&#39;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first"><strong>關連陣列方法：</strong></p>
+<blockquote>
+<div><div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="nv">$array</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;title&#39;</span> <span class="o">=&gt;</span> <span class="nv">$match</span><span class="p">,</span> <span class="s1">&#39;page1&#39;</span> <span class="o">=&gt;</span> <span class="nv">$match</span><span class="p">,</span> <span class="s1">&#39;page2&#39;</span> <span class="o">=&gt;</span> <span class="nv">$match</span><span class="p">);</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">like</span><span class="p">(</span><span class="nv">$array</span><span class="p">);</span>
+<span class="c1">// WHERE `title` LIKE &#39;%match%&#39; ESCAPE &#39;!&#39; AND  `page1` LIKE &#39;%match%&#39; ESCAPE &#39;!&#39; AND  `page2` LIKE &#39;%match%&#39; ESCAPE &#39;!&#39;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ol>
+<p><strong>$this-&gt;db-&gt;or_like()</strong></p>
+<p>這個與前面的方法相同，只是多個實例會使用 OR 來串接：</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">like</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="s1">&#39;match&#39;</span><span class="p">);</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">or_like</span><span class="p">(</span><span class="s1">&#39;body&#39;</span><span class="p">,</span> <span class="nv">$match</span><span class="p">);</span>
+<span class="c1">// WHERE `title` LIKE &#39;%match%&#39; ESCAPE &#39;!&#39; OR  `body` LIKE &#39;%match%&#39; ESCAPE &#39;!&#39;</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">舊的 <code class="docutils literal notranslate"><span class="pre">orlike()</span></code> 方法已經被移除而被 <code class="docutils literal notranslate"><span class="pre">or_like()</span></code> 方法取代</p>
+</div>
+<p><strong>$this-&gt;db-&gt;not_like()</strong></p>
+<p>這個方法與 <code class="docutils literal notranslate"><span class="pre">like()</span></code> 相同，只是它會產生 NOT LIKE 語句：</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">not_like</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="s1">&#39;match&#39;</span><span class="p">);</span>  <span class="c1">// WHERE `title` NOT LIKE &#39;%match% ESCAPE &#39;!&#39;</span>
+</pre></div>
+</div>
+<p><strong>$this-&gt;db-&gt;or_not_like()</strong></p>
+<p>這個方法與 <code class="docutils literal notranslate"><span class="pre">not_like()</span></code> 相同，只是多個實例會使用 OR 來串接：</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">like</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="s1">&#39;match&#39;</span><span class="p">);</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">or_not_like</span><span class="p">(</span><span class="s1">&#39;body&#39;</span><span class="p">,</span> <span class="s1">&#39;match&#39;</span><span class="p">);</span>
+<span class="c1">// WHERE `title` LIKE &#39;%match% OR  `body` NOT LIKE &#39;%match%&#39; ESCAPE &#39;!&#39;</span>
+</pre></div>
+</div>
+<p><strong>$this-&gt;db-&gt;group_by()</strong></p>
+<p>讓你可以撰寫查詢中 GROUP BY 的部份：</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">group_by</span><span class="p">(</span><span class="s2">&quot;title&quot;</span><span class="p">);</span> <span class="c1">// 產生： GROUP BY title</span>
+</pre></div>
+</div>
+<p>你也可以用陣列來傳送多個值給它：</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">group_by</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s2">&quot;title&quot;</span><span class="p">,</span> <span class="s2">&quot;date&quot;</span><span class="p">));</span>  <span class="c1">// 產生： GROUP BY title, date</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">舊的 groupby() 方法已經被移除，而被 group_by() 方法取代</p>
+</div>
+<p><strong>$this-&gt;db-&gt;distinct()</strong></p>
+<p>用來在查詢中加入 “DISTINCT” 關鍵字</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">distinct</span><span class="p">();</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;table&#39;</span><span class="p">);</span> <span class="c1">// 產生： SELECT DISTINCT * FROM table</span>
+</pre></div>
+</div>
+<p><strong>$this-&gt;db-&gt;having()</strong></p>
+<p>讓你可以撰寫查詢中 HAVING 的部份。它有兩種語法，分別使用一個或兩個參數：</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">having</span><span class="p">(</span><span class="s1">&#39;user_id = 45&#39;</span><span class="p">);</span>  <span class="c1">// 產生： HAVING user_id = 45</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">having</span><span class="p">(</span><span class="s1">&#39;user_id&#39;</span><span class="p">,</span>  <span class="mi">45</span><span class="p">);</span>  <span class="c1">// 產生： HAVING user_id = 45</span>
+</pre></div>
+</div>
+<p>你也能用陣列來將多個值傳給它：</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">having</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;title =&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;My Title&#39;</span><span class="p">,</span> <span class="s1">&#39;id &lt;&#39;</span> <span class="o">=&gt;</span> <span class="nv">$id</span><span class="p">));</span>
+<span class="c1">// 產生： HAVING title = &#39;My Title&#39;, id &lt; 45</span>
+</pre></div>
+</div>
+<p>如果你使用的資料庫 CodeIgniter 會為它的查詢做跳脫，你可使用額外的第三個參數，將它設定為 FALSE 來防止跳脫內容。</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">having</span><span class="p">(</span><span class="s1">&#39;user_id&#39;</span><span class="p">,</span>  <span class="mi">45</span><span class="p">);</span>  <span class="c1">// 在一些資料庫例如MySQL會產生： HAVING `user_id` = 45</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">having</span><span class="p">(</span><span class="s1">&#39;user_id&#39;</span><span class="p">,</span>  <span class="mi">45</span><span class="p">,</span> <span class="k">FALSE</span><span class="p">);</span>  <span class="c1">// 產生： HAVING user_id = 45</span>
+</pre></div>
+</div>
+<p><strong>$this-&gt;db-&gt;or_having()</strong></p>
+<p>與 having() 相同，只是它會使用 OR 來分隔多個子句。</p>
+</div>
+<div class="section" id="id5">
+<h2><a class="toc-backref" href="#id19">排序查詢結果</a><a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
+<p><strong>$this-&gt;db-&gt;order_by()</strong></p>
+<p>讓你設定 ORDER BY 子句。</p>
+<p>第一個參數包含你要用來排序的欄位名稱。</p>
+<p>第二個參數讓你設定結果排序的方向，選項有 <strong>ASC</strong>, <strong>DESC</strong> 以及 <strong>RANDOM</strong> 。</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">order_by</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="s1">&#39;DESC&#39;</span><span class="p">);</span>
+<span class="c1">// 產生： ORDER BY `title` DESC</span>
+</pre></div>
+</div>
+<p>你也可以用第一個參數傳入自定的字串：</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">order_by</span><span class="p">(</span><span class="s1">&#39;title DESC, name ASC&#39;</span><span class="p">);</span>
+<span class="c1">// 產生： ORDER BY `title` DESC, `name` ASC</span>
+</pre></div>
+</div>
+<p>或是使用多次函式呼叫來傳入多個需要的欄位。</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">order_by</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="s1">&#39;DESC&#39;</span><span class="p">);</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">order_by</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;ASC&#39;</span><span class="p">);</span>
+<span class="c1">// 產生： ORDER BY `title` DESC, `name` ASC</span>
+</pre></div>
+</div>
+<p>如果你選擇 <strong>RANDOM</strong> 作為排序方向的選項，那第一個參數會被忽略，除非你指定一個數值作為種子。</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">order_by</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="s1">&#39;RANDOM&#39;</span><span class="p">);</span>
+<span class="c1">// 產生： ORDER BY RAND()</span>
+
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">order_by</span><span class="p">(</span><span class="mi">42</span><span class="p">,</span> <span class="s1">&#39;RANDOM&#39;</span><span class="p">);</span>
+<span class="c1">// 產生： ORDER BY RAND(42)</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">舊的 orderby() 方法已經被移除，而被 order_by() 方法取代</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Oracle 目前不支援亂數排序，所以預設會使用 ASC 來取代。</p>
+</div>
+</div>
+<div class="section" id="id6">
+<h2><a class="toc-backref" href="#id20">結果的限制或計數</a><a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
+<p><strong>$this-&gt;db-&gt;limit()</strong></p>
+<p>讓你限制查詢所要回傳的列數：</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">limit</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>  <span class="c1">// 產生： LIMIT 10</span>
+</pre></div>
+</div>
+<p>第二個參數讓你可以指定查詢結果的偏移量。</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">limit</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">);</span>  <span class="c1">// 產生： LIMIT 20, 10 （使用MySQL時。其他資料庫的語法稍有不同）</span>
+</pre></div>
+</div>
+<p><strong>$this-&gt;db-&gt;count_all_results()</strong></p>
+<p>讓你可以判斷特定 Active Record 查詢的結果列數。查詢可接受查詢生成器所給的限制條件，諸如 <code class="docutils literal notranslate"><span class="pre">where()</span></code>, <code class="docutils literal notranslate"><span class="pre">or_where()</span></code>, <code class="docutils literal notranslate"><span class="pre">like()</span></code>, <code class="docutils literal notranslate"><span class="pre">or_like()</span></code> 等。例如：</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">count_all_results</span><span class="p">(</span><span class="s1">&#39;my_table&#39;</span><span class="p">);</span>  <span class="c1">// 產生一個整數，像是 25</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">like</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="s1">&#39;match&#39;</span><span class="p">);</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">from</span><span class="p">(</span><span class="s1">&#39;my_table&#39;</span><span class="p">);</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">count_all_results</span><span class="p">();</span> <span class="c1">// 產生一個整數，像是 17</span>
+</pre></div>
+</div>
+<p>不過這個方法也會重置你傳給 <code class="docutils literal notranslate"><span class="pre">select()</span></code> 的任何欄位值。如果你需要保留它們，可以傳送 <code class="docutils literal notranslate"><span class="pre">FALSE</span></code> 作為第二個參數：</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">count_all_results</span><span class="p">(</span><span class="s1">&#39;my_table&#39;</span><span class="p">,</span> <span class="k">FALSE</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><strong>$this-&gt;db-&gt;count_all()</strong></p>
+<p>讓你可以判斷特定資料表中資料的列數。提交資料表名稱作為第一個參數。例如：</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">count_all</span><span class="p">(</span><span class="s1">&#39;my_table&#39;</span><span class="p">);</span>  <span class="c1">// 產生一個整數，像是 25</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id7">
+<h2><a class="toc-backref" href="#id21">查詢分組</a><a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h2>
+<p>查詢分組讓你使用括號在 WHERE 子句中產生不同群組。這讓你可以用複雜的 WHERE 子句來產生查詢。支援巢狀的群組。例如：</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">select</span><span class="p">(</span><span class="s1">&#39;*&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">from</span><span class="p">(</span><span class="s1">&#39;my_table&#39;</span><span class="p">)</span>
+        <span class="o">-&gt;</span><span class="na">group_start</span><span class="p">()</span>
+                <span class="o">-&gt;</span><span class="na">where</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">)</span>
+                <span class="o">-&gt;</span><span class="na">or_group_start</span><span class="p">()</span>
+                        <span class="o">-&gt;</span><span class="na">where</span><span class="p">(</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">)</span>
+                        <span class="o">-&gt;</span><span class="na">where</span><span class="p">(</span><span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">)</span>
+                <span class="o">-&gt;</span><span class="na">group_end</span><span class="p">()</span>
+        <span class="o">-&gt;</span><span class="na">group_end</span><span class="p">()</span>
+        <span class="o">-&gt;</span><span class="na">where</span><span class="p">(</span><span class="s1">&#39;d&#39;</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">)</span>
+<span class="o">-&gt;</span><span class="na">get</span><span class="p">();</span>
+
+<span class="c1">// 生成：</span>
+<span class="c1">// SELECT * FROM (`my_table`) WHERE ( `a` = &#39;a&#39; OR ( `b` = &#39;b&#39; AND `c` = &#39;c&#39; ) ) AND `d` = &#39;d&#39;</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">群組需要保持平衡，請確認每個 group_start() 都有相對應的 group_end() 。</p>
+</div>
+<p><strong>$this-&gt;db-&gt;group_start()</strong></p>
+<p>經由在查詢的 WHERE 子句中加入一個左括號，來起始一個新的群組。</p>
+<p><strong>$this-&gt;db-&gt;or_group_start()</strong></p>
+<p>經由在查詢的 WHERE 子句中加入一個 OR 以及後面的左括號，來起始一個新的群組。</p>
+<p><strong>$this-&gt;db-&gt;not_group_start()</strong></p>
+<p>經由在查詢的 WHERE 子句中加入一個 NOT 以及後面的左括號，來起始一個新的群組。</p>
+<p><strong>$this-&gt;db-&gt;or_not_group_start()</strong></p>
+<p>經由在查詢的 WHERE 子句中加入一個 OR NOT 以及後面的左括號，來起始一個新的群組。</p>
+<p><strong>$this-&gt;db-&gt;group_end()</strong></p>
+<p>經由在查詢的 WHERE 子句中加入一個右括號，來結束目前的群組。</p>
+</div>
+<div class="section" id="id8">
+<h2><a class="toc-backref" href="#id22">插入資料</a><a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h2>
+<p><strong>$this-&gt;db-&gt;insert()</strong></p>
+<p>根據你提供的資料產生插入語句字串，並執行查詢。你可以傳入 <strong>陣列</strong> 或 <strong>物件</strong> 作為參數。下面的範例是使用陣列：</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="nv">$data</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;title&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;My title&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;My Name&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;date&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;My date&#39;</span>
+<span class="p">);</span>
+
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">insert</span><span class="p">(</span><span class="s1">&#39;mytable&#39;</span><span class="p">,</span> <span class="nv">$data</span><span class="p">);</span>
+<span class="c1">// 產生： INSERT INTO mytable (title, name, date) VALUES (&#39;My title&#39;, &#39;My name&#39;, &#39;My date&#39;)</span>
+</pre></div>
+</div>
+<p>第一個參數包含了資料表的名稱，第二個參數則是一個包含了要存入的值的關連陣列。</p>
+<p>下面這個例子則使用物件：</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="cm">/*</span>
+<span class="cm">class Myclass {</span>
+<span class="cm">        public $title = &#39;My Title&#39;;</span>
+<span class="cm">        public $content = &#39;My Content&#39;;</span>
+<span class="cm">        public $date = &#39;My Date&#39;;</span>
+<span class="cm">}</span>
+<span class="cm">*/</span>
+
+<span class="nv">$object</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Myclass</span><span class="p">;</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">insert</span><span class="p">(</span><span class="s1">&#39;mytable&#39;</span><span class="p">,</span> <span class="nv">$object</span><span class="p">);</span>
+<span class="c1">// 產生： INSERT INTO mytable (title, content, date) VALUES (&#39;My Title&#39;, &#39;My Content&#39;, &#39;My Date&#39;)</span>
+</pre></div>
+</div>
+<p>第一個參數包含了資料表的名稱，第二個參數則是一個物件。</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">所有的值都會被自動跳脫以產生較安全的查詢。</p>
+</div>
+<p><strong>$this-&gt;db-&gt;get_compiled_insert()</strong></p>
+<p>就像 $this-&gt;db-&gt;insert() 一樣編譯出插入的查詢，但是並不 <em>執行</em> 。這個方法只會把產生的 SQL 查詢當做字串回傳。</p>
+<p>範例：</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="nv">$data</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;title&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;My title&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;name&#39;</span>  <span class="o">=&gt;</span> <span class="s1">&#39;My Name&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;date&#39;</span>  <span class="o">=&gt;</span> <span class="s1">&#39;My date&#39;</span>
+<span class="p">);</span>
+
+<span class="nv">$sql</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="nv">$data</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">get_compiled_insert</span><span class="p">(</span><span class="s1">&#39;mytable&#39;</span><span class="p">);</span>
+<span class="k">echo</span> <span class="nv">$sql</span><span class="p">;</span>
+
+<span class="c1">// 產生字串： INSERT INTO mytable (title, name, date) VALUES (&#39;My title&#39;, &#39;My name&#39;, &#39;My date&#39;)</span>
+</pre></div>
+</div>
+<p>第二個參數讓你能設定是否要在執行後重設查詢生成器（預設是會，跟 $this-&gt;db-&gt;insert() 一樣）：</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="s1">&#39;My Title&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">get_compiled_insert</span><span class="p">(</span><span class="s1">&#39;mytable&#39;</span><span class="p">,</span> <span class="k">FALSE</span><span class="p">);</span>
+
+<span class="c1">// 產生字串： INSERT INTO mytable (title) VALUES (&#39;My Title&#39;)</span>
+
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="s1">&#39;content&#39;</span><span class="p">,</span> <span class="s1">&#39;My Content&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">get_compiled_insert</span><span class="p">();</span>
+
+<span class="c1">// 產生字串： INSERT INTO mytable (title, content) VALUES (&#39;My Title&#39;, &#39;My Content&#39;)</span>
+</pre></div>
+</div>
+<p>在上例中要注意的重點在於，第二次查詢並沒有使用 <cite>$this-&gt;db-&gt;from()</cite> ，也沒有把資料表名稱當做第一個參數傳入。這樣依舊能運作的原因在於，查詢並未使用 <cite>$this-&gt;db-&gt;insert()</cite> 來執行而使得值被重設，也沒有直接使用 <cite>$this-&gt;db-&gt;reset_query()</cite> 來重設。</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">這個方法不適用於批次插入資料。</p>
+</div>
+<p><strong>$this-&gt;db-&gt;insert_batch()</strong></p>
+<p>根據你提供的資料產生插入語句字串，並且執行查詢。你可以傳入一個 <strong>陣列</strong> 或是 <strong>物件</strong> 給函式。下面的範例是使用陣列：</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="nv">$data</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+        <span class="k">array</span><span class="p">(</span>
+                <span class="s1">&#39;title&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;My title&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;My Name&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;date&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;My date&#39;</span>
+        <span class="p">),</span>
+        <span class="k">array</span><span class="p">(</span>
+                <span class="s1">&#39;title&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Another title&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Another Name&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;date&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Another date&#39;</span>
+        <span class="p">)</span>
+<span class="p">);</span>
+
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">insert_batch</span><span class="p">(</span><span class="s1">&#39;mytable&#39;</span><span class="p">,</span> <span class="nv">$data</span><span class="p">);</span>
+<span class="c1">// 產生： INSERT INTO mytable (title, name, date) VALUES (&#39;My title&#39;, &#39;My name&#39;, &#39;My date&#39;),  (&#39;Another title&#39;, &#39;Another name&#39;, &#39;Another date&#39;)</span>
+</pre></div>
+</div>
+<p>第一個參數包含了資料表名稱，第二個參數則是要插入資料的關聯陣列。</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">所有的值都會被自動跳脫以產生較安全的查詢。</p>
+</div>
+</div>
+<div class="section" id="id9">
+<h2><a class="toc-backref" href="#id23">更新資料</a><a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h2>
+<p><strong>$this-&gt;db-&gt;replace()</strong></p>
+<p>這個方法會執行一個 REPLACE 語句，它基本上是一個標準的 SQL DELETE 加上 INSERT，使用 <em>PRIMARY</em> 與 <em>UNIQUE</em> 鍵來做判斷的因素。
+在我們的案例中，它可以讓你不需要呼叫 <code class="docutils literal notranslate"><span class="pre">select()</span></code>, <code class="docutils literal notranslate"><span class="pre">update()</span></code>, <code class="docutils literal notranslate"><span class="pre">delete()</span></code> 與 <code class="docutils literal notranslate"><span class="pre">insert()</span></code> 等的不同組合來實現複雜的邏輯。</p>
+<p>範例：</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="nv">$data</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;title&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;My title&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;name&#39;</span>  <span class="o">=&gt;</span> <span class="s1">&#39;My Name&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;date&#39;</span>  <span class="o">=&gt;</span> <span class="s1">&#39;My date&#39;</span>
+<span class="p">);</span>
+
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">replace</span><span class="p">(</span><span class="s1">&#39;table&#39;</span><span class="p">,</span> <span class="nv">$data</span><span class="p">);</span>
+
+<span class="c1">// 執行： REPLACE INTO mytable (title, name, date) VALUES (&#39;My title&#39;, &#39;My name&#39;, &#39;My date&#39;)</span>
+</pre></div>
+</div>
+<p>在上面的範例中，如果我們假設 <em>title</em> 欄位是主鍵，而一個列的 <em>title</em> 欄位值包含 ‘My title’ ，那這個列會被刪除而用新的資料列取代。</p>
+<p>也可以使用 <code class="docutils literal notranslate"><span class="pre">set()</span></code> 方法，而且就像使用  <code class="docutils literal notranslate"><span class="pre">insert()</span></code> 時一樣，所有的欄位值會被自動跳脫。</p>
+<p><strong>$this-&gt;db-&gt;set()</strong></p>
+<p>這個函式讓你能設定要插入或更新的值。</p>
+<p><strong>也可以直接傳送一個資料陣列給插入或更新函數</strong></p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="nv">$name</span><span class="p">);</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">insert</span><span class="p">(</span><span class="s1">&#39;mytable&#39;</span><span class="p">);</span>  <span class="c1">// 產生： INSERT INTO mytable (name) VALUES (&#39;{$name}&#39;)</span>
+</pre></div>
+</div>
+<p>如果多次呼叫函式，它會根據你是要插入或更新來做適當的組合：</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="nv">$name</span><span class="p">);</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="nv">$title</span><span class="p">);</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="s1">&#39;status&#39;</span><span class="p">,</span> <span class="nv">$status</span><span class="p">);</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">insert</span><span class="p">(</span><span class="s1">&#39;mytable&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><strong>set()</strong> 可以接受額外的第三個參數 ($escape) ，將它設定為 FALSE ，可以避免資料被跳脫。為了展示其中的差異，這裡同時使用 escape 參數與不使用 escape 參數來呼叫 set() ：</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="s1">&#39;field&#39;</span><span class="p">,</span> <span class="s1">&#39;field+1&#39;</span><span class="p">,</span> <span class="k">FALSE</span><span class="p">);</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">insert</span><span class="p">(</span><span class="s1">&#39;mytable&#39;</span><span class="p">);</span> <span class="c1">// 執行： INSERT INTO mytable (field) VALUES (field+1)</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="s1">&#39;field&#39;</span><span class="p">,</span> <span class="s1">&#39;field+1&#39;</span><span class="p">);</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">insert</span><span class="p">(</span><span class="s1">&#39;mytable&#39;</span><span class="p">);</span> <span class="c1">// 執行： INSERT INTO mytable (field) VALUES (&#39;field+1&#39;)</span>
+</pre></div>
+</div>
+<p>你也可以傳送關連陣列給這個函式：</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="nv">$array</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="nv">$name</span><span class="p">,</span>
+        <span class="s1">&#39;title&#39;</span> <span class="o">=&gt;</span> <span class="nv">$title</span><span class="p">,</span>
+        <span class="s1">&#39;status&#39;</span> <span class="o">=&gt;</span> <span class="nv">$status</span>
+<span class="p">);</span>
+
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="nv">$array</span><span class="p">);</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">insert</span><span class="p">(</span><span class="s1">&#39;mytable&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>或是傳送一個物件：</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="cm">/*</span>
+<span class="cm">class Myclass {</span>
+<span class="cm">        public $title = &#39;My Title&#39;;</span>
+<span class="cm">        public $content = &#39;My Content&#39;;</span>
+<span class="cm">        public $date = &#39;My Date&#39;;</span>
+<span class="cm">}</span>
+<span class="cm">*/</span>
+
+<span class="nv">$object</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Myclass</span><span class="p">;</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="nv">$object</span><span class="p">);</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">insert</span><span class="p">(</span><span class="s1">&#39;mytable&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><strong>$this-&gt;db-&gt;update()</strong></p>
+<p>根據你傳送的資料產生一個 update 字串並執行查詢。你可以傳送 <strong>陣列</strong> 或 <strong>物件</strong> 給函式。這是使用陣列的例子：</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="nv">$data</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;title&#39;</span> <span class="o">=&gt;</span> <span class="nv">$title</span><span class="p">,</span>
+        <span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="nv">$name</span><span class="p">,</span>
+        <span class="s1">&#39;date&#39;</span> <span class="o">=&gt;</span> <span class="nv">$date</span>
+<span class="p">);</span>
+
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">where</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="nv">$id</span><span class="p">);</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">update</span><span class="p">(</span><span class="s1">&#39;mytable&#39;</span><span class="p">,</span> <span class="nv">$data</span><span class="p">);</span>
+<span class="c1">// 產生：</span>
+<span class="c1">// UPDATE mytable</span>
+<span class="c1">// SET title = &#39;{$title}&#39;, name = &#39;{$name}&#39;, date = &#39;{$date}&#39;</span>
+<span class="c1">// WHERE id = $id</span>
+</pre></div>
+</div>
+<p>你也可以提供一個物件：</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="cm">/*</span>
+<span class="cm">class Myclass {</span>
+<span class="cm">        public $title = &#39;My Title&#39;;</span>
+<span class="cm">        public $content = &#39;My Content&#39;;</span>
+<span class="cm">        public $date = &#39;My Date&#39;;</span>
+<span class="cm">}</span>
+<span class="cm">*/</span>
+
+<span class="nv">$object</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Myclass</span><span class="p">;</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">where</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="nv">$id</span><span class="p">);</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">update</span><span class="p">(</span><span class="s1">&#39;mytable&#39;</span><span class="p">,</span> <span class="nv">$object</span><span class="p">);</span>
+<span class="c1">// 產生：</span>
+<span class="c1">// UPDATE mytable</span>
+<span class="c1">// SET title = &#39;{$title}&#39;, name = &#39;{$name}&#39;, date = &#39;{$date}&#39;</span>
+<span class="c1">// WHERE id = $id</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">所有的值會被自動跳脫以產生較安全的查詢。</p>
+</div>
+<p>你會發現使用 $this-&gt;db-&gt;where() 讓你可以設定 WHERE 子句。你也可以額外用字串來直接傳送這個資訊給 update 函式：</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">update</span><span class="p">(</span><span class="s1">&#39;mytable&#39;</span><span class="p">,</span> <span class="nv">$data</span><span class="p">,</span> <span class="s2">&quot;id = 4&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Or as an array</p>
+<p>或是使用一個陣列：</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">update</span><span class="p">(</span><span class="s1">&#39;mytable&#39;</span><span class="p">,</span> <span class="nv">$data</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="nv">$id</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>你也可以使用前面提到的 $this-&gt;db-&gt;set() 函式來執行更新。</p>
+<p><strong>$this-&gt;db-&gt;update_batch()</strong></p>
+<p>根據你提供的資料產生 update 字串並執行查詢。你也可以傳送一個 <strong>陣列</strong> 或是 <strong>物件</strong> 給這個函式。
+這是使用陣列的例子：</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="nv">$data</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+   <span class="k">array</span><span class="p">(</span>
+      <span class="s1">&#39;title&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;My title&#39;</span> <span class="p">,</span>
+      <span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;My Name 2&#39;</span> <span class="p">,</span>
+      <span class="s1">&#39;date&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;My date 2&#39;</span>
+   <span class="p">),</span>
+   <span class="k">array</span><span class="p">(</span>
+      <span class="s1">&#39;title&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Another title&#39;</span> <span class="p">,</span>
+      <span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Another Name 2&#39;</span> <span class="p">,</span>
+      <span class="s1">&#39;date&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Another date 2&#39;</span>
+   <span class="p">)</span>
+<span class="p">);</span>
+
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">update_batch</span><span class="p">(</span><span class="s1">&#39;mytable&#39;</span><span class="p">,</span> <span class="nv">$data</span><span class="p">,</span> <span class="s1">&#39;title&#39;</span><span class="p">);</span>
+
+<span class="c1">// 產生：</span>
+<span class="c1">// UPDATE `mytable` SET `name` = CASE</span>
+<span class="c1">// WHEN `title` = &#39;My title&#39; THEN &#39;My Name 2&#39;</span>
+<span class="c1">// WHEN `title` = &#39;Another title&#39; THEN &#39;Another Name 2&#39;</span>
+<span class="c1">// ELSE `name` END,</span>
+<span class="c1">// `date` = CASE</span>
+<span class="c1">// WHEN `title` = &#39;My title&#39; THEN &#39;My date 2&#39;</span>
+<span class="c1">// WHEN `title` = &#39;Another title&#39; THEN &#39;Another date 2&#39;</span>
+<span class="c1">// ELSE `date` END</span>
+<span class="c1">// WHERE `title` IN (&#39;My title&#39;,&#39;Another title&#39;)</span>
+</pre></div>
+</div>
+<p>第一個參數會包含資料表的名稱，第二個參數是一個值的陣列，第三個則是 where 使用的鍵。</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">所有的值會被自動跳脫以產生較安全的查詢。</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">由於它運作的天性，在這個方法使用 <code class="docutils literal notranslate"><span class="pre">affected_rows()</span></code> 不會給你適當的結果。取而代之，使用 <code class="docutils literal notranslate"><span class="pre">update_batch()</span></code> 來回傳受影響的列數。</p>
+</div>
+<p><strong>$this-&gt;db-&gt;get_compiled_update()</strong></p>
+<p>與 <code class="docutils literal notranslate"><span class="pre">$this-&gt;db-&gt;get_compiled_insert()</span></code> 用幾乎完全一樣的方式運作，只是它會產生 UPDATE SQL 字串而非 INSERT SQL 字串。</p>
+<p>請參閱 <cite>$this-&gt;db-&gt;get_compiled_insert()</cite> 的文件來取得更多資訊。</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">這個方法無法在批次更新運作。</p>
+</div>
+</div>
+<div class="section" id="id10">
+<h2><a class="toc-backref" href="#id24">刪除資料</a><a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h2>
+<p><strong>$this-&gt;db-&gt;delete()</strong></p>
+<p>產生一個刪除的 SQL 字串並執行查詢。</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">delete</span><span class="p">(</span><span class="s1">&#39;mytable&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="nv">$id</span><span class="p">));</span>
+<span class="c1">// 產生：</span>
+<span class="c1">// DELETE FROM mytable</span>
+<span class="c1">// WHERE id = $id</span>
+</pre></div>
+</div>
+<p>第一個參數是資料表名稱，第二個參數是 where 子句。除了傳送資料作為第二個參數，你也可以使用 where() 或是 or_where() 函式：</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">where</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="nv">$id</span><span class="p">);</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">delete</span><span class="p">(</span><span class="s1">&#39;mytable&#39;</span><span class="p">);</span>
+
+<span class="c1">// 產生：</span>
+<span class="c1">// DELETE FROM mytable</span>
+<span class="c1">// WHERE id = $id</span>
+</pre></div>
+</div>
+<p>如果你想要從多個資料表刪除資料，可以傳送一個資料表名稱的陣列給 delete() 。</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="nv">$tables</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;table1&#39;</span><span class="p">,</span> <span class="s1">&#39;table2&#39;</span><span class="p">,</span> <span class="s1">&#39;table3&#39;</span><span class="p">);</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">where</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;5&#39;</span><span class="p">);</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">delete</span><span class="p">(</span><span class="nv">$tables</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>如果你要把資料表中所有的資料刪除，可以使用 truncate() 函式或是 empty_table() 函式。</p>
+<p><strong>$this-&gt;db-&gt;empty_table()</strong></p>
+<p>產生一個刪除的 SQL 字串並執行查詢。</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">empty_table</span><span class="p">(</span><span class="s1">&#39;mytable&#39;</span><span class="p">);</span> <span class="c1">// 產生： DELETE FROM mytable</span>
+</pre></div>
+</div>
+<p><strong>$this-&gt;db-&gt;truncate()</strong></p>
+<p>產生一個 truncate SQL 字串並執行查詢。</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">from</span><span class="p">(</span><span class="s1">&#39;mytable&#39;</span><span class="p">);</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">truncate</span><span class="p">();</span>
+
+<span class="c1">// 或</span>
+
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">truncate</span><span class="p">(</span><span class="s1">&#39;mytable&#39;</span><span class="p">);</span>
+
+<span class="c1">// 產生：</span>
+<span class="c1">// TRUNCATE mytable</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">如果無法使用 TRUNCATE 命令， truncate() 會執行 “DELETE FROM table” 。</p>
+</div>
+<p><strong>$this-&gt;db-&gt;get_compiled_delete()</strong></p>
+<p>運作的方式與 <code class="docutils literal notranslate"><span class="pre">$this-&gt;db-&gt;get_compiled_insert()</span></code> 完全一樣，除了它會產生一個 DELETE SQL 字串而不是 INSERT SQL 字串。</p>
+<p>請參閱 $this-&gt;db-&gt;get_compiled_insert() 文件來取得更多資訊。</p>
+</div>
+<div class="section" id="id11">
+<h2><a class="toc-backref" href="#id25">方法串接</a><a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h2>
+<p>方法串接讓你可以把多個函式接起來使用以簡化語法。請考慮下例：</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="nv">$query</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">select</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">)</span>
+                <span class="o">-&gt;</span><span class="na">where</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="nv">$id</span><span class="p">)</span>
+                <span class="o">-&gt;</span><span class="na">limit</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+                <span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;mytable&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="ar-caching">
+<span id="id12"></span><h2><a class="toc-backref" href="#id26">查詢生成器快取</a><a class="headerlink" href="#ar-caching" title="Permalink to this headline">¶</a></h2>
+<p>雖然不是真的快取，查詢生成器可以儲存（或 “快取” ）查詢中的特定部分，讓你可以在程式中重複使用。正常狀態下，當查詢生成器的呼叫完成時，所有儲存起來的資訊會被重置以準備下一次呼叫。使用快取，讓你能防止重置，而簡單地重複使用資訊。</p>
+<p>快取的呼叫是累積的。如果你進行兩次快取的 select() 呼叫，然後進行兩次不快取的呼叫，結果會進行四次 select() 呼叫。
+有三個快取函式可以使用：</p>
+<p><strong>$this-&gt;db-&gt;start_cache()</strong></p>
+<p>必須呼叫這個函式來開始快取。所有正確的查詢生成器的查詢類型（請參閱後面提到的可支援的查詢）會被儲存起來以備接下來的程式使用。</p>
+<p><strong>$this-&gt;db-&gt;stop_cache()</strong></p>
+<p>呼叫這個函數能停止快取。</p>
+<p><strong>$this-&gt;db-&gt;flush_cache()</strong></p>
+<p>這個函數會刪除所有查詢生成器快取中的項目。</p>
+<div class="section" id="id13">
+<h3>一個快取的範例<a class="headerlink" href="#id13" title="Permalink to this headline">¶</a></h3>
+<p>這是一個使用範例：</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">start_cache</span><span class="p">();</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">select</span><span class="p">(</span><span class="s1">&#39;field1&#39;</span><span class="p">);</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">stop_cache</span><span class="p">();</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;tablename&#39;</span><span class="p">);</span>
+<span class="c1">// 生成： SELECT `field1` FROM (`tablename`)</span>
+
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">select</span><span class="p">(</span><span class="s1">&#39;field2&#39;</span><span class="p">);</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;tablename&#39;</span><span class="p">);</span>
+<span class="c1">// 生成：  SELECT `field1`, `field2` FROM (`tablename`)</span>
+
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">flush_cache</span><span class="p">();</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">select</span><span class="p">(</span><span class="s1">&#39;field2&#39;</span><span class="p">);</span>
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;tablename&#39;</span><span class="p">);</span>
+<span class="c1">// 生成：  SELECT `field2` FROM (`tablename`)</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">下列語句可以被快取： select, from, join, where, like, group_by, having, order_by</p>
+</div>
+</div>
+</div>
+<div class="section" id="id14">
+<h2><a class="toc-backref" href="#id27">重置查詢生成器</a><a class="headerlink" href="#id14" title="Permalink to this headline">¶</a></h2>
+<p><strong>$this-&gt;db-&gt;reset_query()</strong></p>
+<p>重置查詢生成器讓你可以重新開始查詢，而不用先呼叫 $this-&gt;db-&gt;get() 或 $this-&gt;db-&gt;insert() 等方法。就像其他執行查詢的方法，這並不會讓你重置使用 <a class="reference internal" href="#id12">查詢生成器快取</a> 快取起來的項目。</p>
+<p>在你使用查詢生成器產生 SQL （例如： <code class="docutils literal notranslate"><span class="pre">$this-&gt;db-&gt;get_compiled_select()</span></code> ），然後又想要進行其他動作（例如執行查詢）的狀況下，這樣會很有用：</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="c1">// 注意， get_compiled_select 方法的第二個參數是 FALSE</span>
+<span class="nv">$sql</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">select</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;field1&#39;</span><span class="p">,</span><span class="s1">&#39;field2&#39;</span><span class="p">))</span>
+                                <span class="o">-&gt;</span><span class="na">where</span><span class="p">(</span><span class="s1">&#39;field3&#39;</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
+                                <span class="o">-&gt;</span><span class="na">get_compiled_select</span><span class="p">(</span><span class="s1">&#39;mytable&#39;</span><span class="p">,</span> <span class="k">FALSE</span><span class="p">);</span>
+
+<span class="c1">// ...</span>
+<span class="c1">// 對 SQL 程式碼做一些瘋狂的事 ... 像是把它加入到 cron script</span>
+<span class="c1">// 來在稍後執行 ...</span>
+<span class="c1">// ...</span>
+
+<span class="nv">$data</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">result_array</span><span class="p">();</span>
+
+<span class="c1">// 會執行並回傳下列查詢的結果陣列：</span>
+<span class="c1">// SELECT field1, field1 from mytable where field3 = 5;</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">在使用查詢生成器的快取功能，又沒有重置查詢的時候重複呼叫 <code class="docutils literal notranslate"><span class="pre">get_compiled_select()</span></code> ，會使得快取被合併兩次。例如，假設你正在快取一個 <code class="docutils literal notranslate"><span class="pre">select()</span></code> ，這樣反而會讓你 select 同一個欄位兩次。</p>
+</div>
+</div>
+<div class="section" id="id15">
+<h2><a class="toc-backref" href="#id28">類別參考</a><a class="headerlink" href="#id15" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="CI_DB_query_builder">
+<em class="property">class </em><code class="descname">CI_DB_query_builder</code><a class="headerlink" href="#CI_DB_query_builder" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="CI_DB_query_builder::reset_query">
+<code class="descname">reset_query</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#CI_DB_query_builder::reset_query" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">CI_DB_query_builder 的實例（方法串接）</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#CI_DB_query_builder" title="CI_DB_query_builder">CI_DB_query_builder</a></td>
+</tr>
+</tbody>
+</table>
+<p>重置當前查詢生成器的狀態。當你要建立一個在特定狀況下會取消的查詢時，這個方法很有用。</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CI_DB_query_builder::start_cache">
+<code class="descname">start_cache</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#CI_DB_query_builder::start_cache" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">CI_DB_query_builder 的實例（方法串接）</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#CI_DB_query_builder" title="CI_DB_query_builder">CI_DB_query_builder</a></td>
+</tr>
+</tbody>
+</table>
+<p>開始查詢生成器的快取。</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CI_DB_query_builder::stop_cache">
+<code class="descname">stop_cache</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#CI_DB_query_builder::stop_cache" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">CI_DB_query_builder 的實例（方法串接）</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#CI_DB_query_builder" title="CI_DB_query_builder">CI_DB_query_builder</a></td>
+</tr>
+</tbody>
+</table>
+<p>停止查詢生成器的快取。</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CI_DB_query_builder::flush_cache">
+<code class="descname">flush_cache</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#CI_DB_query_builder::flush_cache" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">CI_DB_query_builder 的實例（方法串接）</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#CI_DB_query_builder" title="CI_DB_query_builder">CI_DB_query_builder</a></td>
+</tr>
+</tbody>
+</table>
+<p>清空查詢生成器的快取。</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CI_DB_query_builder::set_dbprefix">
+<code class="descname">set_dbprefix</code><span class="sig-paren">(</span><span class="optional">[</span><em>$prefix = ''</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#CI_DB_query_builder::set_dbprefix" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>$prefix</strong> (<em>string</em>) – 要使用的新前綴</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">使用中的資料庫前綴</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">string</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>設定資料庫前綴，此操作無需重新連接到資料庫。</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CI_DB_query_builder::dbprefix">
+<code class="descname">dbprefix</code><span class="sig-paren">(</span><span class="optional">[</span><em>$table = ''</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#CI_DB_query_builder::dbprefix" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>$table</strong> (<em>string</em>) – 要加上前綴的資料表名稱</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">已加上前綴的資料表名稱</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">string</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Prepends a database prefix, if one exists in configuration.
+如果設定中存在已經設定好資料庫前綴，就將它加上。</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CI_DB_query_builder::count_all_results">
+<code class="descname">count_all_results</code><span class="sig-paren">(</span><span class="optional">[</span><em>$table = ''</em><span class="optional">[</span>, <em>$reset = TRUE</em><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#CI_DB_query_builder::count_all_results" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>$table</strong> (<em>string</em>) – 資料表名稱</li>
+<li><strong>$reset</strong> (<em>bool</em>) – 是否要在執行完畢重設 SELECT 的值</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">查詢結果的列數</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">int</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>產生一個平台特定的查詢字串，這個查詢字串會用來計算查詢生成器的查詢所回傳的記錄數，然後執行並回傳結果。</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CI_DB_query_builder::get">
+<code class="descname">get</code><span class="sig-paren">(</span><span class="optional">[</span><em>$table = ''</em><span class="optional">[</span>, <em>$limit = NULL</em><span class="optional">[</span>, <em>$offset = NULL</em><span class="optional">]</span><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#CI_DB_query_builder::get" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>$table</strong> (<em>string</em>) – 要查詢的資料表</li>
+<li><strong>$limit</strong> (<em>int</em>) – LIMIT 子句</li>
+<li><strong>$offset</strong> (<em>int</em>) – OFFSET 子句</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">CI_DB_result 的實例（方法串接）</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">CI_DB_result</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>根據已經呼叫的查詢生成器方法，編譯並執行 SELECT 語句。</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CI_DB_query_builder::get_where">
+<code class="descname">get_where</code><span class="sig-paren">(</span><span class="optional">[</span><em>$table = ''</em><span class="optional">[</span>, <em>$where = NULL</em><span class="optional">[</span>, <em>$limit = NULL</em><span class="optional">[</span>, <em>$offset = NULL</em><span class="optional">]</span><span class="optional">]</span><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#CI_DB_query_builder::get_where" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>$table</strong> (<em>mixed</em>) – 要取得資料的資料表（一個或多個），字串或陣列</li>
+<li><strong>$where</strong> (<em>string</em>) – WHERE 子句</li>
+<li><strong>$limit</strong> (<em>int</em>) – LIMIT 子句</li>
+<li><strong>$offset</strong> (<em>int</em>) – OFFSET 子句</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">CI_DB_result 的實例（方法串接）</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">CI_DB_result</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>跟 <code class="docutils literal notranslate"><span class="pre">get()</span></code> 相同，但是讓你可以直接加入 WHERE 子句。</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CI_DB_query_builder::select">
+<code class="descname">select</code><span class="sig-paren">(</span><span class="optional">[</span><em>$select = '*'</em><span class="optional">[</span>, <em>$escape = NULL</em><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#CI_DB_query_builder::select" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>$select</strong> (<em>string</em>) – 查詢的 SELECT 部分</li>
+<li><strong>$escape</strong> (<em>bool</em>) – 是否要跳脫值及識別字</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">CI_DB_query_builder 的實例（方法串接）</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#CI_DB_query_builder" title="CI_DB_query_builder">CI_DB_query_builder</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>在查詢中加入 SELECT 子句。</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CI_DB_query_builder::select_avg">
+<code class="descname">select_avg</code><span class="sig-paren">(</span><span class="optional">[</span><em>$select = ''</em><span class="optional">[</span>, <em>$alias = ''</em><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#CI_DB_query_builder::select_avg" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>$select</strong> (<em>string</em>) – 要計算平均值的欄位</li>
+<li><strong>$alias</strong> (<em>string</em>) – 結果值的欄位別名</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">CI_DB_query_builder 的實例（方法串接）</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#CI_DB_query_builder" title="CI_DB_query_builder">CI_DB_query_builder</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>在查詢中加入 SELECT AVG(field) 子句。</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CI_DB_query_builder::select_max">
+<code class="descname">select_max</code><span class="sig-paren">(</span><span class="optional">[</span><em>$select = ''</em><span class="optional">[</span>, <em>$alias = ''</em><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#CI_DB_query_builder::select_max" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>$select</strong> (<em>string</em>) – 要計算最大值的欄位</li>
+<li><strong>$alias</strong> (<em>string</em>) – 結果值的欄位別名</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">CI_DB_query_builder 的實例（方法串接）</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#CI_DB_query_builder" title="CI_DB_query_builder">CI_DB_query_builder</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>在查詢中加入 SELECT MAX(field) 子句。</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CI_DB_query_builder::select_min">
+<code class="descname">select_min</code><span class="sig-paren">(</span><span class="optional">[</span><em>$select = ''</em><span class="optional">[</span>, <em>$alias = ''</em><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#CI_DB_query_builder::select_min" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>$select</strong> (<em>string</em>) – 要計算最小值的欄位</li>
+<li><strong>$alias</strong> (<em>string</em>) – 結果值的欄位別名</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">CI_DB_query_builder 的實例（方法串接）</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#CI_DB_query_builder" title="CI_DB_query_builder">CI_DB_query_builder</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>在查詢中加入 SELECT MIN(field) 子句。</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CI_DB_query_builder::select_sum">
+<code class="descname">select_sum</code><span class="sig-paren">(</span><span class="optional">[</span><em>$select = ''</em><span class="optional">[</span>, <em>$alias = ''</em><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#CI_DB_query_builder::select_sum" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>$select</strong> (<em>string</em>) – 要計算總和的欄位</li>
+<li><strong>$alias</strong> (<em>string</em>) – 結果值的欄位別名</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">CI_DB_query_builder 的實例（方法串接）</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#CI_DB_query_builder" title="CI_DB_query_builder">CI_DB_query_builder</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>在查詢中加入 SELECT SUM(field) 子句。</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CI_DB_query_builder::distinct">
+<code class="descname">distinct</code><span class="sig-paren">(</span><span class="optional">[</span><em>$val = TRUE</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#CI_DB_query_builder::distinct" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>$val</strong> (<em>bool</em>) – 要使用的 “distinct” 旗標值</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">CI_DB_query_builder 的實例（方法串接）</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#CI_DB_query_builder" title="CI_DB_query_builder">CI_DB_query_builder</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>設定一個旗標，告訴查詢生成器要在查詢的 SELECT 部分加入 DISTINCT 子句。</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CI_DB_query_builder::from">
+<code class="descname">from</code><span class="sig-paren">(</span><em>$from</em><span class="sig-paren">)</span><a class="headerlink" href="#CI_DB_query_builder::from" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>$from</strong> (<em>mixed</em>) – 字串或陣列，用來指定一個或多個資料表名稱</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">CI_DB_query_builder 的實例（方法串接）</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#CI_DB_query_builder" title="CI_DB_query_builder">CI_DB_query_builder</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>指定查詢的 FROM 子句。</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CI_DB_query_builder::join">
+<code class="descname">join</code><span class="sig-paren">(</span><em>$table</em>, <em>$cond</em><span class="optional">[</span>, <em>$type = ''</em><span class="optional">[</span>, <em>$escape = NULL</em><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#CI_DB_query_builder::join" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>$table</strong> (<em>string</em>) – 要 join 的資料表名稱</li>
+<li><strong>$cond</strong> (<em>string</em>) – JOIN ON 條件</li>
+<li><strong>$type</strong> (<em>string</em>) – JOIN 的類型</li>
+<li><strong>$escape</strong> (<em>bool</em>) – 是否要跳脫值及識別字</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">CI_DB_query_builder 的實例（方法串接）</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#CI_DB_query_builder" title="CI_DB_query_builder">CI_DB_query_builder</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>在查詢中加入 JOIN 子句。</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CI_DB_query_builder::where">
+<code class="descname">where</code><span class="sig-paren">(</span><em>$key</em><span class="optional">[</span>, <em>$value = NULL</em><span class="optional">[</span>, <em>$escape = NULL</em><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#CI_DB_query_builder::where" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>$key</strong> (<em>mixed</em>) – 用來比較的欄位名稱，或是一個關連陣列</li>
+<li><strong>$value</strong> (<em>mixed</em>) – 如果 key 是單一欄位名稱，用來指定比較的值</li>
+<li><strong>$escape</strong> (<em>boolean</em>) – 是否要跳脫值及識別字</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">DB_query_builder 的實例</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">object</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>產生查詢的 WHERE 部分。
+多次呼叫時會使用 ‘AND’ 來分隔（串接多個條件）。</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CI_DB_query_builder::or_where">
+<code class="descname">or_where</code><span class="sig-paren">(</span><em>$key</em><span class="optional">[</span>, <em>$value = NULL</em><span class="optional">[</span>, <em>$escape = NULL</em><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#CI_DB_query_builder::or_where" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>$key</strong> (<em>mixed</em>) – 用來比較的欄位名稱，或是一個關連陣列</li>
+<li><strong>$value</strong> (<em>mixed</em>) – 如果 key 是單一欄位名稱，用來指定比較的值</li>
+<li><strong>$escape</strong> (<em>boolean</em>) – 是否要跳脫值及識別字</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">DB_query_builder 的實例</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">object</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>產生查詢的 WHERE 部分。
+多次呼叫時會使用 ‘OR’ 來分隔（串接多個條件）。</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CI_DB_query_builder::or_where_in">
+<code class="descname">or_where_in</code><span class="sig-paren">(</span><span class="optional">[</span><em>$key = NULL</em><span class="optional">[</span>, <em>$values = NULL</em><span class="optional">[</span>, <em>$escape = NULL</em><span class="optional">]</span><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#CI_DB_query_builder::or_where_in" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>$key</strong> (<em>string</em>) – 要搜尋的欄位</li>
+<li><strong>$values</strong> (<em>array</em>) – 用來搜尋的值</li>
+<li><strong>$escape</strong> (<em>boolean</em>) – 是否要跳脫值及識別字</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">DB_query_builder 的實例</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">object</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>產生一個 WHERE field IN(‘item’, ‘item’) SQL 查詢，
+合適的話以 ‘OR’ 串接。</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CI_DB_query_builder::or_where_not_in">
+<code class="descname">or_where_not_in</code><span class="sig-paren">(</span><span class="optional">[</span><em>$key = NULL</em><span class="optional">[</span>, <em>$values = NULL</em><span class="optional">[</span>, <em>$escape = NULL</em><span class="optional">]</span><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#CI_DB_query_builder::or_where_not_in" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>$key</strong> (<em>string</em>) – 要搜尋的欄位</li>
+<li><strong>$values</strong> (<em>array</em>) – 用來搜尋的值</li>
+<li><strong>$escape</strong> (<em>boolean</em>) – 是否要跳脫識別字</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">DB_query_builder 的實例</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">object</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>產生一個 WHERE field NOT IN(‘item’, ‘item’) SQL 查詢，
+合適的話以 ‘OR’ 串接。</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CI_DB_query_builder::where_in">
+<code class="descname">where_in</code><span class="sig-paren">(</span><span class="optional">[</span><em>$key = NULL</em><span class="optional">[</span>, <em>$values = NULL</em><span class="optional">[</span>, <em>$escape = NULL</em><span class="optional">]</span><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#CI_DB_query_builder::where_in" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>$key</strong> (<em>string</em>) – 要檢查的欄位名稱</li>
+<li><strong>$values</strong> (<em>array</em>) – 目標值的陣列</li>
+<li><strong>$escape</strong> (<em>boolean</em>) – 是否要跳脫識別字</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">DB_query_builder 的實例</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">object</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>產生一個 WHERE field IN(‘item’, ‘item’) SQL 查詢，
+合適的話以 ‘AND’ 串接。</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CI_DB_query_builder::where_not_in">
+<code class="descname">where_not_in</code><span class="sig-paren">(</span><span class="optional">[</span><em>$key = NULL</em><span class="optional">[</span>, <em>$values = NULL</em><span class="optional">[</span>, <em>$escape = NULL</em><span class="optional">]</span><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#CI_DB_query_builder::where_not_in" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>$key</strong> (<em>string</em>) – 要檢查的欄位名稱</li>
+<li><strong>$values</strong> (<em>array</em>) – 目標值的陣列</li>
+<li><strong>$escape</strong> (<em>boolean</em>) – 是否要跳脫識別字</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">DB_query_builder 的實例</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">object</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>產生一個 WHERE field NOT IN(‘item’, ‘item’) SQL 查詢，
+合適的話以 ‘AND’ 串接。</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CI_DB_query_builder::group_start">
+<code class="descname">group_start</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#CI_DB_query_builder::group_start" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">CI_DB_query_builder 的實例（方法串接）</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#CI_DB_query_builder" title="CI_DB_query_builder">CI_DB_query_builder</a></td>
+</tr>
+</tbody>
+</table>
+<p>開始一段群組表達式，使用 AND 作為內部條件。</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CI_DB_query_builder::or_group_start">
+<code class="descname">or_group_start</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#CI_DB_query_builder::or_group_start" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">CI_DB_query_builder 的實例（方法串接）</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#CI_DB_query_builder" title="CI_DB_query_builder">CI_DB_query_builder</a></td>
+</tr>
+</tbody>
+</table>
+<p>開始一段群組表達式，使用 OR 作為內部條件。</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CI_DB_query_builder::not_group_start">
+<code class="descname">not_group_start</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#CI_DB_query_builder::not_group_start" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">CI_DB_query_builder 的實例（方法串接）</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#CI_DB_query_builder" title="CI_DB_query_builder">CI_DB_query_builder</a></td>
+</tr>
+</tbody>
+</table>
+<p>開始一段群組表達式，使用 NOT 作為內部條件。</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CI_DB_query_builder::or_not_group_start">
+<code class="descname">or_not_group_start</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#CI_DB_query_builder::or_not_group_start" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">CI_DB_query_builder 的實例（方法串接）</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#CI_DB_query_builder" title="CI_DB_query_builder">CI_DB_query_builder</a></td>
+</tr>
+</tbody>
+</table>
+<p>開始一段群組表達式，使用 OR NOT 作為內部條件。</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CI_DB_query_builder::group_end">
+<code class="descname">group_end</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#CI_DB_query_builder::group_end" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">DB_query_builder 的實例</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">object</td>
+</tr>
+</tbody>
+</table>
+<p>結束一段群組表達式。</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CI_DB_query_builder::like">
+<code class="descname">like</code><span class="sig-paren">(</span><em>$field</em><span class="optional">[</span>, <em>$match = ''</em><span class="optional">[</span>, <em>$side = 'both'</em><span class="optional">[</span>, <em>$escape = NULL</em><span class="optional">]</span><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#CI_DB_query_builder::like" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>$field</strong> (<em>string</em>) – 欄位名稱</li>
+<li><strong>$match</strong> (<em>string</em>) – 要匹配的文字部分</li>
+<li><strong>$side</strong> (<em>string</em>) – 要在敘述的哪一側加上 ‘%’ 萬用字元</li>
+<li><strong>$escape</strong> (<em>bool</em>) – 是否要跳脫值及識別字</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">CI_DB_query_builder 的實例（方法串接）</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#CI_DB_query_builder" title="CI_DB_query_builder">CI_DB_query_builder</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>在查詢加入 LIKE 子句，多次呼叫時會使用 AND 來分隔（串接多個條件）。</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CI_DB_query_builder::or_like">
+<code class="descname">or_like</code><span class="sig-paren">(</span><em>$field</em><span class="optional">[</span>, <em>$match = ''</em><span class="optional">[</span>, <em>$side = 'both'</em><span class="optional">[</span>, <em>$escape = NULL</em><span class="optional">]</span><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#CI_DB_query_builder::or_like" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>$field</strong> (<em>string</em>) – 欄位名稱</li>
+<li><strong>$match</strong> (<em>string</em>) – 要匹配的文字部分</li>
+<li><strong>$side</strong> (<em>string</em>) – 要在敘述的哪一側加上 ‘%’ 萬用字元</li>
+<li><strong>$escape</strong> (<em>bool</em>) – 是否要跳脫值及識別字</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">CI_DB_query_builder 的實例（方法串接）</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#CI_DB_query_builder" title="CI_DB_query_builder">CI_DB_query_builder</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>在查詢加入 LIKE 子句，多次呼叫時會使用 OR 來分隔（串接多個條件）。</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CI_DB_query_builder::not_like">
+<code class="descname">not_like</code><span class="sig-paren">(</span><em>$field</em><span class="optional">[</span>, <em>$match = ''</em><span class="optional">[</span>, <em>$side = 'both'</em><span class="optional">[</span>, <em>$escape = NULL</em><span class="optional">]</span><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#CI_DB_query_builder::not_like" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>$field</strong> (<em>string</em>) – 欄位名稱</li>
+<li><strong>$match</strong> (<em>string</em>) – 要匹配的文字部分</li>
+<li><strong>$side</strong> (<em>string</em>) – 要在敘述的哪一側加上 ‘%’ 萬用字元</li>
+<li><strong>$escape</strong> (<em>bool</em>) – 是否要跳脫值及識別字</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">CI_DB_query_builder 的實例（方法串接）</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#CI_DB_query_builder" title="CI_DB_query_builder">CI_DB_query_builder</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>在查詢加入 NOT LIKE 子句，多次呼叫時會使用 AND 來分隔（串接多個條件）。</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CI_DB_query_builder::or_not_like">
+<code class="descname">or_not_like</code><span class="sig-paren">(</span><em>$field</em><span class="optional">[</span>, <em>$match = ''</em><span class="optional">[</span>, <em>$side = 'both'</em><span class="optional">[</span>, <em>$escape = NULL</em><span class="optional">]</span><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#CI_DB_query_builder::or_not_like" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>$field</strong> (<em>string</em>) – 欄位名稱</li>
+<li><strong>$match</strong> (<em>string</em>) – 要匹配的文字部分</li>
+<li><strong>$side</strong> (<em>string</em>) – 要在敘述的哪一側加上 ‘%’ 萬用字元</li>
+<li><strong>$escape</strong> (<em>bool</em>) – 是否要跳脫值及識別字</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">CI_DB_query_builder 的實例（方法串接）</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#CI_DB_query_builder" title="CI_DB_query_builder">CI_DB_query_builder</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>在查詢加入 NOT LIKE 子句，多次呼叫時會使用 OR 來分隔（串接多個條件）。</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CI_DB_query_builder::having">
+<code class="descname">having</code><span class="sig-paren">(</span><em>$key</em><span class="optional">[</span>, <em>$value = NULL</em><span class="optional">[</span>, <em>$escape = NULL</em><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#CI_DB_query_builder::having" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>$key</strong> (<em>mixed</em>) – 識別字（字串）或是由欄位 / 值對構成的關聯陣列</li>
+<li><strong>$value</strong> (<em>string</em>) – 如果 $key 是識別字，這是要搜尋的值</li>
+<li><strong>$escape</strong> (<em>string</em>) – 是否要跳脫值及識別字</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">CI_DB_query_builder 的實例（方法串接）</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#CI_DB_query_builder" title="CI_DB_query_builder">CI_DB_query_builder</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>在查詢加入 HAVING 子句，多次呼叫時會使用 AND 來分隔（串接多個條件）。</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CI_DB_query_builder::or_having">
+<code class="descname">or_having</code><span class="sig-paren">(</span><em>$key</em><span class="optional">[</span>, <em>$value = NULL</em><span class="optional">[</span>, <em>$escape = NULL</em><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#CI_DB_query_builder::or_having" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>$key</strong> (<em>mixed</em>) – 識別字（字串）或是由欄位/值對構成的關聯陣列</li>
+<li><strong>$value</strong> (<em>string</em>) – 如果 $key 是識別字，這是要搜尋的值</li>
+<li><strong>$escape</strong> (<em>string</em>) – 是否要跳脫值及識別字</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">CI_DB_query_builder 的實例（方法串接）</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#CI_DB_query_builder" title="CI_DB_query_builder">CI_DB_query_builder</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>在查詢加入 HAVING 子句，多次呼叫時會使用 OR 來分隔（串接多個條件）。</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CI_DB_query_builder::group_by">
+<code class="descname">group_by</code><span class="sig-paren">(</span><em>$by</em><span class="optional">[</span>, <em>$escape = NULL</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#CI_DB_query_builder::group_by" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>$by</strong> (<em>mixed</em>) – 要 group by 的欄位，字串或陣列（多個欄位時）</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">CI_DB_query_builder 的實例（方法串接）</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#CI_DB_query_builder" title="CI_DB_query_builder">CI_DB_query_builder</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>在查詢加入 GROUP BY 子句。</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CI_DB_query_builder::order_by">
+<code class="descname">order_by</code><span class="sig-paren">(</span><em>$orderby</em><span class="optional">[</span>, <em>$direction = ''</em><span class="optional">[</span>, <em>$escape = NULL</em><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#CI_DB_query_builder::order_by" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>$orderby</strong> (<em>string</em>) – 要排序的欄位</li>
+<li><strong>$direction</strong> (<em>string</em>) – 指定的排序方式： ASC, DESC 或 random</li>
+<li><strong>$escape</strong> (<em>bool</em>) – 是否要跳脫值及識別字</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">CI_DB_query_builder 的實例（方法串接）</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#CI_DB_query_builder" title="CI_DB_query_builder">CI_DB_query_builder</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>在查詢加入 ORDER BY 子句。</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CI_DB_query_builder::limit">
+<code class="descname">limit</code><span class="sig-paren">(</span><em>$value</em><span class="optional">[</span>, <em>$offset = 0</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#CI_DB_query_builder::limit" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>$value</strong> (<em>int</em>) – 要限制的結果列數</li>
+<li><strong>$offset</strong> (<em>int</em>) – 要跳過的列數</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">CI_DB_query_builder 的實例（方法串接）</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#CI_DB_query_builder" title="CI_DB_query_builder">CI_DB_query_builder</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>在查詢加入 LIMIT 與 OFFSET 子句。</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CI_DB_query_builder::offset">
+<code class="descname">offset</code><span class="sig-paren">(</span><em>$offset</em><span class="sig-paren">)</span><a class="headerlink" href="#CI_DB_query_builder::offset" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>$offset</strong> (<em>int</em>) – 要跳過的列數</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">CI_DB_query_builder 的實例（方法串接）</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#CI_DB_query_builder" title="CI_DB_query_builder">CI_DB_query_builder</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>在查詢加入 OFFSET 子句。</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CI_DB_query_builder::set">
+<code class="descname">set</code><span class="sig-paren">(</span><em>$key</em><span class="optional">[</span>, <em>$value = ''</em><span class="optional">[</span>, <em>$escape = NULL</em><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#CI_DB_query_builder::set" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>$key</strong> (<em>mixed</em>) – 欄位名稱，或是由欄位 / 值對構成的陣列</li>
+<li><strong>$value</strong> (<em>string</em>) – 如果 $key 是單一欄位，就是欄位要指定的值</li>
+<li><strong>$escape</strong> (<em>bool</em>) – 是否要跳脫值及識別字</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">CI_DB_query_builder 的實例（方法串接）</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#CI_DB_query_builder" title="CI_DB_query_builder">CI_DB_query_builder</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>加入稍後會被傳給 <code class="docutils literal notranslate"><span class="pre">insert()</span></code> , <code class="docutils literal notranslate"><span class="pre">update()</span></code> 或 <code class="docutils literal notranslate"><span class="pre">replace()</span></code> 的欄位 / 值對。</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CI_DB_query_builder::insert">
+<code class="descname">insert</code><span class="sig-paren">(</span><span class="optional">[</span><em>$table = ''</em><span class="optional">[</span>, <em>$set = NULL</em><span class="optional">[</span>, <em>$escape = NULL</em><span class="optional">]</span><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#CI_DB_query_builder::insert" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>$table</strong> (<em>string</em>) – 資料表名稱</li>
+<li><strong>$set</strong> (<em>array</em>) – 欄位 / 值對構成的關聯陣列</li>
+<li><strong>$escape</strong> (<em>bool</em>) – 是否要跳脫值及識別字</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">成功時回傳 TRUE ，失敗時回傳 FALSE</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">bool</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>編譯並執行 INSERT 語句。</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CI_DB_query_builder::insert_batch">
+<code class="descname">insert_batch</code><span class="sig-paren">(</span><em>$table</em><span class="optional">[</span>, <em>$set = NULL</em><span class="optional">[</span>, <em>$escape = NULL</em><span class="optional">[</span>, <em>$batch_size = 100</em><span class="optional">]</span><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#CI_DB_query_builder::insert_batch" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>$table</strong> (<em>string</em>) – 資料表名稱</li>
+<li><strong>$set</strong> (<em>array</em>) – 要插入的資料</li>
+<li><strong>$escape</strong> (<em>bool</em>) – 是否要跳脫值及識別字</li>
+<li><strong>$batch_size</strong> (<em>int</em>) – 一次插入的資料行數</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">成功時回傳插入列數，失敗時回傳 FALSE</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">mixed</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>編譯並執行批次的 <code class="docutils literal notranslate"><span class="pre">INSERT</span></code> 語句。</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">當提供的資料行數超過 <code class="docutils literal notranslate"><span class="pre">$batch_size</span></code> ，數個 <code class="docutils literal notranslate"><span class="pre">INSERT</span></code> 查詢將被執行，每一次嘗試插入最多 <code class="docutils literal notranslate"><span class="pre">$batch_size</span></code> 行。</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="CI_DB_query_builder::set_insert_batch">
+<code class="descname">set_insert_batch</code><span class="sig-paren">(</span><em>$key</em><span class="optional">[</span>, <em>$value = ''</em><span class="optional">[</span>, <em>$escape = NULL</em><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#CI_DB_query_builder::set_insert_batch" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>$key</strong> (<em>mixed</em>) – 欄位名稱或是由欄位 / 值對構成的陣列</li>
+<li><strong>$value</strong> (<em>string</em>) – 如果 $key 是單一欄位，指定欄位要設定的值</li>
+<li><strong>$escape</strong> (<em>bool</em>) – 是否要跳脫值及識別字</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">CI_DB_query_builder 的實例（方法串接）</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#CI_DB_query_builder" title="CI_DB_query_builder">CI_DB_query_builder</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>加入稍後會透過 <code class="docutils literal notranslate"><span class="pre">insert_batch()</span></code> 插入到資料表的欄位 / 值對。</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CI_DB_query_builder::update">
+<code class="descname">update</code><span class="sig-paren">(</span><span class="optional">[</span><em>$table = ''</em><span class="optional">[</span>, <em>$set = NULL</em><span class="optional">[</span>, <em>$where = NULL</em><span class="optional">[</span>, <em>$limit = NULL</em><span class="optional">]</span><span class="optional">]</span><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#CI_DB_query_builder::update" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>$table</strong> (<em>string</em>) – 資料表名稱</li>
+<li><strong>$set</strong> (<em>array</em>) – 由欄位 / 值對構成的關聯陣列</li>
+<li><strong>$where</strong> (<em>string</em>) – WHERE 子句</li>
+<li><strong>$limit</strong> (<em>int</em>) – LIMIT 子句</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">成功時回傳 TRUE ，失敗時回傳 FALSE</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">bool</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>編譯並執行 UPDATE 語句。</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CI_DB_query_builder::update_batch">
+<code class="descname">update_batch</code><span class="sig-paren">(</span><em>$table</em><span class="optional">[</span>, <em>$set = NULL</em><span class="optional">[</span>, <em>$value = NULL</em><span class="optional">[</span>, <em>$batch_size = 100</em><span class="optional">]</span><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#CI_DB_query_builder::update_batch" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>$table</strong> (<em>string</em>) – 資料表名稱</li>
+<li><strong>$set</strong> (<em>array</em>) – 欄位名稱或由欄位 / 值對構成的關聯陣列</li>
+<li><strong>$value</strong> (<em>string</em>) – 如果 $set 是單一欄位，指定欄位要設定的值</li>
+<li><strong>$batch_size</strong> (<em>int</em>) – Count of conditions to group in a single query</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">成功時回傳更新列數，失敗時回傳 FALSE</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">mixed</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>編譯並執行批次 <code class="docutils literal notranslate"><span class="pre">UPDATE</span></code> 語句。</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">When more than <code class="docutils literal notranslate"><span class="pre">$batch_size</span></code> field/value pairs are provided,
+multiple queries will be executed, each handling up to
+<code class="docutils literal notranslate"><span class="pre">$batch_size</span></code> field/value pairs.</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="CI_DB_query_builder::set_update_batch">
+<code class="descname">set_update_batch</code><span class="sig-paren">(</span><em>$key</em><span class="optional">[</span>, <em>$value = ''</em><span class="optional">[</span>, <em>$escape = NULL</em><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#CI_DB_query_builder::set_update_batch" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>$key</strong> (<em>mixed</em>) – 欄位名稱或由欄位 / 值對構成的陣列</li>
+<li><strong>$value</strong> (<em>string</em>) – 如果 $key 是單一欄位，指定欄位要設定的值</li>
+<li><strong>$escape</strong> (<em>bool</em>) – 是否要跳脫值及識別字</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">CI_DB_query_builder 的實例（方法串接）</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#CI_DB_query_builder" title="CI_DB_query_builder">CI_DB_query_builder</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>加入稍後會透過 <code class="docutils literal notranslate"><span class="pre">update_batch()</span></code> 更新到資料表的欄位 / 值對。</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CI_DB_query_builder::replace">
+<code class="descname">replace</code><span class="sig-paren">(</span><span class="optional">[</span><em>$table = ''</em><span class="optional">[</span>, <em>$set = NULL</em><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#CI_DB_query_builder::replace" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>$table</strong> (<em>string</em>) – 資料表名稱</li>
+<li><strong>$set</strong> (<em>array</em>) – 由欄位 / 值對構成的關聯陣列</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">成功時回傳 TRUE ，失敗時回傳 FALSE</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">bool</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>編譯並執行 REPLACE 語句。</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CI_DB_query_builder::delete">
+<code class="descname">delete</code><span class="sig-paren">(</span><span class="optional">[</span><em>$table = ''</em><span class="optional">[</span>, <em>$where = ''</em><span class="optional">[</span>, <em>$limit = NULL</em><span class="optional">[</span>, <em>$reset_data = TRUE</em><span class="optional">]</span><span class="optional">]</span><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#CI_DB_query_builder::delete" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>$table</strong> (<em>mixed</em>) – 要刪除的資料表，字串或陣列（多個資料表）</li>
+<li><strong>$where</strong> (<em>string</em>) – WHERE 子句</li>
+<li><strong>$limit</strong> (<em>int</em>) – LIMIT 子句</li>
+<li><strong>$reset_data</strong> (<em>bool</em>) – TRUE to reset the query “write” clause</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">成功時回傳 CI_DB_query_builder 的實例（方法串接），失敗時回傳 FALSE</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">mixed</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>編譯並執行 DELETE 查詢。</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CI_DB_query_builder::truncate">
+<code class="descname">truncate</code><span class="sig-paren">(</span><span class="optional">[</span><em>$table = ''</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#CI_DB_query_builder::truncate" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>$table</strong> (<em>string</em>) – 資料表名稱</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">成功時回傳 TRUE ，失敗時回傳 FALSE</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">bool</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>在資料表執行 TRUNCATE 語句。</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">如果資料庫平台不支援 TRUNCATE，會使用 DELETE 語句來替代。</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="CI_DB_query_builder::empty_table">
+<code class="descname">empty_table</code><span class="sig-paren">(</span><span class="optional">[</span><em>$table = ''</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#CI_DB_query_builder::empty_table" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>$table</strong> (<em>string</em>) – 資料表名稱</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">成功時回傳 TRUE ，失敗時回傳 FALSE</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">bool</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>透過 DELETE 語句將資料表中所有記錄刪除。</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CI_DB_query_builder::get_compiled_select">
+<code class="descname">get_compiled_select</code><span class="sig-paren">(</span><span class="optional">[</span><em>$table = ''</em><span class="optional">[</span>, <em>$reset = TRUE</em><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#CI_DB_query_builder::get_compiled_select" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>$table</strong> (<em>string</em>) – 資料表名稱</li>
+<li><strong>$reset</strong> (<em>bool</em>) – 是否要重置當前查詢生成器的值</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">編譯好的 SQL 語句字串</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">string</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>編譯 SELECT 語句並作為字串回傳。</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CI_DB_query_builder::get_compiled_insert">
+<code class="descname">get_compiled_insert</code><span class="sig-paren">(</span><span class="optional">[</span><em>$table = ''</em><span class="optional">[</span>, <em>$reset = TRUE</em><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#CI_DB_query_builder::get_compiled_insert" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>$table</strong> (<em>string</em>) – 資料表名稱</li>
+<li><strong>$reset</strong> (<em>bool</em>) – 是否要重置當前查詢生成器的值</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">編譯好的 SQL 語句字串</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">string</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>編譯 INSERT 語句並作為字串回傳。</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CI_DB_query_builder::get_compiled_update">
+<code class="descname">get_compiled_update</code><span class="sig-paren">(</span><span class="optional">[</span><em>$table = ''</em><span class="optional">[</span>, <em>$reset = TRUE</em><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#CI_DB_query_builder::get_compiled_update" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>$table</strong> (<em>string</em>) – 資料表名稱</li>
+<li><strong>$reset</strong> (<em>bool</em>) – 是否要重置當前查詢生成器的值</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">編譯好的 SQL 語句字串</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">string</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>編譯 UPDATE 語句並作為字串回傳。</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CI_DB_query_builder::get_compiled_delete">
+<code class="descname">get_compiled_delete</code><span class="sig-paren">(</span><span class="optional">[</span><em>$table = ''</em><span class="optional">[</span>, <em>$reset = TRUE</em><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#CI_DB_query_builder::get_compiled_delete" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>$table</strong> (<em>string</em>) – 資料表名稱</li>
+<li><strong>$reset</strong> (<em>bool</em>) – 是否要重置當前查詢生成器的值</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">編譯好的 SQL 語句字串</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">string</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>編譯 DELETE 語句並作為字串回傳。</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="transactions.html" class="btn btn-neutral float-right" title="Transactions">下一頁 <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="helpers.html" class="btn btn-neutral" title="查詢補助函式"><span class="fa fa-arrow-circle-left"></span> 上一頁</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2014 - 2017, British Columbia Institute of Technology.
+      最後編輯時間 Nov 19, 2020.
+    </p>
+  </div>
+
+  
+    <p>由 <a href="https://readthedocs.org">Read the Docs</a> 提供 <a href="http://sphinx-doc.org/">Sphinx</a> 並使用 <a href="https://github.com/snide/sphinx_rtd_theme">sphinx_rtd_theme</a> 主題</p>
+    <p><a href="https://github.com/CodeIgniter-TW/CodeIgniter-UserGuide" target="_blank">Github 繁體中文翻譯</a></p>
+  
+
+</footer>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-5766319-11', 'auto');
+  ga('send', 'pageview');
+
+</script>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'3.1.6',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  false
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="../_static/language_data.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

@@ -8,17 +8,23 @@ class Download extends BaseController
 {
     public function index()
     {
+
+        $gitDatas = $this->gitter->fillReleaseInfo([]);
+
+
         // Get the latest framework releases
         try {
-            $releases = $this->github->getReleases();
-
             $data = [
-                'v3name' => $releases['framework3'][0]->tag,
-                'v4name' => $releases['framework4'][0]->tag,
-                'v3link' => $releases['framework3'][0]->download_url,
-                'v4link' => $releases['framework4'][0]->download_url,
+                'v3name' => $gitDatas['v3name'],
+                'v4name' => $gitDatas['v4name'],
+                'v3link' => empty($gitDatas['v3name'])
+                ? 'https://github.com/bcit-ci/CodeIgniter/releases/'
+                : 'https://github.com/bcit-ci/CodeIgniter/archive/' . $gitDatas['v3name'] . '.zip',
+                'v4link' => empty($gitDatas['v4name'])
+                ? 'https://github.com/codeigniter4/framework/releases/'
+                : 'https://github.com/codeigniter4/framework/archive/' . $gitDatas['v4name'] . '.zip',
             ];
-        } catch (ExceptionInterface $e) {
+        } catch (\Exception $e) {
             $data = [
                 'v3name' => '<em>unknown</em>',
                 'v4name' => '<em>unknown</em>',

@@ -1,0 +1,773 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>日曆類別 &mdash; CodeIgniter 3.1.6 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/ci-icon.ico"/>
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="CodeIgniter 3.1.6 documentation" href="../index.html"/>
+        <link rel="up" title="Libraries" href="index.html"/>
+        <link rel="next" title="購物車類別" href="cart.html"/>
+        <link rel="prev" title="快取驅動類別" href="caching.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        
+          <a href="http://codeigniter.tw/" class="fa fa-home"> CodeIgniter</a>
+        
+        
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="搜尋使用手冊" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+          
+          
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../general/welcome.html">歡迎加入 CodeIgniter</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../installation/index.html">安裝指引</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../installation/downloads.html">下載 CodeIgniter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation/index.html">安裝指引</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation/upgrading.html">從先前的版本來更新</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation/troubleshooting.html">故障排除</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../overview/index.html">CodeIgniter 概觀</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../overview/getting_started.html">開始 CodeIgniter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/at_a_glance.html">CodeIgniter 一目了然</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/features.html">CodeIgniter 特色</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/appflow.html">應用程式溝通流程</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/mvc.html">Model-View-Controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/goals.html">設計以及架構目標</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/index.html">教學</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial/static_pages.html">靜態頁面</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial/news_section.html">新聞模組介紹</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial/create_news_items.html">動態新增新聞</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial/conclusion.html">結論</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../general/index.html">一般主題</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../general/urls.html">CodeIgniter URLs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/controllers.html">控制器 Controllers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/reserved_names.html">保留名稱</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/views.html">視圖 Views</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/models.html">什麼是 Model？</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/models.html#id2">剖析 Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/models.html#id3">載入 Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/models.html#models">自動載入 Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/models.html#id4">連接資料庫</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/helpers.html">Helpers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/libraries.html">使用 CodeIgniter 函式庫</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/creating_libraries.html">自建函式庫</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/drivers.html">使用 CodeIgniter 驅動器</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/creating_drivers.html">自建驅動器</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/core_classes.html">新增系統核心類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/ancillary_classes.html">新增配套類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/hooks.html">Hooks－擴充核心</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/autoloader.html">自動載入資源</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/common_functions.html">通用函數</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/compatibility_functions.html">相容性函數</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/routing.html">URI 路由</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/errors.html">錯誤處理</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/caching.html">Caching</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/profiling.html">應用程式效能分析</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/cli.html">透過 CLI 執行 CodeIgniter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/managing_apps.html">管理你的應用程式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/environments.html">處理多環境變數</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/alternative_php.html">替代 View 檔案的 PHP 的語法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/security.html">安全性</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/styleguide.html">PHP Style Guide</a></li>
+</ul>
+</li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Libraries</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="benchmark.html">效能測試類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="caching.html">快取驅動類別</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">日曆類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cart.html">購物車類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="config.html">設定類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="email.html">電子郵件類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="encrypt.html">Encrypt Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="encryption.html">Encryption Library</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_uploading.html">檔案上傳類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="form_validation.html">Form Validation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ftp.html">FTP Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="image_lib.html">Image Manipulation Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="input.html">Input Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="javascript.html">Javascript Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="language.html">Language Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="loader.html">Loader Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="migration.html">Migrations Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="output.html">Output Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pagination.html">Pagination Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parser.html">Template Parser Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security.html">Security Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sessions.html">Session Library</a></li>
+<li class="toctree-l2"><a class="reference internal" href="table.html">HTML Table 類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="trackback.html">Trackback 類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="typography.html">Typography 類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="unit_testing.html">單元測試類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="uri.html">URI 類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user_agent.html">User Agent 類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="xmlrpc.html">XML-RPC 及 XML-RPC Server 類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="zip.html">Zip 類別</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../database/index.html">資料庫參考</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../database/examples.html">快速入門：範例程式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../database/configuration.html">資料庫設定</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../database/connecting.html">連接資料庫</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../database/queries.html">執行查詢</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../database/results.html">產生查詢結果</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../database/helpers.html">查詢補助函數</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../database/query_builder.html">查詢生成器類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../database/transactions.html">交易</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../database/metadata.html">取得資料表資訊</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../database/call_function.html">自訂函數</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../database/caching.html">查詢快取</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../database/forge.html">使用 Database Forge 管理資料庫</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../database/utilities.html">Database Utilities 類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../database/db_driver_reference.html">Database Driver 參考</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../helpers/index.html">輔助函式</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../helpers/array_helper.html">Array 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../helpers/captcha_helper.html">CAPTCHA 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../helpers/cookie_helper.html">Cookie 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../helpers/date_helper.html">Date 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../helpers/directory_helper.html">Directory 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../helpers/download_helper.html">Download 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../helpers/email_helper.html">Email 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../helpers/file_helper.html">File 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../helpers/form_helper.html">Form 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../helpers/html_helper.html">HTML 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../helpers/inflector_helper.html">Inflector 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../helpers/language_helper.html">Language 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../helpers/number_helper.html">Number 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../helpers/path_helper.html">Path 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../helpers/security_helper.html">Security 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../helpers/smiley_helper.html">Smiley 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../helpers/string_helper.html">String 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../helpers/text_helper.html">Text 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../helpers/typography_helper.html">Typography 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../helpers/url_helper.html">URL 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../helpers/xml_helper.html">XML 輔助函式</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">貢獻 CodeIgniter</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../documentation/index.html">Writing CodeIgniter Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../DCO.html">Developer’s Certificate of Origin 1.1</a></li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">CodeIgniter</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">使用手冊</a> &raquo;</li>
+      
+          <li><a href="index.html">Libraries</a> &raquo;</li>
+      
+    <li>日曆類別</li>
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document">
+            
+  <div class="section" id="id1">
+<h1>日曆類別<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<p>日曆類別能夠讓你創建日曆。你也可以使用模版將日曆格式化，讓你完全地掌握日曆的設計。
+除此之外，你也可以傳送資料到日曆單元格 (calendar cells) 中。</p>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#id2" id="id9">使用日曆類別</a><ul>
+<li><a class="reference internal" href="#id3" id="id10">初始化日曆</a></li>
+<li><a class="reference internal" href="#id4" id="id11">顯示日曆</a></li>
+<li><a class="reference internal" href="#calendar-cells" id="id12">傳送資料至日曆單元格 (calendar cells)</a></li>
+<li><a class="reference internal" href="#id5" id="id13">設定顯示偏好</a></li>
+<li><a class="reference internal" href="#id6" id="id14">顯示上個月/下個月的連結</a></li>
+<li><a class="reference internal" href="#id7" id="id15">建立日曆模版</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id8" id="id16">類別參考</a></li>
+</ul>
+</div>
+<div class="custom-index container"></div><div class="section" id="id2">
+<h2><a class="toc-backref" href="#id9">使用日曆類別</a><a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id3">
+<h3><a class="toc-backref" href="#id10">初始化日曆</a><a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<p>如同 CodeIgniter 裡的其他類別，在控制器中初始化日曆類別，是使用 “$this-&gt;load-&gt;library” 功能:</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">load</span><span class="o">-&gt;</span><span class="na">library</span><span class="p">(</span><span class="s1">&#39;calendar&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>當載入之後，日曆物件可以這樣使用:</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">calendar</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id4">
+<h3><a class="toc-backref" href="#id11">顯示日曆</a><a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<p>這是一個非常簡單的範例，告訴你如何顯示日曆:</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">load</span><span class="o">-&gt;</span><span class="na">library</span><span class="p">(</span><span class="s1">&#39;calendar&#39;</span><span class="p">);</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">calendar</span><span class="o">-&gt;</span><span class="na">generate</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>以上的程式碼將會根據你的伺服器時間，建立一個目前年月的日曆。
+若要產生一個特定年月的日曆，你需要透過以下方式:</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">load</span><span class="o">-&gt;</span><span class="na">library</span><span class="p">(</span><span class="s1">&#39;calendar&#39;</span><span class="p">);</span>
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">calendar</span><span class="o">-&gt;</span><span class="na">generate</span><span class="p">(</span><span class="mi">2006</span><span class="p">,</span> <span class="mi">6</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>上面的程式碼會建立 2006 年 6 月的日曆。第一個參數代表年份，第二個則代表月份。</p>
+</div>
+<div class="section" id="calendar-cells">
+<h3><a class="toc-backref" href="#id12">傳送資料至日曆單元格 (calendar cells)</a><a class="headerlink" href="#calendar-cells" title="Permalink to this headline">¶</a></h3>
+<p>增加資料到日曆單元格中需要建立一個關聯陣列，在此陣列中對應你想要設定的天數，
+包含傳入的值。將此關聯陣列傳送到日曆產生函數的第三個參數。請參考以下範例:</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">load</span><span class="o">-&gt;</span><span class="na">library</span><span class="p">(</span><span class="s1">&#39;calendar&#39;</span><span class="p">);</span>
+
+<span class="nv">$data</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+        <span class="mi">3</span>  <span class="o">=&gt;</span> <span class="s1">&#39;http://example.com/news/article/2006/06/03/&#39;</span><span class="p">,</span>
+        <span class="mi">7</span>  <span class="o">=&gt;</span> <span class="s1">&#39;http://example.com/news/article/2006/06/07/&#39;</span><span class="p">,</span>
+        <span class="mi">13</span> <span class="o">=&gt;</span> <span class="s1">&#39;http://example.com/news/article/2006/06/13/&#39;</span><span class="p">,</span>
+        <span class="mi">26</span> <span class="o">=&gt;</span> <span class="s1">&#39;http://example.com/news/article/2006/06/26/&#39;</span>
+<span class="p">);</span>
+
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">calendar</span><span class="o">-&gt;</span><span class="na">generate</span><span class="p">(</span><span class="mi">2006</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="nv">$data</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>使用以上的範例，日期 3，7，13 以及 26 將會連結到你提供的網址。</p>
+</div>
+<div class="section" id="id5">
+<h3><a class="toc-backref" href="#id13">設定顯示偏好</a><a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<p>有七種偏好設定可以讓你設計日曆。偏好設定是透過傳入關聯陣列的第二個參數。請參考以下範例:</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="nv">$prefs</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;start_day&#39;</span>    <span class="o">=&gt;</span> <span class="s1">&#39;saturday&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;month_type&#39;</span>   <span class="o">=&gt;</span> <span class="s1">&#39;long&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;day_type&#39;</span>     <span class="o">=&gt;</span> <span class="s1">&#39;short&#39;</span>
+<span class="p">);</span>
+
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">load</span><span class="o">-&gt;</span><span class="na">library</span><span class="p">(</span><span class="s1">&#39;calendar&#39;</span><span class="p">,</span> <span class="nv">$prefs</span><span class="p">);</span>
+
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">calendar</span><span class="o">-&gt;</span><span class="na">generate</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>以上程式碼會將日曆設定為從週六開始，使用 “long” 月份標題，以及 “short” 日期名稱。
+更多資訊請參考以下偏好設定。</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="15%" />
+<col width="11%" />
+<col width="29%" />
+<col width="45%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">偏好名稱</th>
+<th class="head">預設值</th>
+<th class="head">選項</th>
+<th class="head">描述</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><strong>template</strong></td>
+<td>None</td>
+<td>None</td>
+<td>字串或陣列包含日曆模版。請參考以下模版章節。</td>
+</tr>
+<tr class="row-odd"><td><strong>local_time</strong></td>
+<td>time()</td>
+<td>None</td>
+<td>對應目前的 Unix 時間戳記。</td>
+</tr>
+<tr class="row-even"><td><strong>start_day</strong></td>
+<td>sunday</td>
+<td>Any week day (sunday, monday, tuesday, etc.)</td>
+<td>設定每周開始的第一天。</td>
+</tr>
+<tr class="row-odd"><td><strong>month_type</strong></td>
+<td>long</td>
+<td>long, short</td>
+<td><dl class="first last docutils">
+<dt>確定要用什麼月份版本在你的標題。</dt>
+<dd>long = January, short = Jan.</dd>
+</dl>
+</td>
+</tr>
+<tr class="row-even"><td><strong>day_type</strong></td>
+<td>abr</td>
+<td>long, short, abr</td>
+<td><dl class="first last docutils">
+<dt>確定要用什麼星期版本在你的標題欄位。</dt>
+<dd>long = Sunday, short = Sun, abr = Su.</dd>
+</dl>
+</td>
+</tr>
+<tr class="row-odd"><td><strong>show_next_prev</strong></td>
+<td>FALSE</td>
+<td>TRUE/FALSE (boolean)</td>
+<td>顯示上個月/下個月的連結。更多資訊請參考以下章節。</td>
+</tr>
+<tr class="row-even"><td><strong>next_prev_url</strong></td>
+<td>controller/method</td>
+<td>A URL</td>
+<td>設定上個月/下個月的連結基本位置。</td>
+</tr>
+<tr class="row-odd"><td><strong>show_other_days</strong></td>
+<td>FALSE</td>
+<td>TRUE/FALSE (boolean)</td>
+<td>在同一個月份中，顯示其他月份的月初第一週或月底最後一週。</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="id6">
+<h3><a class="toc-backref" href="#id14">顯示上個月/下個月的連結</a><a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
+<p>要讓你的日曆能有上/下個月的連結，你需要設定如下的例子:</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="nv">$prefs</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;show_next_prev&#39;</span>  <span class="o">=&gt;</span> <span class="k">TRUE</span><span class="p">,</span>
+        <span class="s1">&#39;next_prev_url&#39;</span>   <span class="o">=&gt;</span> <span class="s1">&#39;http://example.com/index.php/calendar/show/&#39;</span>
+<span class="p">);</span>
+
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">load</span><span class="o">-&gt;</span><span class="na">library</span><span class="p">(</span><span class="s1">&#39;calendar&#39;</span><span class="p">,</span> <span class="nv">$prefs</span><span class="p">);</span>
+
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">calendar</span><span class="o">-&gt;</span><span class="na">generate</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">uri</span><span class="o">-&gt;</span><span class="na">segment</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">uri</span><span class="o">-&gt;</span><span class="na">segment</span><span class="p">(</span><span class="mi">4</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>從上面的例子中，你將會注意到這幾點:</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="o">-</span>  <span class="nx">你必須設定</span> <span class="s2">&quot;show_next_prev&quot;</span> <span class="nx">為</span> <span class="k">TRUE</span><span class="nx">。</span>
+<span class="o">-</span>  <span class="nx">你必須在偏好</span> <span class="s2">&quot;next_prev_url&quot;</span> <span class="nx">中提供</span> <span class="nx">URL，若你沒有這麼做，將會設定成目前的控制器</span><span class="o">/</span><span class="nx">方法</span> <span class="p">(</span><span class="nx">controller</span><span class="o">/</span><span class="nx">method</span><span class="p">)</span><span class="nx">。</span>
+<span class="o">-</span>  <span class="nx">你必須透過</span> <span class="nx">URI</span> <span class="nx">字段提供日曆設定含式</span> <span class="s2">&quot;年份&quot;</span> <span class="nx">以及</span> <span class="s2">&quot;月份&quot;</span><span class="nx">。</span><span class="p">(</span><span class="nx">註記：日曆類別會根據你提供的</span> <span class="nx">URL</span> <span class="nx">自動地加入年份及月份。</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id7">
+<h3><a class="toc-backref" href="#id15">建立日曆模版</a><a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
+<p>透過建立日曆模版，你可以 100% 掌控日曆的設計。使用字串的方法，每一個日曆中的組件都將被放置在一對偽變數中，
+如以下範例:</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="nv">$prefs</span><span class="p">[</span><span class="s1">&#39;template&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;</span>
+
+<span class="s1">        {table_open}&lt;table border=&quot;0&quot; cellpadding=&quot;0&quot; cellspacing=&quot;0&quot;&gt;{/table_open}</span>
+
+<span class="s1">        {heading_row_start}&lt;tr&gt;{/heading_row_start}</span>
+
+<span class="s1">        {heading_previous_cell}&lt;th&gt;&lt;a href=&quot;{previous_url}&quot;&gt;&amp;lt;&amp;lt;&lt;/a&gt;&lt;/th&gt;{/heading_previous_cell}</span>
+<span class="s1">        {heading_title_cell}&lt;th colspan=&quot;{colspan}&quot;&gt;{heading}&lt;/th&gt;{/heading_title_cell}</span>
+<span class="s1">        {heading_next_cell}&lt;th&gt;&lt;a href=&quot;{next_url}&quot;&gt;&amp;gt;&amp;gt;&lt;/a&gt;&lt;/th&gt;{/heading_next_cell}</span>
+
+<span class="s1">        {heading_row_end}&lt;/tr&gt;{/heading_row_end}</span>
+
+<span class="s1">        {week_row_start}&lt;tr&gt;{/week_row_start}</span>
+<span class="s1">        {week_day_cell}&lt;td&gt;{week_day}&lt;/td&gt;{/week_day_cell}</span>
+<span class="s1">        {week_row_end}&lt;/tr&gt;{/week_row_end}</span>
+
+<span class="s1">        {cal_row_start}&lt;tr&gt;{/cal_row_start}</span>
+<span class="s1">        {cal_cell_start}&lt;td&gt;{/cal_cell_start}</span>
+<span class="s1">        {cal_cell_start_today}&lt;td&gt;{/cal_cell_start_today}</span>
+<span class="s1">        {cal_cell_start_other}&lt;td class=&quot;other-month&quot;&gt;{/cal_cell_start_other}</span>
+
+<span class="s1">        {cal_cell_content}&lt;a href=&quot;{content}&quot;&gt;{day}&lt;/a&gt;{/cal_cell_content}</span>
+<span class="s1">        {cal_cell_content_today}&lt;div class=&quot;highlight&quot;&gt;&lt;a href=&quot;{content}&quot;&gt;{day}&lt;/a&gt;&lt;/div&gt;{/cal_cell_content_today}</span>
+
+<span class="s1">        {cal_cell_no_content}{day}{/cal_cell_no_content}</span>
+<span class="s1">        {cal_cell_no_content_today}&lt;div class=&quot;highlight&quot;&gt;{day}&lt;/div&gt;{/cal_cell_no_content_today}</span>
+
+<span class="s1">        {cal_cell_blank}&amp;nbsp;{/cal_cell_blank}</span>
+
+<span class="s1">        {cal_cell_other}{day}{/cal_cel_other}</span>
+
+<span class="s1">        {cal_cell_end}&lt;/td&gt;{/cal_cell_end}</span>
+<span class="s1">        {cal_cell_end_today}&lt;/td&gt;{/cal_cell_end_today}</span>
+<span class="s1">        {cal_cell_end_other}&lt;/td&gt;{/cal_cell_end_other}</span>
+<span class="s1">        {cal_row_end}&lt;/tr&gt;{/cal_row_end}</span>
+
+<span class="s1">        {table_close}&lt;/table&gt;{/table_close}</span>
+<span class="s1">&#39;</span><span class="p">;</span>
+
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">load</span><span class="o">-&gt;</span><span class="na">library</span><span class="p">(</span><span class="s1">&#39;calendar&#39;</span><span class="p">,</span> <span class="nv">$prefs</span><span class="p">);</span>
+
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">calendar</span><span class="o">-&gt;</span><span class="na">generate</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>使用陣列的方式，你將會傳送 <code class="docutils literal notranslate"><span class="pre">key</span> <span class="pre">=&gt;</span> <span class="pre">value</span></code> 的配對。你可以依照你的意願，傳送更多或更少的值。
+省略鍵 (omitted key) 的時候，將會使用預設值取代。</p>
+<p>範例:</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="nv">$prefs</span><span class="p">[</span><span class="s1">&#39;template&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">&#39;table_open&#39;</span>           <span class="o">=&gt;</span> <span class="s1">&#39;&lt;table class=&quot;calendar&quot;&gt;&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;cal_cell_start&#39;</span>       <span class="o">=&gt;</span> <span class="s1">&#39;&lt;td class=&quot;day&quot;&gt;&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;cal_cell_start_today&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;&lt;td class=&quot;today&quot;&gt;&#39;</span>
+<span class="p">);</span>
+
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">load</span><span class="o">-&gt;</span><span class="na">library</span><span class="p">(</span><span class="s1">&#39;calendar&#39;</span><span class="p">,</span> <span class="nv">$prefs</span><span class="p">);</span>
+
+<span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">calendar</span><span class="o">-&gt;</span><span class="na">generate</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="id8">
+<h2><a class="toc-backref" href="#id16">類別參考</a><a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="CI_Calendar">
+<em class="property">class </em><code class="descname">CI_Calendar</code><a class="headerlink" href="#CI_Calendar" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="CI_Calendar::initialize">
+<code class="descname">initialize</code><span class="sig-paren">(</span><span class="optional">[</span><em>$config = array()</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#CI_Calendar::initialize" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>$config</strong> (<em>array</em>) – 設定的參數</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">CI_Calendar instance (方法串接)</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#CI_Calendar" title="CI_Calendar">CI_Calendar</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>初始化日曆的偏好設定。可接受輸入的關聯陣列，包含顯示偏好。</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CI_Calendar::generate">
+<code class="descname">generate</code><span class="sig-paren">(</span><span class="optional">[</span><em>$year = ''</em><span class="optional">[</span>, <em>$month = ''</em><span class="optional">[</span>, <em>$data = array()</em><span class="optional">]</span><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#CI_Calendar::generate" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>$year</strong> (<em>int</em>) – 年</li>
+<li><strong>$month</strong> (<em>int</em>) – 月</li>
+<li><strong>$data</strong> (<em>array</em>) – 要顯示在日曆的單元格的資料</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">HTML 格式的日曆</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">string</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>產生日曆。</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CI_Calendar::get_month_name">
+<code class="descname">get_month_name</code><span class="sig-paren">(</span><em>$month</em><span class="sig-paren">)</span><a class="headerlink" href="#CI_Calendar::get_month_name" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>$month</strong> (<em>int</em>) – 月</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">月份名稱</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">string</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>根據提供的月份數字，產生一個月份名稱。</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CI_Calendar::get_day_names">
+<code class="descname">get_day_names</code><span class="sig-paren">(</span><em>$day_type = ''</em><span class="sig-paren">)</span><a class="headerlink" href="#CI_Calendar::get_day_names" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>$day_type</strong> (<em>string</em>) – ‘long’, ‘short’, 或 ‘abr’</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">陣列的日期名稱</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">array</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>根據提供的日期樣式，回傳一個日期名稱的陣列(如：週日(Sunday)、週一(Monday)…等等)。
+選項：long, short, abr. 若沒有提供 <code class="docutils literal notranslate"><span class="pre">$day_type</span></code> 或是提供的樣式無效，
+則會回傳 “abbreviated” 樣式。</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CI_Calendar::adjust_date">
+<code class="descname">adjust_date</code><span class="sig-paren">(</span><em>$month</em>, <em>$year</em><span class="sig-paren">)</span><a class="headerlink" href="#CI_Calendar::adjust_date" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>$month</strong> (<em>int</em>) – Month</li>
+<li><strong>$year</strong> (<em>int</em>) – Year</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">An associative array containing month and year</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">array</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>此方法確保你會得到有效的年份/月份。舉例來說，若你提交 13 個月，則年份會往上加，而月份會回到一月:</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="nb">print_r</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">calendar</span><span class="o">-&gt;</span><span class="na">adjust_date</span><span class="p">(</span><span class="mi">13</span><span class="p">,</span> <span class="mi">2014</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>outputs:</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="k">Array</span>
+<span class="p">(</span>
+        <span class="p">[</span><span class="nx">month</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="s1">&#39;01&#39;</span>
+        <span class="p">[</span><span class="nx">year</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="s1">&#39;2015&#39;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="CI_Calendar::get_total_days">
+<code class="descname">get_total_days</code><span class="sig-paren">(</span><em>$month</em>, <em>$year</em><span class="sig-paren">)</span><a class="headerlink" href="#CI_Calendar::get_total_days" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>$month</strong> (<em>int</em>) – Month</li>
+<li><strong>$year</strong> (<em>int</em>) – Year</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Count of days in the specified month</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">int</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>取得月份總天數:</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">calendar</span><span class="o">-&gt;</span><span class="na">get_total_days</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2012</span><span class="p">);</span>
+<span class="c1">// 29</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="CI_Calendar::default_template">
+<code class="descname">default_template</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#CI_Calendar::default_template" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">An array of template values</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">array</td>
+</tr>
+</tbody>
+</table>
+<p>設定預設模版。當你沒有建立你自己的模版，則使用此方法。</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CI_Calendar::parse_template">
+<code class="descname">parse_template</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#CI_Calendar::parse_template" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">CI_Calendar instance (method chaining)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#CI_Calendar" title="CI_Calendar">CI_Calendar</a></td>
+</tr>
+</tbody>
+</table>
+<p>取得模版內的數據 <code class="docutils literal notranslate"><span class="pre">pseudo-variables</span></code>，用在顯示日曆。
+Harvests the data within the template <code class="docutils literal notranslate"><span class="pre">{pseudo-variables}</span></code> used to
+display the calendar.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="cart.html" class="btn btn-neutral float-right" title="購物車類別">下一頁 <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="caching.html" class="btn btn-neutral" title="快取驅動類別"><span class="fa fa-arrow-circle-left"></span> 上一頁</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2014 - 2017, British Columbia Institute of Technology.
+      最後編輯時間 Nov 19, 2020.
+    </p>
+  </div>
+
+  
+    <p>由 <a href="https://readthedocs.org">Read the Docs</a> 提供 <a href="http://sphinx-doc.org/">Sphinx</a> 並使用 <a href="https://github.com/snide/sphinx_rtd_theme">sphinx_rtd_theme</a> 主題</p>
+    <p><a href="https://github.com/CodeIgniter-TW/CodeIgniter-UserGuide" target="_blank">Github 繁體中文翻譯</a></p>
+  
+
+</footer>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-5766319-11', 'auto');
+  ga('send', 'pageview');
+
+</script>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'3.1.6',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  false
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="../_static/language_data.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

@@ -1,0 +1,685 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>單元測試類別 &mdash; CodeIgniter 3.1.6 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/ci-icon.ico"/>
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="CodeIgniter 3.1.6 documentation" href="../index.html"/>
+        <link rel="up" title="Libraries" href="index.html"/>
+        <link rel="next" title="URI 類別" href="uri.html"/>
+        <link rel="prev" title="Typography 類別" href="typography.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        
+          <a href="http://codeigniter.tw/" class="fa fa-home"> CodeIgniter</a>
+        
+        
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="搜尋使用手冊" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+          
+          
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../general/welcome.html">歡迎加入 CodeIgniter</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../installation/index.html">安裝指引</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../installation/downloads.html">下載 CodeIgniter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation/index.html">安裝指引</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation/upgrading.html">從先前的版本來更新</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation/troubleshooting.html">故障排除</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../overview/index.html">CodeIgniter 概觀</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../overview/getting_started.html">開始 CodeIgniter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/at_a_glance.html">CodeIgniter 一目了然</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/features.html">CodeIgniter 特色</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/appflow.html">應用程式溝通流程</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/mvc.html">Model-View-Controller</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../overview/goals.html">設計以及架構目標</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/index.html">教學</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial/static_pages.html">靜態頁面</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial/news_section.html">新聞模組介紹</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial/create_news_items.html">動態新增新聞</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial/conclusion.html">結論</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../general/index.html">一般主題</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../general/urls.html">CodeIgniter URLs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/controllers.html">控制器 Controllers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/reserved_names.html">保留名稱</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/views.html">視圖 Views</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/models.html">什麼是 Model？</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/models.html#id2">剖析 Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/models.html#id3">載入 Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/models.html#models">自動載入 Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/models.html#id4">連接資料庫</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/helpers.html">Helpers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/libraries.html">使用 CodeIgniter 函式庫</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/creating_libraries.html">自建函式庫</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/drivers.html">使用 CodeIgniter 驅動器</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/creating_drivers.html">自建驅動器</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/core_classes.html">新增系統核心類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/ancillary_classes.html">新增配套類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/hooks.html">Hooks－擴充核心</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/autoloader.html">自動載入資源</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/common_functions.html">通用函數</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/compatibility_functions.html">相容性函數</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/routing.html">URI 路由</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/errors.html">錯誤處理</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/caching.html">Caching</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/profiling.html">應用程式效能分析</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/cli.html">透過 CLI 執行 CodeIgniter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/managing_apps.html">管理你的應用程式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/environments.html">處理多環境變數</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/alternative_php.html">替代 View 檔案的 PHP 的語法</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/security.html">安全性</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/styleguide.html">PHP Style Guide</a></li>
+</ul>
+</li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Libraries</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="benchmark.html">效能測試類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="caching.html">快取驅動類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="calendar.html">日曆類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cart.html">購物車類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="config.html">設定類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="email.html">電子郵件類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="encrypt.html">Encrypt Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="encryption.html">Encryption Library</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file_uploading.html">檔案上傳類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="form_validation.html">Form Validation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ftp.html">FTP Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="image_lib.html">Image Manipulation Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="input.html">Input Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="javascript.html">Javascript Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="language.html">Language Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="loader.html">Loader Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="migration.html">Migrations Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="output.html">Output Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pagination.html">Pagination Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parser.html">Template Parser Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security.html">Security Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sessions.html">Session Library</a></li>
+<li class="toctree-l2"><a class="reference internal" href="table.html">HTML Table 類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="trackback.html">Trackback 類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="typography.html">Typography 類別</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">單元測試類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="uri.html">URI 類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user_agent.html">User Agent 類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="xmlrpc.html">XML-RPC 及 XML-RPC Server 類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="zip.html">Zip 類別</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../database/index.html">資料庫參考</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../database/examples.html">快速入門：範例程式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../database/configuration.html">資料庫設定</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../database/connecting.html">連接資料庫</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../database/queries.html">執行查詢</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../database/results.html">產生查詢結果</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../database/helpers.html">查詢補助函數</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../database/query_builder.html">查詢生成器類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../database/transactions.html">交易</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../database/metadata.html">取得資料表資訊</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../database/call_function.html">自訂函數</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../database/caching.html">查詢快取</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../database/forge.html">使用 Database Forge 管理資料庫</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../database/utilities.html">Database Utilities 類別</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../database/db_driver_reference.html">Database Driver 參考</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../helpers/index.html">輔助函式</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../helpers/array_helper.html">Array 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../helpers/captcha_helper.html">CAPTCHA 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../helpers/cookie_helper.html">Cookie 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../helpers/date_helper.html">Date 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../helpers/directory_helper.html">Directory 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../helpers/download_helper.html">Download 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../helpers/email_helper.html">Email 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../helpers/file_helper.html">File 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../helpers/form_helper.html">Form 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../helpers/html_helper.html">HTML 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../helpers/inflector_helper.html">Inflector 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../helpers/language_helper.html">Language 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../helpers/number_helper.html">Number 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../helpers/path_helper.html">Path 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../helpers/security_helper.html">Security 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../helpers/smiley_helper.html">Smiley 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../helpers/string_helper.html">String 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../helpers/text_helper.html">Text 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../helpers/typography_helper.html">Typography 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../helpers/url_helper.html">URL 輔助函式</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../helpers/xml_helper.html">XML 輔助函式</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">貢獻 CodeIgniter</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../documentation/index.html">Writing CodeIgniter Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../DCO.html">Developer’s Certificate of Origin 1.1</a></li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">CodeIgniter</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">使用手冊</a> &raquo;</li>
+      
+          <li><a href="index.html">Libraries</a> &raquo;</li>
+      
+    <li>單元測試類別</li>
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document">
+            
+  <div class="section" id="id1">
+<h1>單元測試類別<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<p>單元測試是為應用軟體中每一個函數撰寫測試程式的開發方式。
+如果你不熟悉這個概念，可以稍微 google 一下這個主題。</p>
+<p>CodeIgniter 的單元測試類別非常簡單，由一個評估函式以及兩個結果函式構成。
+它並不打算成為一個完整成熟的測試套件，而只提供了簡單的機制讓你評估你的程式碼，
+來確認它是否產生正確的資料型別與結果。</p>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#id2" id="id12">使用單元測試函式庫</a><ul>
+<li><a class="reference internal" href="#id3" id="id13">類別初始化</a></li>
+<li><a class="reference internal" href="#id4" id="id14">執行測試</a></li>
+<li><a class="reference internal" href="#id5" id="id15">產生報告</a></li>
+<li><a class="reference internal" href="#id6" id="id16">嚴格模式</a></li>
+<li><a class="reference internal" href="#id7" id="id17">啟用/停用單元測試</a></li>
+<li><a class="reference internal" href="#id8" id="id18">單元測試的陳列</a><ul>
+<li><a class="reference internal" href="#id9" id="id19">客製要顯示的測試</a></li>
+<li><a class="reference internal" href="#id10" id="id20">建立模板</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id11" id="id21">類別參考</a></li>
+</ul>
+</div>
+<div class="custom-index container"></div><div class="section" id="id2">
+<h2><a class="toc-backref" href="#id12">使用單元測試函式庫</a><a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id3">
+<h3><a class="toc-backref" href="#id13">類別初始化</a><a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<p>就像 CodeIgniter 其它多數類別一樣，
+Unit Test 類別可以在你的 controller 內透過 $this-&gt;load-&gt;library 函式來初始化:</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">load</span><span class="o">-&gt;</span><span class="na">library</span><span class="p">(</span><span class="s1">&#39;unit_test&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>載入之後，就可以這樣取得 Unit Test 物件 <code class="docutils literal notranslate"><span class="pre">$this-&gt;unit</span></code></p>
+</div>
+<div class="section" id="id4">
+<h3><a class="toc-backref" href="#id14">執行測試</a><a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<p>提供待測程式與預期的結果來執行測試，如下所示:</p>
+<blockquote>
+<div>$this-&gt;unit-&gt;run(‘test’, ‘expected result’, ‘test name’, ‘notes’);</div></blockquote>
+<p>其中 ‘test’ 是待測程式實際回傳的值，
+‘expected result’ 是你預期的結果，
+‘test name’ 用來命名這個測試，可省略，
+‘notes’ 是備註，也可省略。範例:</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="nv">$test</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+
+<span class="nv">$expected_result</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+
+<span class="nv">$test_name</span> <span class="o">=</span> <span class="s1">&#39;Adds one plus one&#39;</span><span class="p">;</span>
+
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">unit</span><span class="o">-&gt;</span><span class="na">run</span><span class="p">(</span><span class="nv">$test</span><span class="p">,</span> <span class="nv">$expected_result</span><span class="p">,</span> <span class="nv">$test_name</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>預期的結果可以是值相符，或是型別相符兩者之一。
+這是值相符的範例:</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">unit</span><span class="o">-&gt;</span><span class="na">run</span><span class="p">(</span><span class="s1">&#39;Foo&#39;</span><span class="p">,</span> <span class="s1">&#39;Foo&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>這是型別相符的範例:</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">unit</span><span class="o">-&gt;</span><span class="na">run</span><span class="p">(</span><span class="s1">&#39;Foo&#39;</span><span class="p">,</span> <span class="s1">&#39;is_string&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>注意到第二個參數 “is_string” 了嗎？
+這告訴函式要檢查你的待測程式回傳值是否為字串型別。
+這裡有一份清單列出了可以用來比對的型別：</p>
+<ul class="simple">
+<li>is_object</li>
+<li>is_string</li>
+<li>is_bool</li>
+<li>is_true</li>
+<li>is_false</li>
+<li>is_int</li>
+<li>is_numeric</li>
+<li>is_float</li>
+<li>is_double</li>
+<li>is_array</li>
+<li>is_null</li>
+</ul>
+</div>
+<div class="section" id="id5">
+<h3><a class="toc-backref" href="#id15">產生報告</a><a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<p>你可以在每個測試執行後就顯示結果，或是執行完數個測試後才產生報告。
+直接 echo 或是 return 就可以顯示報告:</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">unit</span><span class="o">-&gt;</span><span class="na">run</span><span class="p">(</span><span class="nv">$test</span><span class="p">,</span> <span class="nv">$expected_result</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>或是這樣子取得所有測試的報告:</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">unit</span><span class="o">-&gt;</span><span class="na">report</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>報告將會以表格呈現。
+如果你偏好原始資料，也可以這樣做來取得原始資料陣列:</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="k">echo</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">unit</span><span class="o">-&gt;</span><span class="na">result</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id6">
+<h3><a class="toc-backref" href="#id16">嚴格模式</a><a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
+<p>單元測試類別預設使用鬆散比對來檢查值是否相符。
+例如下面的範例:</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">unit</span><span class="o">-&gt;</span><span class="na">run</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="k">TRUE</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>測試評估的是一個整數，但預期的結果是一個布林值。
+而由於 PHP 的型別鬆散特性，上面的程式使用一般的相等來檢查時，
+結果會是 TRUE:</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="p">(</span><span class="mi">1</span> <span class="o">==</span> <span class="k">TRUE</span><span class="p">)</span> <span class="k">echo</span> <span class="s1">&#39;This evaluates as true&#39;</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>若有需要的話，你可以將單元測試類別設置為嚴格模式，
+這樣在比對結果時，除了比對值以外，還會比對資料型態:</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="p">(</span><span class="mi">1</span> <span class="o">===</span> <span class="k">TRUE</span><span class="p">)</span> <span class="k">echo</span> <span class="s1">&#39;This evaluates as FALSE&#39;</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>你可以這樣子啟動嚴格模式:</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">unit</span><span class="o">-&gt;</span><span class="na">use_strict</span><span class="p">(</span><span class="k">TRUE</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id7">
+<h3><a class="toc-backref" href="#id17">啟用/停用單元測試</a><a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
+<p>如果你想要把一些測試留在程式碼中，但只想在需要的時候才執行，
+你可以用下面的方法來停用單元測試:</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">unit</span><span class="o">-&gt;</span><span class="na">active</span><span class="p">(</span><span class="k">FALSE</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id8">
+<h3><a class="toc-backref" href="#id18">單元測試的陳列</a><a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
+<p>當你顯示單元測試結果時，預設包含下列的項目：</p>
+<ul class="simple">
+<li>Test Name (test_name)</li>
+<li>Test Datatype (test_datatype)</li>
+<li>Expected Datatype (res_datatype)</li>
+<li>Result (result)</li>
+<li>File Name (file)</li>
+<li>Line Number (line)</li>
+<li>Any notes you entered for the test (notes)</li>
+</ul>
+<p>使用 $this-&gt;unit-&gt;set_test_items()，你可以決定項目是否要顯示。
+例如，如果你只想要顯示測試名稱與結果：</p>
+<div class="section" id="id9">
+<h4><a class="toc-backref" href="#id19">客製要顯示的測試</a><a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">unit</span><span class="o">-&gt;</span><span class="na">set_test_items</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;test_name&#39;</span><span class="p">,</span> <span class="s1">&#39;result&#39;</span><span class="p">));</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id10">
+<h4><a class="toc-backref" href="#id20">建立模板</a><a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h4>
+<p>如果你想要用非預設的格式來顯示測試結果，你可以定義自己的模板。
+這是一個簡單的模板範例。請注意必要的虛擬變數:</p>
+<div class="highlight-ci notranslate"><div class="highlight"><pre><span></span><span class="nv">$str</span> <span class="o">=</span> <span class="s1">&#39;</span>
+<span class="s1">&lt;table border=&quot;0&quot; cellpadding=&quot;4&quot; cellspacing=&quot;1&quot;&gt;</span>
+<span class="s1">{rows}</span>
+<span class="s1">        &lt;tr&gt;</span>
+<span class="s1">                &lt;td&gt;{item}&lt;/td&gt;</span>
+<span class="s1">                &lt;td&gt;{result}&lt;/td&gt;</span>
+<span class="s1">        &lt;/tr&gt;</span>
+<span class="s1">{/rows}</span>
+<span class="s1">&lt;/table&gt;&#39;</span><span class="p">;</span>
+
+<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">unit</span><span class="o">-&gt;</span><span class="na">set_template</span><span class="p">(</span><span class="nv">$str</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">你的模板必須在測試執行 <strong>之前</strong> 定義。</p>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="id11">
+<h2><a class="toc-backref" href="#id21">類別參考</a><a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="CI_Unit_test">
+<em class="property">class </em><code class="descname">CI_Unit_test</code><a class="headerlink" href="#CI_Unit_test" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="CI_Unit_test::set_test_items">
+<code class="descname">set_test_items</code><span class="sig-paren">(</span><em>$items</em><span class="sig-paren">)</span><a class="headerlink" href="#CI_Unit_test::set_test_items" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>$items</strong> (<em>array</em>) – 要顯示的項目列表</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">void</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>設置要顯示的項目列表。可用的選項有：</p>
+<blockquote>
+<div><ul class="simple">
+<li>test_name</li>
+<li>test_datatype</li>
+<li>res_datatype</li>
+<li>result</li>
+<li>file</li>
+<li>line</li>
+<li>notes</li>
+</ul>
+</div></blockquote>
+</dd></dl>
+
+<dl class="method">
+<dt id="CI_Unit_test::run">
+<code class="descname">run</code><span class="sig-paren">(</span><em>$test</em><span class="optional">[</span>, <em>$expected = TRUE</em><span class="optional">[</span>, <em>$test_name = 'undefined'</em><span class="optional">[</span>, <em>$notes = ''</em><span class="optional">]</span><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#CI_Unit_test::run" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>$test</strong> (<em>mixed</em>) – 測試資料</li>
+<li><strong>$expected</strong> (<em>mixed</em>) – 預期的結果</li>
+<li><strong>$test_name</strong> (<em>string</em>) – 測試名稱</li>
+<li><strong>$notes</strong> (<em>string</em>) – 附加在此測試的任何備註</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">測試報告</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">string</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>執行單元測試。</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CI_Unit_test::report">
+<code class="descname">report</code><span class="sig-paren">(</span><span class="optional">[</span><em>$result = array()</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#CI_Unit_test::report" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>$result</strong> (<em>array</em>) – 一個包含了測試結果的陣列</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">測試報告</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">string</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>為已經執行完的測試產生報告。</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CI_Unit_test::use_strict">
+<code class="descname">use_strict</code><span class="sig-paren">(</span><span class="optional">[</span><em>$state = TRUE</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#CI_Unit_test::use_strict" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>$state</strong> (<em>bool</em>) – 嚴格模式旗標</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">void</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>啟用/停用嚴格模式。</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CI_Unit_test::active">
+<code class="descname">active</code><span class="sig-paren">(</span><span class="optional">[</span><em>$state = TRUE</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#CI_Unit_test::active" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>$state</strong> (<em>bool</em>) – 是否啟用單元測試</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">void</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>啟用/停用單元測試。</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CI_Unit_test::result">
+<code class="descname">result</code><span class="sig-paren">(</span><span class="optional">[</span><em>$results = array()</em><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#CI_Unit_test::result" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>$results</strong> (<em>array</em>) – 測試結果列表</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">包含測試結果原始資料的陣列</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">array</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>回傳測試結果的原始資料。</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="CI_Unit_test::set_template">
+<code class="descname">set_template</code><span class="sig-paren">(</span><em>$template</em><span class="sig-paren">)</span><a class="headerlink" href="#CI_Unit_test::set_template" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>$template</strong> (<em>string</em>) – 測試結果模板</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">void</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>設置要用來顯示測試結果的模板。</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="uri.html" class="btn btn-neutral float-right" title="URI 類別">下一頁 <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="typography.html" class="btn btn-neutral" title="Typography 類別"><span class="fa fa-arrow-circle-left"></span> 上一頁</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2014 - 2017, British Columbia Institute of Technology.
+      最後編輯時間 Nov 19, 2020.
+    </p>
+  </div>
+
+  
+    <p>由 <a href="https://readthedocs.org">Read the Docs</a> 提供 <a href="http://sphinx-doc.org/">Sphinx</a> 並使用 <a href="https://github.com/snide/sphinx_rtd_theme">sphinx_rtd_theme</a> 主題</p>
+    <p><a href="https://github.com/CodeIgniter-TW/CodeIgniter-UserGuide" target="_blank">Github 繁體中文翻譯</a></p>
+  
+
+</footer>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-5766319-11', 'auto');
+  ga('send', 'pageview');
+
+</script>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'3.1.6',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  false
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="../_static/language_data.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
