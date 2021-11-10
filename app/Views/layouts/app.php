@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title><?php if($headTitle) echo "{$headTitle} | " ?>CodeIgniter台灣 輕量級 PHP網頁框架</title>
+    <meta name="description" content="The small framework with powerful features">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/png" href="/favicon.ico"/>
+
+    <link rel="stylesheet" href="/assets/css/ci-theme.css">
+    <link rel="stylesheet" href="/assets/css/ci-responsive.css?ver=1.0">
+    <link rel="stylesheet" href="/assets/css/animate.css">
+
+	<?= $this->renderSection('headerAssets') ?>
+</head>
+<body>
+    <?= $this->include('layouts/_top_nav') ?>
+
+    <?= $this->renderSection('content') ?>
+
+    <?= $this->include('layouts/_footer') ?>
+
+	<?= $this->renderSection('footerAssets') ?>
+</body>
+</html>
