@@ -2,7 +2,7 @@ name: CI-CD # Give your workflow a name
 
 on:
   push:
-    branches: [ master, gitflow ]
+    branches: [ master ]
   pull_request:
     branches: [ master ]
 
