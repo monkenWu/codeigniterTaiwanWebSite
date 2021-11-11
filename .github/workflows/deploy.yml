@@ -1,0 +1,49 @@
+name: CI-CD # Give your workflow a name
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    # PHP 環境
+    - name: Setup PHP
+      uses: shivammathur/setup-php@master
+      with:
+        php-version: 7.4
+        extensions: mbstring, intl
+    # composer install
+    - name: Composer install
+      run: composer install --no-scripts
+    # 壓縮產出檔案
+    - name: Run a multi-line script
+      run: |
+        sudo apt-get install zip -y
+        mkdir ../build
+        cp -TR . ../build
+        zip -r deploy.zip ../build/
+    # 透過 SSH 複製檔案
+    - name: copy file via ssh
+      uses: appleboy/scp-action@master
+      with:
+        host: ${{ secrets.SSH_KNOWN_HOSTS }}
+        username: ${{ secrets.SSH_USERNAME }}
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        port: ${{ secrets.SSH_PORT }}
+        source: "deploy.zip"
+        target: "/home/cd"
+    # 透過 SSH 部屬專案
+    - name: executing remote ssh commands using ssh key
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.SSH_KNOWN_HOSTS }}
+        username: ${{ secrets.SSH_USERNAME }}
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        port: ${{ secrets.SSH_PORT }}
+        script: bash /home/cd/deploy.sh
