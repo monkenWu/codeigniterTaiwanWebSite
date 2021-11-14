@@ -22,6 +22,8 @@
 
 				<div class="cv-boxes-buttons-area">
 					<a href="<?= $v4link ?>" class="buttons-reverse download-buttons" target="_blank">下載框架</a>
+					<a href="/user_guide/index.html" class="buttons-reverse download-buttons" target="_blank">線上使用手冊</a>
+					<a href="<?= $twGuideLink?>" class="buttons-reverse download-buttons" target="_blank">離線使用手冊</a>
 					<a href="https://forum.codeigniter.com/forum-28.html" class="buttons-reverse download-buttons" target="_blank">討論版</a>
 					<a href="https://github.com/codeigniter4/CodeIgniter4" class="buttons-reverse download-buttons" target="_blank">原始碼</a>
 					<a href="https://github.com/codeigniter4/translations" class="buttons-reverse download-buttons" target="_blank">系統語系</a>

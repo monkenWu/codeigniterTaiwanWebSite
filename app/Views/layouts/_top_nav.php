@@ -2,7 +2,7 @@
     <div id="header-inner">
         <div id="logo">
             <a href="/" title="CodeIgniter.tw">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2100 500" width="270" height="44">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3200 500" width="270" height="44">
                     <style>
                         tspan { white-space:pre }
                         .shp0 { fill: #dd4814 }
@@ -14,11 +14,6 @@
                 
             </a>
         </div>
-
-        <div id="mobile-search">
-            <input type="text" placeholder="Search.." id="search-bar-input" name="search" />
-            <button type="submit"><img src="/assets/icons/search-icon.png" alt="search button"></button>
-        </div><!--mobile-search ends-->
 
         <div id="menu-toggle">
             <button onclick="toggleMenu();">&#9776;</button>

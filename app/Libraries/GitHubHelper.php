@@ -50,6 +50,28 @@ class GitHubHelper
     }
 
     /**
+     * Will hit up the API and get the current
+     * version of the taiwan user guide, etc.
+     *
+     * @param array $data
+     *
+     * @return array
+     */
+    public function taiwanGuideReleaseInfo(array $data): array
+    {
+        $ttl = config('App')->gitHubExpires;
+
+        if (! $infoTwGuide = cache('infoTwGuide')) {
+            $infoTwGuide = $this->api->getLatestRelease('monkenWu', 'codeIgniter4-taiwan-User-Guide');
+            cache()->save('infoTwGuide', $infoTwGuide, $ttl);
+        }
+        $data['taiwname'] = $infoTwGuide['tag_name'];
+        $data['guidelink'] = $infoTwGuide['zipball_url'];
+
+        return $data;
+    }
+
+    /**
      * Grab the "hero" data for our contribute page from Github,
      * caching to speed things up.
      *
